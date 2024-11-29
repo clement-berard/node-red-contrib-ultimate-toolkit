@@ -6,12 +6,13 @@ import {
   removeClassesOnSelectors,
   watchInput,
 } from '@keload/node-red-dxp/editor/dom-helper';
+import type { EditorNodeDef } from 'node-red';
 import { title } from 'radash';
 import { categories, getDocsFromFunction, getFunctionsFromCategory } from '../../../common/all';
 import type { NodeMainProps } from '../types';
 
-const Main = createEditorNode<NodeEditorProps<NodeMainProps>>({
-  category: 'ultimate-toolkit',
+const Main: EditorNodeDef<NodeMainProps> = {
+  category: 'toolkit',
   color: '#8EA3A6',
   defaults: {
     name: { value: '' },
@@ -68,6 +69,6 @@ const Main = createEditorNode<NodeEditorProps<NodeMainProps>>({
       handleShowDocs(jqSelector('$category').val() as string, functionValue);
     });
   },
-});
+};
 
 export default Main;
