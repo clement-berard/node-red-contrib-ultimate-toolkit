@@ -1,4 +1,5 @@
 import { alphabetical } from 'radash';
+import { arrayUtilities } from './categories/array-utilities';
 import { objectUtilities } from './categories/object-utilities';
 import { predicates } from './categories/predicates';
 import { stringUtilities } from './categories/string-utilities';
@@ -9,6 +10,7 @@ export const structure = {
   string_utilities: stringUtilities,
   predicates: predicates,
   object_utilities: objectUtilities,
+  array_utilities: arrayUtilities,
 };
 
 export const categories = alphabetical(Object.keys(structure), (v) => v);
@@ -26,4 +28,8 @@ export function getFunctionsFromCategory(category: (typeof categories)[number]) 
 
 export function getFunctionDetails(category: (typeof categories)[number], fn: string) {
   return structure[category][fn];
+}
+
+export function getDocsFromFunction(category: (typeof categories)[number], fn: string) {
+  return structure?.[category]?.[fn]?.docs;
 }
