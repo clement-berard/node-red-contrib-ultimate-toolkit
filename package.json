@@ -1,7 +1,7 @@
 {
   "name": "@keload/node-red-contrib-ultimate-toolkit",
   "version": "1.0.0",
-  "description": "A collection of useful tools for Node-RED",
+  "description": "A collection of (moderns) useful tools for Node-RED",
   "engines": {
     "node": ">=18"
   },
@@ -30,15 +30,14 @@
     "@types/jqueryui": "1.12.23",
     "@types/node": "^22.10.1",
     "@types/node-red": "1.3.5",
+    "es-toolkit": "^1.27.0",
+    "radash": "^12.1.0",
     "release-it": "17.10.0",
     "tsx": "4.19.2",
     "typescript": "^5.6.3"
   },
   "dependencies": {
-    "@keload/node-red-dxp": "^1.11.0",
-    "es-toolkit": "^1.27.0",
-    "radash": "^12.1.0",
-    "superstruct": "2.0.2"
+    "@keload/node-red-dxp": "^1.11.1"
   },
   "keywords": [
     "node-red",
@@ -48,12 +47,12 @@
   "license": "MIT",
   "repository": {
     "type": "git",
-    "url": "https://github.com/clement-berard/node-red-contrib-js-philips-tv-control.git"
+    "url": "https://github.com/clement-berard/node-red-contrib-ultimate-toolkit.git"
   },
   "bugs": {
-    "url": "https://github.com/clement-berard/node-red-contrib-js-philips-tv-control/issues"
+    "url": "https://github.com/clement-berard/node-red-contrib-ultimate-toolkit/issues"
   },
-  "homepage": "https://github.com/clement-berard/node-red-contrib-js-philips-tv-control",
+  "homepage": "https://github.com/clement-berard/node-red-contrib-ultimate-toolkit",
   "files": [
     "dist"
   ]

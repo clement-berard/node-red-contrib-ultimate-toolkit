@@ -9,17 +9,8 @@ importers:
   .:
     dependencies:
       '@keload/node-red-dxp':
-        specifier: ^1.11.0
-        version: 1.11.0(typescript@5.7.2)
-      es-toolkit:
-        specifier: ^1.27.0
-        version: 1.27.0
-      radash:
-        specifier: ^12.1.0
-        version: 12.1.0
-      superstruct:
-        specifier: 2.0.2
-        version: 2.0.2
+        specifier: ^1.11.1
+        version: 1.11.1(typescript@5.7.2)
     devDependencies:
       '@biomejs/biome':
         specifier: 1.9.4
@@ -39,6 +30,12 @@ importers:
       '@types/node-red':
         specifier: 1.3.5
         version: 1.3.5
+      es-toolkit:
+        specifier: ^1.27.0
+        version: 1.27.0
+      radash:
+        specifier: ^12.1.0
+        version: 12.1.0
       release-it:
         specifier: 17.10.0
         version: 17.10.0(typescript@5.7.2)
@@ -469,8 +466,8 @@ packages:
   '@jridgewell/trace-mapping@0.3.25':
     resolution: {integrity: sha512-vNk6aEwybGtawWmy/PzwnGDOjCkLWSD2wqvjGGAgOAwCGWySYXfYoxt00IJkTF+8Lb57DwOb3Aa0o9CApepiYQ==}
 
-  '@keload/node-red-dxp@1.11.0':
-    resolution: {integrity: sha512-geu10hYZ1WOYB3El+Iy98ph3JOpv42/zQoxIacslcsmlzxDOiJV1Csz/B7/qgrbLESNVEnMCmFycF5XY7XtnBA==}
+  '@keload/node-red-dxp@1.11.1':
+    resolution: {integrity: sha512-TjFE//nE3OIu/xEektpnbagpIn88Ytm2qwT96bXocT+sLT/J/S/XpcfvIqfRZOZDUUzTHj3lHXhet0pZ3ih1dQ==}
     hasBin: true
 
   '@mdx-js/esbuild@2.3.0':
@@ -2799,8 +2796,8 @@ packages:
   regenerator-runtime@0.14.1:
     resolution: {integrity: sha512-dYnhHh0nJoMfnkZs6GmmhFknAGRrLznOu5nc9ML+EJxGvrx6H7teuevqVqCuPcPK//3eDrrjQhehXVx9cnkGdw==}
 
-  registry-auth-token@5.0.2:
-    resolution: {integrity: sha512-o/3ikDxtXaA59BmZuZrJZDJv8NMDGSj+6j6XaeBmHw8eY1i1qd9+6H+LjVvQXx3HN6aRCGa1cUdJ9RaJZUugnQ==}
+  registry-auth-token@5.0.3:
+    resolution: {integrity: sha512-1bpc9IyC+e+CNFRaWyn77tk4xGG4PPUyfakSmA6F6cvUDjrm58dfyJ3II+9yb10EDkHoy1LaPSmHaWLOH3m6HA==}
     engines: {node: '>=14'}
 
   registry-url@6.0.1:
@@ -3114,10 +3111,6 @@ packages:
     resolution: {integrity: sha512-WZzIx3rC1CvbMDloLsVw0lkZVKJWbrkJ0k1ghKFmcnPrW1+jWbgTkTEWVtD9lMdmI4jZEz40+naBxl1dCUhXXw==}
     engines: {node: '>=14.16'}
 
-  superstruct@2.0.2:
-    resolution: {integrity: sha512-uV+TFRZdXsqXTL2pRvujROjdZQ4RAlBUS5BTh9IGm+jTqQntYThciG/qu57Gs69yjnVUSqdxF9YLmSnpupBW9A==}
-    engines: {node: '>=14.0.0'}
-
   supports-color@5.5.0:
     resolution: {integrity: sha512-QjVjwdXIt408MIiAqCX4oUKsgU2EqAGzs2Ppkm4aQYbjm+ZEWEcW4SfFNTr4uMNZma0ey4f5lgLrkB0aX0QMow==}
     engines: {node: '>=4'}
@@ -3200,8 +3193,8 @@ packages:
     resolution: {integrity: sha512-RAH822pAdBgcNMAfWnCBU3CFZcfZ/i1eZjwFU/dsLKumyuuP3niueg2UAukXYF0E2AAoc82ZSSf9J0WQBinzHA==}
     engines: {node: '>=12.20'}
 
-  type-fest@4.28.1:
-    resolution: {integrity: sha512-LO/+yb3mf46YqfUC7QkkoAlpa7CTYh//V1Xy9+NQ+pKqDqXIq0NTfPfQRwFfCt+if4Qkwb9gzZfsl6E5TkXZGw==}
+  type-fest@4.29.0:
+    resolution: {integrity: sha512-RPYt6dKyemXJe7I6oNstcH24myUGSReicxcHTvCLgzm4e0n8y05dGvcGB15/SoPRBmhlMthWQ9pvKyL81ko8nQ==}
     engines: {node: '>=16'}
 
   typedarray@0.0.6:
@@ -3665,7 +3658,7 @@ snapshots:
       '@jridgewell/resolve-uri': 3.1.2
       '@jridgewell/sourcemap-codec': 1.5.0
 
-  '@keload/node-red-dxp@1.11.0(typescript@5.7.2)':
+  '@keload/node-red-dxp@1.11.1(typescript@5.7.2)':
     dependencies:
       '@fullhuman/postcss-purgecss': 6.0.0(postcss@8.4.49)
       '@types/html-minifier-terser': 7.0.2
@@ -4171,7 +4164,7 @@ snapshots:
       chalk: 5.3.0
       cli-boxes: 3.0.0
       string-width: 7.2.0
-      type-fest: 4.28.1
+      type-fest: 4.29.0
       widest-line: 5.0.0
       wrap-ansi: 9.0.0
 
@@ -4680,7 +4673,7 @@ snapshots:
 
   dot-prop@9.0.0:
     dependencies:
-      type-fest: 4.28.1
+      type-fest: 4.29.0
 
   eastasianwidth@0.2.0: {}
 
@@ -6021,7 +6014,7 @@ snapshots:
   package-json@10.0.1:
     dependencies:
       ky: 1.7.2
-      registry-auth-token: 5.0.2
+      registry-auth-token: 5.0.3
       registry-url: 6.0.1
       semver: 7.6.3
 
@@ -6056,7 +6049,7 @@ snapshots:
     dependencies:
       '@babel/code-frame': 7.26.2
       index-to-position: 0.1.2
-      type-fest: 4.28.1
+      type-fest: 4.29.0
 
   parse-path@7.0.0:
     dependencies:
@@ -6370,14 +6363,14 @@ snapshots:
     dependencies:
       find-up-simple: 1.0.0
       read-pkg: 9.0.1
-      type-fest: 4.28.1
+      type-fest: 4.29.0
 
   read-pkg@9.0.1:
     dependencies:
       '@types/normalize-package-data': 2.4.4
       normalize-package-data: 6.0.2
       parse-json: 8.1.0
-      type-fest: 4.28.1
+      type-fest: 4.29.0
       unicorn-magic: 0.1.0
 
   readable-stream@3.6.2:
@@ -6398,7 +6391,7 @@ snapshots:
 
   regenerator-runtime@0.14.1: {}
 
-  registry-auth-token@5.0.2:
+  registry-auth-token@5.0.3:
     dependencies:
       '@pnpm/npm-conf': 2.3.1
 
@@ -6806,8 +6799,6 @@ snapshots:
       function-timeout: 0.1.1
       time-span: 5.1.0
 
-  superstruct@2.0.2: {}
-
   supports-color@5.5.0:
     dependencies:
       has-flag: 3.0.0
@@ -6907,7 +6898,7 @@ snapshots:
 
   type-fest@2.19.0: {}
 
-  type-fest@4.28.1: {}
+  type-fest@4.29.0: {}
 
   typedarray@0.0.6: {}
 

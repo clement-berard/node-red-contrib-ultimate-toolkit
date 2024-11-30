@@ -1,6 +1,7 @@
 import type { NodeControllerConfig, NodeControllerInst } from '@keload/node-red-dxp/editor';
 import { tryit } from 'radash';
 import { getFunctionDetails } from '../../common/all';
+import { getServerFn } from '../../common/server-fn';
 import type { NodeMainProps } from './types';
 
 export default function (this: NodeControllerInst<NodeMainProps>, config: NodeControllerConfig<NodeMainProps>) {
@@ -9,7 +10,7 @@ export default function (this: NodeControllerInst<NodeMainProps>, config: NodeCo
   this.on('input', async (msg) => {
     const innerPayload = msg.payload;
     const fnDetails = getFunctionDetails(config.category, config.function);
-    const toCall = tryit(fnDetails.fn);
+    const toCall = fnDetails.server ? tryit(getServerFn(config.category, config.function).fn) : tryit(fnDetails.fn);
     const [err, result] = toCall(innerPayload);
     if (err) {
       this.error(err, msg);
