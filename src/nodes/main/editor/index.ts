@@ -1,4 +1,4 @@
-import { type NodeEditorProps, createEditorNode } from '@keload/node-red-dxp/editor';
+import type { NodeEditorDefinition } from '@keload/node-red-dxp/editor';
 import {
   addClassesOnSelectors,
   initSelect,
@@ -6,14 +6,14 @@ import {
   removeClassesOnSelectors,
   watchInput,
 } from '@keload/node-red-dxp/editor/dom-helper';
-import type { EditorNodeDef } from 'node-red';
 import { title } from 'radash';
 import { categories, getDocsFromFunction, getFunctionsFromCategory } from '../../../common/all';
 import type { NodeMainProps } from '../types';
 
-const Main: EditorNodeDef<NodeMainProps> = {
+const Main: NodeEditorDefinition<NodeMainProps> = {
   category: 'toolkit',
   color: '#8EA3A6',
+  paletteLabel: 'toolkit',
   defaults: {
     name: { value: '' },
     entry: { value: 'payload', required: true },

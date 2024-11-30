@@ -1,5 +1,6 @@
 import { alphabetical } from 'radash';
 import { arrayUtilities } from './categories/array-utilities';
+// import { networkUtilities } from './categories/network-utilities';
 import { objectUtilities } from './categories/object-utilities';
 import { predicates } from './categories/predicates';
 import { stringUtilities } from './categories/string-utilities';
@@ -11,6 +12,7 @@ export const structure = {
   predicates: predicates,
   object_utilities: objectUtilities,
   array_utilities: arrayUtilities,
+  // network_utilities: networkUtilities,
 };
 
 export const categories = alphabetical(Object.keys(structure), (v) => v);

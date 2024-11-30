@@ -1,7 +1,7 @@
 {
   "name": "@keload/node-red-contrib-ultimate-toolkit",
   "version": "1.0.0",
-  "description": "A collection of useful tools for Node-RED",
+  "description": "A collection of (moderns) useful tools for Node-RED",
   "engines": {
     "node": ">=18"
   },
@@ -47,12 +47,12 @@
   "license": "MIT",
   "repository": {
     "type": "git",
-    "url": "https://github.com/clement-berard/node-red-contrib-js-philips-tv-control.git"
+    "url": "https://github.com/clement-berard/node-red-contrib-ultimate-toolkit.git"
   },
   "bugs": {
-    "url": "https://github.com/clement-berard/node-red-contrib-js-philips-tv-control/issues"
+    "url": "https://github.com/clement-berard/node-red-contrib-ultimate-toolkit/issues"
   },
-  "homepage": "https://github.com/clement-berard/node-red-contrib-js-philips-tv-control",
+  "homepage": "https://github.com/clement-berard/node-red-contrib-ultimate-toolkit",
   "files": [
     "dist"
   ]
