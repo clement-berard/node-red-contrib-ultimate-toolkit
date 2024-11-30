@@ -1,11 +1,5 @@
 import type { NodeEditorDefinition } from '@keload/node-red-dxp/editor';
-import {
-  addClassesOnSelectors,
-  initSelect,
-  jqSelector,
-  removeClassesOnSelectors,
-  watchInput,
-} from '@keload/node-red-dxp/editor/dom-helper';
+import { initSelect, jqSelector, resolveSelector, watchInput } from '@keload/node-red-dxp/editor/dom-helper';
 import { title } from 'radash';
 import { categories, getDocsFromFunction, getFunctionsFromCategory } from '../../../common/all';
 import type { NodeMainProps } from '../types';
@@ -17,6 +11,7 @@ const Main: NodeEditorDefinition<NodeMainProps> = {
   defaults: {
     name: { value: '' },
     entry: { value: 'payload', required: true },
+    entryType: { value: 'msg', required: true },
     category: { value: '', required: true },
     function: { value: '', required: true },
   },
@@ -27,6 +22,11 @@ const Main: NodeEditorDefinition<NodeMainProps> = {
     return this.name || this.function || 'toolkit';
   },
   oneditprepare: function () {
+    jqSelector('$entry').typedInput({
+      types: ['msg', 'flow', 'global'],
+      typeField: resolveSelector('$entryType'),
+    });
+
     initSelect(
       '$category',
       categories.map((v) => ({ value: v, text: title(v) })),
@@ -49,11 +49,10 @@ const Main: NodeEditorDefinition<NodeMainProps> = {
     }
 
     function handleShowDocs(category?: string, currentFunction?: string | undefined) {
-      addClassesOnSelectors(['.fn-docs'], ['hidden']);
+      jqSelector('.fn-docs').addClass('hidden');
       const docs = getDocsFromFunction(category as string, currentFunction as string);
       if (docs) {
-        document.querySelector('.fn-docs').innerHTML = docs;
-        removeClassesOnSelectors(['.fn-docs'], ['hidden']);
+        jqSelector('.fn-docs').html(docs).removeClass('hidden');
       }
     }
 

@@ -8,7 +8,7 @@ export default function (this: NodeControllerInst<NodeMainProps>, config: NodeCo
   RED.nodes.createNode(this, config);
 
   this.on('input', async (msg) => {
-    const innerPayload = msg.payload;
+    const innerPayload = RED.util.evaluateNodeProperty(config.entry, config.entryType, this, msg);
     const fnDetails = getFunctionDetails(config.category, config.function);
     const toCall = fnDetails.server ? tryit(getServerFn(config.category, config.function).fn) : tryit(fnDetails.fn);
     const [err, result] = toCall(innerPayload);
