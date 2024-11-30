@@ -1,6 +1,6 @@
 # node-red-contrib-ultimate-toolkit
 
-A collection of utility nodes to help you build your Node-RED flows.
+A collection of utilities to help you build your Node-RED flows.
 
 <br/>
 <p align="center">
@@ -33,13 +33,13 @@ A collection of utility nodes to help you build your Node-RED flows.
 
 ## Overview
 
-This package provides a set of nodes to help you build your Node-RED flows.
+This package provides a set of utilities to help you build your Node-RED flows.
 
 Convert, format, and manipulate your data with ease.
 
 Essentially based on [es-toolkit](https://es-toolkit.slash.page/) and [radash](https://radash-docs.vercel.app/docs/getting-started)
 
-One node to rule them all!
+**One node to rule them all!**
 
 ## Performance
 
