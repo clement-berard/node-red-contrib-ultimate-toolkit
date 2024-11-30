@@ -81,6 +81,8 @@ export const listFunctions = {
     },
   },
   network_utilities: {
-    ping: {},
+    ipInformation: async (input: string) => {
+      return (await fetch(`http://ip-api.com/json/${input || ''}`)).json();
+    },
   },
 };

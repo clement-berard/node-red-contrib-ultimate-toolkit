@@ -17,7 +17,7 @@ export default function (this: NodeControllerInst<NodeMainProps>, config: NodeCo
     }
     const matchedFunction = listFunctions[config.category][config.function];
     const toCall = tryit(matchedFunction);
-    const [err, result] = toCall(...argsToCall);
+    const [err, result] = await toCall(...argsToCall);
     if (err) {
       this.error(err, msg);
       return;

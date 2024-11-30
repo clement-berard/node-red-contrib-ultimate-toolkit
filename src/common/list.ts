@@ -63,7 +63,7 @@ export const list = {
     },
   },
   network_utilities: {
-    // ping: {},
+    ipInformation: {},
   },
 };
 
