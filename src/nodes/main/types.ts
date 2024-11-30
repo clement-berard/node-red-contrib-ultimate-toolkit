@@ -5,4 +5,5 @@ export interface NodeMainProps extends EditorNodeProperties {
   entryType: string;
   category: string;
   function: string;
+  mainValue: string;
 }
