@@ -7,9 +7,16 @@
         <input type="text" id="node-input-name"/>
     </div>
 </div>
-<div class="alert alert-warning">
-    <i class="fa fa-info-circle"></i>
-    For the moment entry point is <code>msg.payload</code>
+<div class="dxp-form-row">
+    <div class="main">
+        <div>
+            <i class="fa fa-ellipsis-h"></i>
+            <label for="node-input-entry">Property</label>
+        </div>
+        <input type="text" id="node-input-entry">
+        <input type="hidden" id="node-input-entryType">
+
+    </div>
 </div>
 <div class="dxp-form-row">
     <div class="main">
@@ -27,6 +34,15 @@
             <label for="node-input-function">Function</label>
         </div>
         <select id="node-input-function"></select>
+    </div>
+</div>
+<div class="dxp-form-row hidden additionalMainValue">
+    <div class="main">
+        <div>
+            <i class="fa fa-plus"></i>
+            <label for="node-input-mainValue" id="mainValueLabel">Value</label>
+        </div>
+        <input type="text" id="node-input-mainValue">
     </div>
 </div>
 <div class="alert alert-info fn-docs hidden text-center"></div>
