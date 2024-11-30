@@ -1,6 +1,6 @@
 {
   "name": "@keload/node-red-contrib-ultimate-toolkit",
-  "version": "1.0.0",
+  "version": "1.1.0",
   "description": "A collection of (moderns) useful tools for Node-RED",
   "engines": {
     "node": ">=18"
