@@ -1,3 +1,4 @@
+import { isIP } from 'node:net';
 import {
   escape as _escape,
   unescape as _unescape,
@@ -19,9 +20,8 @@ import {
   upperFirst,
   words,
 } from 'es-toolkit';
-import { isNaN as _isNan, toString as _toString, toNumber, toSafeInteger } from 'es-toolkit/compat';
-import { isBoolean, isNil, isNotNil, isNull, isString, isUndefined } from 'es-toolkit/predicate';
-import { keys, toggle } from 'radash';
+import { isNaN as _isNan, toString as _toString, gt, gte, toNumber, toSafeInteger } from 'es-toolkit/compat';
+import { keys, sum, toggle, unique } from 'radash';
 
 export const listFunctions = {
   utility_functions: {
@@ -37,6 +37,8 @@ export const listFunctions = {
     toBooleanNumber: (input: unknown) => {
       return !input ? 1 : 0;
     },
+    gt: gt,
+    gte: gte,
   },
   string_utilities: {
     camelCase: camelCase,
@@ -58,13 +60,14 @@ export const listFunctions = {
     words: words,
   },
   predicates: {
-    isBoolean: isBoolean,
-    isNil: isNil,
-    isNotNil: isNotNil,
-    isNull: isNull,
-    isNumber: (input: unknown) => !Number.isNaN(input),
-    isString: isString,
-    isUndefined: isUndefined,
+    isBoolean: (input: unknown) => typeof input === 'boolean',
+    isNil: (input: unknown) => input == null,
+    isNotNil: (input: unknown) => input != null,
+    isNull: (input: unknown) => input === null,
+    isNumber: (input: unknown) => typeof input === 'number',
+    isString: (input: unknown) => typeof input === 'string',
+    isUndefined: (input: unknown) => input === undefined,
+    isIp: isIP,
   },
   object_utilities: {
     getKeys: keys,
@@ -79,9 +82,20 @@ export const listFunctions = {
       const realProp = inputProp as string;
       return keyBy(inputArr, (x) => x[realProp.trim()]);
     },
+    sum: (inputArr: object[], inputProp: unknown) => {
+      const realProp = inputProp as string;
+      return sum(inputArr, (x) => x[realProp.trim()]);
+    },
+    unique: (inputArr: object[], inputProp: unknown) => {
+      const realProp = inputProp as string;
+      return unique(inputArr, (x) => x[realProp.trim()]);
+    },
   },
   network_utilities: {
     ipInformation: async (input: string) => {
+      if (!isIP(input)) {
+        throw new Error('Invalid IP address');
+      }
       return (await fetch(`http://ip-api.com/json/${input || ''}`)).json();
     },
   },

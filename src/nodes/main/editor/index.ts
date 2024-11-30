@@ -24,7 +24,7 @@ const Main: NodeEditorDefinition<NodeMainProps> = {
   },
   oneditprepare: function () {
     jqSelector('$entry').typedInput({
-      types: ['msg', 'flow', 'global'],
+      types: ['msg', 'flow', 'global', 'str'],
       typeField: resolveSelector('$entryType'),
     });
 

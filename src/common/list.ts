@@ -11,6 +11,12 @@ export const list = {
     toSafeInteger: {},
     toBoolean: {},
     toBooleanNumber: {},
+    gt: {
+      mainValue: {},
+    },
+    gte: {
+      mainValue: {},
+    },
   },
   string_utilities: {
     camelCase: {},
@@ -39,6 +45,7 @@ export const list = {
     isNumber: {},
     isString: {},
     isUndefined: {},
+    isIp: {},
   },
   object_utilities: {
     getKeys: {
@@ -61,9 +68,23 @@ export const list = {
       },
       docs: docsFromEsToolkit('array/keyBy'),
     },
+    sum: {
+      mainValue: {
+        label: 'Property',
+      },
+      docs: docsFromRadash('array/sum'),
+    },
+    unique: {
+      mainValue: {
+        label: 'Property',
+      },
+      docs: docsFromRadash('array/unique'),
+    },
   },
   network_utilities: {
-    ipInformation: {},
+    ipInformation: {
+      docs: 'By default is your current IP address',
+    },
   },
 };
 
