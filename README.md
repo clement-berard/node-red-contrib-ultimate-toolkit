@@ -39,11 +39,15 @@ Convert, format, and manipulate your data with ease.
 
 Essentially based on [es-toolkit](https://es-toolkit.slash.page/) and [radash](https://radash-docs.vercel.app/docs/getting-started)
 
+If native Node.js are available, they are used instead of the libraries.
+
 **One node to rule them all!**
 
 ## Performance
 
 All used libraries are treeshaked and included in the final bundle. No extra dependencies are added.
+
+Very small distribution size ~ 20kb.
 
 ## Contributing
 
