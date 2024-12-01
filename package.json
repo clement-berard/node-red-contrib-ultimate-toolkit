@@ -39,7 +39,10 @@
   },
   "keywords": [
     "node-red",
-    "node-red-contrib"
+    "node-red-contrib",
+    "node-red-dxp",
+    "toolkit",
+    "utilities"
   ],
   "author": "Clément BERARD <contact@berard.dev>",
   "license": "MIT",
