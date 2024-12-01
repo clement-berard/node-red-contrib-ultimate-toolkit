@@ -13,6 +13,14 @@ export const utilityFunctions = {
   toBooleanNumber: (input: unknown) => {
     return !input ? 1 : 0;
   },
-  gt: gt,
-  gte: gte,
+  gt: (...args: unknown[]) => {
+    const [a, b] = args.map(toNumber);
+
+    return gt(a, b);
+  },
+  gte: (...args: unknown[]) => {
+    const [a, b] = args.map(toNumber);
+
+    return gte(a, b);
+  },
 };
