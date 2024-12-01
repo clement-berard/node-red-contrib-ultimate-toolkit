@@ -23,8 +23,28 @@ export default function (this: NodeControllerInst<NodeMainProps>, config: NodeCo
       return;
     }
 
-    this.send({
-      payload: result,
-    });
+    const commonReturn = {
+      nodeParams: {
+        callWith: argsToCall,
+        callFunction: config.function,
+      },
+    };
+
+    if (config.outputs === 2) {
+      const outputs = [null, null];
+      if (result === true) {
+        outputs[0] = { ...msg, payload: result, ...commonReturn };
+      } else if (result === false) {
+        outputs[1] = { ...msg, payload: result, ...commonReturn };
+      } else {
+        this.warn('Payload must be true or false.');
+      }
+      this.send(outputs);
+    } else {
+      this.send({
+        payload: result,
+        ...commonReturn,
+      });
+    }
   });
 }

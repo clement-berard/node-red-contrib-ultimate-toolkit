@@ -6,4 +6,6 @@ export interface NodeMainProps extends EditorNodeProperties {
   category: string;
   function: string;
   mainValue: string;
+  outputs: number;
+  splitBooleanOutputs: boolean;
 }
