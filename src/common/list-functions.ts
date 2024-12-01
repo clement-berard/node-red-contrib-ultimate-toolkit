@@ -1,4 +1,5 @@
 import { isIP } from 'node:net';
+import { URL } from 'node:url';
 import {
   escape as _escape,
   unescape as _unescape,
@@ -22,6 +23,7 @@ import {
 } from 'es-toolkit';
 import { isNaN as _isNan, toString as _toString, gt, gte, toNumber, toSafeInteger } from 'es-toolkit/compat';
 import { keys, sum, toggle, unique } from 'radash';
+import { networkUtilities } from './fns/network-utilities';
 
 export const listFunctions = {
   utility_functions: {
@@ -67,7 +69,15 @@ export const listFunctions = {
     isNumber: (input: unknown) => typeof input === 'number',
     isString: (input: unknown) => typeof input === 'string',
     isUndefined: (input: unknown) => input === undefined,
-    isIp: isIP,
+    isIp: (input: string) => !!isIP(input),
+    isUrl: (input: string) => {
+      try {
+        new URL(input);
+        return true;
+      } catch (e) {
+        return false;
+      }
+    },
   },
   object_utilities: {
     getKeys: keys,
@@ -91,12 +101,5 @@ export const listFunctions = {
       return unique(inputArr, (x) => x[realProp.trim()]);
     },
   },
-  network_utilities: {
-    ipInformation: async (input: string) => {
-      if (!isIP(input)) {
-        throw new Error('Invalid IP address');
-      }
-      return (await fetch(`http://ip-api.com/json/${input || ''}`)).json();
-    },
-  },
+  network_utilities: networkUtilities,
 };

@@ -6,6 +6,7 @@ export const list = {
     toNumber: {},
     toNumberNonStrict: {
       label: 'toNumber (non-strict)',
+      docs: 'If the value is not a number, it will return the original value',
     },
     toString: {},
     toSafeInteger: {},
@@ -13,9 +14,11 @@ export const list = {
     toBooleanNumber: {},
     gt: {
       mainValue: {},
+      canSplitBooleanOutputs: true,
     },
     gte: {
       mainValue: {},
+      canSplitBooleanOutputs: true,
     },
   },
   string_utilities: {
@@ -38,14 +41,33 @@ export const list = {
     words: {},
   },
   predicates: {
-    isBoolean: {},
-    isNil: {},
-    isNotNil: {},
-    isNull: {},
-    isNumber: {},
-    isString: {},
-    isUndefined: {},
-    isIp: {},
+    isBoolean: {
+      canSplitBooleanOutputs: true,
+    },
+    isNil: {
+      canSplitBooleanOutputs: true,
+    },
+    isNotNil: {
+      canSplitBooleanOutputs: true,
+    },
+    isNull: {
+      canSplitBooleanOutputs: true,
+    },
+    isNumber: {
+      canSplitBooleanOutputs: true,
+    },
+    isString: {
+      canSplitBooleanOutputs: true,
+    },
+    isUndefined: {
+      canSplitBooleanOutputs: true,
+    },
+    isIp: {
+      canSplitBooleanOutputs: true,
+    },
+    isUrl: {
+      canSplitBooleanOutputs: true,
+    },
   },
   object_utilities: {
     getKeys: {
@@ -85,6 +107,10 @@ export const list = {
     ipInformation: {
       docs: 'By default is your current IP address',
     },
+    ipVersion: {
+      docs: '4 or 6. 0 if invalid',
+    },
+    networkInterfaces: {},
   },
 };
 
