@@ -115,9 +115,7 @@ export const list = {
 };
 
 export const getCategories = alphabetical(Object.keys(list), (f) => f);
-export const getDocsFromFunction = (category: string, fn: string) => {
-  return list?.[category]?.[fn]?.docs;
-};
+
 export function getFunctionsFromCategory(category: string) {
   const all = Object.keys(list[category]).map((v) => {
     return {
