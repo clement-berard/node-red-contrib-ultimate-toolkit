@@ -2,6 +2,7 @@ import type { NodeControllerConfig, NodeControllerInst } from '@keload/node-red-
 import { tryit } from 'radash';
 import { getFunctionDetails } from '../../common/list';
 import { listFunctions } from '../../common/list-functions';
+import { splitBooleanOutputs } from './helpers/outputs';
 import type { NodeMainProps } from './types';
 
 export default function (this: NodeControllerInst<NodeMainProps>, config: NodeControllerConfig<NodeMainProps>) {
@@ -30,21 +31,13 @@ export default function (this: NodeControllerInst<NodeMainProps>, config: NodeCo
       },
     };
 
-    if (config.outputs === 2) {
-      const outputs = [null, null];
-      if (result === true) {
-        outputs[0] = { ...msg, payload: result, ...commonReturn };
-      } else if (result === false) {
-        outputs[1] = { ...msg, payload: result, ...commonReturn };
-      } else {
-        this.warn('Payload must be true or false.');
-      }
+    const resp = { ...msg, payload: result, ...commonReturn };
+
+    if (config.splitBooleanOutputs) {
+      const outputs = splitBooleanOutputs(result, resp);
       this.send(outputs);
     } else {
-      this.send({
-        payload: result,
-        ...commonReturn,
-      });
+      this.send(resp);
     }
   });
 }
