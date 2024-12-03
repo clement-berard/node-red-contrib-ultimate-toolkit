@@ -2,6 +2,7 @@ import type { NodeEditorDefinition } from '@keload/node-red-dxp/editor';
 import {
   addClassesOnSelectors,
   initSelect,
+  isCheckboxChecked,
   jqSelector,
   resolveSelector,
   watchInput,
@@ -37,12 +38,11 @@ const Main: NodeEditorDefinition<NodeMainProps> = {
     return this.name || this.function || 'toolkit';
   },
   oneditsave: function () {
-    // @ts-ignore
-    this.outputs = jqSelector('$splitBooleanOutputs').is(':checked') ? 2 : 1;
+    this.outputs = isCheckboxChecked('$splitBooleanOutputs') ? 2 : 1;
   },
   oneditprepare: function () {
     jqSelector('$entry').typedInput({
-      types: ['msg', 'flow', 'global', 'str'],
+      types: ['msg', 'flow', 'global', 'str', 'json'],
       typeField: resolveSelector('$entryType'),
     });
 
