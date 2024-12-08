@@ -1,3 +1,34 @@
+import * as fs from 'node:fs';
+import { alphabetical, title } from 'radash';
+import { list } from './src/common/list';
+
+const allFunctions = list;
+
+const allFns = new Map<string, string[]>();
+
+for (const [key, value] of Object.entries(allFunctions)) {
+  allFns.set(
+    title(key),
+    alphabetical(Object.keys(value), (f) => f),
+  );
+}
+
+// console.log(allFns);
+
+const featurePart = `
+## Features
+${Array.from(allFns)
+  .map(([key, value]) => {
+    const _values = value
+      .filter((v) => v?.trim())
+      .map((v) => `- \`${v}\``)
+      .join('\n');
+
+    return `\n### ${key}\n\n${_values}`;
+  })
+  .join('\n')}`;
+
+const README = `
 # node-red-contrib-ultimate-toolkit
 
 A collection of utilities to help you build your Node-RED flows.
@@ -43,69 +74,7 @@ If native Node.js are available, they are used instead of the libraries.
 
 **One node to rule them all!**
 
-
-## Features
-
-### Utility Functions
-
-- `gt`
-- `gte`
-- `toBoolean`
-- `toBooleanNumber`
-- `toNumber`
-- `toNumberNonStrict`
-- `toSafeInteger`
-- `toString`
-
-### String Utilities
-
-- `camelCase`
-- `capitalize`
-- `constantCase`
-- `escape`
-- `kebabCase`
-- `lowerCase`
-- `lowerFirst`
-- `pascalCase`
-- `snakeCase`
-- `startCase`
-- `trim`
-- `trimEnd`
-- `trimStart`
-- `unescape`
-- `upperCase`
-- `upperFirst`
-- `words`
-
-### Predicates
-
-- `isBoolean`
-- `isIp`
-- `isNil`
-- `isNotNil`
-- `isNull`
-- `isNumber`
-- `isString`
-- `isUndefined`
-- `isUrl`
-
-### Object Utilities
-
-- `getKeys`
-
-### Array Utilities
-
-- `groupBy`
-- `keyBy`
-- `sum`
-- `toggle`
-- `unique`
-
-### Network Utilities
-
-- `ipInformation`
-- `ipVersion`
-- `networkInterfaces`
+${featurePart}
 
 ## Performance
 
@@ -123,3 +92,6 @@ Please feel free to contribute to this package by creating issues or pull reques
 ## License
 
 MIT
+`.trim();
+
+fs.writeFileSync('./README.md', README);
