@@ -15,7 +15,8 @@
     "lint": "pnpm biome lint",
     "lint:check": "pnpm biome check",
     "release": "pnpm release-it",
-    "release:test": "pnpm release-it --dry-run"
+    "release:test": "pnpm release-it --dry-run",
+    "generate:readme": "pnpm tsx build-readme.ts"
   },
   "node-red": {
     "version": ">=2.0.0",
