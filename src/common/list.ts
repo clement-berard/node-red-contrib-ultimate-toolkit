@@ -15,10 +15,12 @@ export const list = {
     gt: {
       mainValue: {},
       canSplitBooleanOutputs: true,
+      inverseReturnValue: true,
     },
     gte: {
       mainValue: {},
       canSplitBooleanOutputs: true,
+      inverseReturnValue: true,
     },
   },
   string_utilities: {
@@ -43,30 +45,39 @@ export const list = {
   predicates: {
     isBoolean: {
       canSplitBooleanOutputs: true,
+      inverseReturnValue: true,
+    },
+    isNaN: {
+      canSplitBooleanOutputs: true,
+      inverseReturnValue: true,
     },
     isNil: {
       canSplitBooleanOutputs: true,
-    },
-    isNotNil: {
-      canSplitBooleanOutputs: true,
+      inverseReturnValue: true,
     },
     isNull: {
       canSplitBooleanOutputs: true,
+      inverseReturnValue: true,
     },
     isNumber: {
       canSplitBooleanOutputs: true,
+      inverseReturnValue: true,
     },
     isString: {
       canSplitBooleanOutputs: true,
+      inverseReturnValue: true,
     },
     isUndefined: {
       canSplitBooleanOutputs: true,
+      inverseReturnValue: true,
     },
     isIp: {
       canSplitBooleanOutputs: true,
+      inverseReturnValue: true,
     },
     isUrl: {
       canSplitBooleanOutputs: true,
+      inverseReturnValue: true,
     },
   },
   object_utilities: {

@@ -36,7 +36,7 @@
         <select id="node-input-function"></select>
     </div>
 </div>
-<div class="dxp-form-row hidden additionalMainValue">
+<div class="dxp-form-row extra-field additionalMainValue">
     <div class="main">
         <div>
             <i class="fa fa-plus"></i>
@@ -45,14 +45,24 @@
         <input type="text" id="node-input-mainValue">
     </div>
 </div>
-<div class="dxp-form-row splitBooleanOutputs hidden">
+<div class="dxp-form-row inverseReturnValue extra-field">
+    <div class="main">
+        <div>
+            <i class="fa fa-arrow-circle-o-right"></i>
+            <label for="node-input-inverseReturnValue">Inverse</label>
+        </div>
+        <input type="checkbox" id="node-input-inverseReturnValue" />
+        <span>Inverse the return value (<span class="italic">not</span> of condition)</span>
+    </div>
+</div>
+<div class="dxp-form-row splitBooleanOutputs extra-field">
     <div class="main">
         <div>
             <i class="fa fa-map-signs"></i>
             <label for="node-input-splitBooleanOutputs">Split out</label>
         </div>
         <input type="checkbox" id="node-input-splitBooleanOutputs" />
-        <span class="italic">Split outputs in two distinct boolean</span>
+        <span>Split outputs in two distinct boolean</span>
     </div>
 </div>
-<div class="alert alert-info fn-docs hidden text-center"></div>
+<div class="alert alert-info fn-docs extra-field text-center"></div>
