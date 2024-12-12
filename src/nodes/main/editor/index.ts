@@ -1,6 +1,5 @@
 import type { NodeEditorDefinition } from '@keload/node-red-dxp/editor';
 import {
-  addClassesOnSelectors,
   initSelect,
   isCheckboxChecked,
   jqSelector,
@@ -23,6 +22,7 @@ const Main: NodeEditorDefinition<NodeMainProps> = {
     function: { value: '', required: true },
     mainValue: { value: '' },
     splitBooleanOutputs: { value: false },
+    inverseReturnValue: { value: false },
     outputs: { value: 1 },
   },
   inputs: 1,
@@ -35,7 +35,7 @@ const Main: NodeEditorDefinition<NodeMainProps> = {
   },
   icon: 'font-awesome/fa-wrench',
   label: function () {
-    return this.name || this.function || 'toolkit';
+    return this.name || `${this.inverseReturnValue ? '!' : ''}${this.function}` || 'toolkit';
   },
   oneditsave: function () {
     this.outputs = isCheckboxChecked('$splitBooleanOutputs') ? 2 : 1;
@@ -71,7 +71,7 @@ const Main: NodeEditorDefinition<NodeMainProps> = {
       // get details
       const fnDetails = getFunctionDetails(category as string, currentFunction as string);
       // force hide optionals fields
-      addClassesOnSelectors(['.fn-docs', '.additionalMainValue', '.splitBooleanOutputs'], ['hidden']);
+      jqSelector('.extra-field').addClass('hidden');
       //docs part
       const docs = fnDetails?.docs;
       if (docs) {
@@ -90,6 +90,11 @@ const Main: NodeEditorDefinition<NodeMainProps> = {
       const hasCanSplitBooleanOutputs = !!fnDetails?.canSplitBooleanOutputs;
       if (hasCanSplitBooleanOutputs) {
         jqSelector('.splitBooleanOutputs').removeClass('hidden');
+      }
+      // inverse boolean value
+      const hasInverseReturnValue = !!fnDetails?.inverseReturnValue;
+      if (hasInverseReturnValue) {
+        jqSelector('.inverseReturnValue').removeClass('hidden');
       }
     }
 

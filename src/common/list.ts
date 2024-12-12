@@ -2,78 +2,6 @@ import { alphabetical } from 'radash';
 import { docsFromEsToolkit, docsFromRadash } from './docs';
 
 export const list = {
-  utility_functions: {
-    toNumber: {},
-    toNumberNonStrict: {
-      label: 'toNumber (non-strict)',
-      docs: 'If the value is not a number, it will return the original value',
-    },
-    toString: {},
-    toSafeInteger: {},
-    toBoolean: {},
-    toBooleanNumber: {},
-    gt: {
-      mainValue: {},
-      canSplitBooleanOutputs: true,
-    },
-    gte: {
-      mainValue: {},
-      canSplitBooleanOutputs: true,
-    },
-  },
-  string_utilities: {
-    camelCase: {},
-    capitalize: {},
-    constantCase: {},
-    escape: {},
-    kebabCase: {},
-    lowerCase: {},
-    lowerFirst: {},
-    pascalCase: {},
-    snakeCase: {},
-    startCase: {},
-    trim: {},
-    trimEnd: {},
-    trimStart: {},
-    unescape: {},
-    upperCase: {},
-    upperFirst: {},
-    words: {},
-  },
-  predicates: {
-    isBoolean: {
-      canSplitBooleanOutputs: true,
-    },
-    isNil: {
-      canSplitBooleanOutputs: true,
-    },
-    isNotNil: {
-      canSplitBooleanOutputs: true,
-    },
-    isNull: {
-      canSplitBooleanOutputs: true,
-    },
-    isNumber: {
-      canSplitBooleanOutputs: true,
-    },
-    isString: {
-      canSplitBooleanOutputs: true,
-    },
-    isUndefined: {
-      canSplitBooleanOutputs: true,
-    },
-    isIp: {
-      canSplitBooleanOutputs: true,
-    },
-    isUrl: {
-      canSplitBooleanOutputs: true,
-    },
-  },
-  object_utilities: {
-    getKeys: {
-      docs: docsFromRadash('object/keys'),
-    },
-  },
   array_utilities: {
     toggle: {
       docs: docsFromRadash('array/toggle'),
@@ -103,6 +31,89 @@ export const list = {
       docs: docsFromRadash('array/unique'),
     },
   },
+  string_utilities: {
+    camelCase: {},
+    capitalize: {},
+    constantCase: {},
+    escape: {},
+    kebabCase: {},
+    lowerCase: {},
+    lowerFirst: {},
+    pascalCase: {},
+    snakeCase: {},
+    startCase: {},
+    trim: {},
+    trimEnd: {},
+    trimStart: {},
+    unescape: {},
+    upperCase: {},
+    upperFirst: {},
+    words: {},
+  },
+  utility_functions: {
+    toNumber: {},
+    toNumberNonStrict: {
+      label: 'toNumber (non-strict)',
+      docs: 'If the value is not a number, it will return the original value',
+    },
+    toString: {},
+    toSafeInteger: {},
+    toBoolean: {},
+    toBooleanNumber: {},
+    gt: {
+      mainValue: {},
+      canSplitBooleanOutputs: true,
+      inverseReturnValue: true,
+    },
+    gte: {
+      mainValue: {},
+      canSplitBooleanOutputs: true,
+      inverseReturnValue: true,
+    },
+  },
+  predicates: {
+    isBoolean: {
+      canSplitBooleanOutputs: true,
+      inverseReturnValue: true,
+    },
+    isNaN: {
+      canSplitBooleanOutputs: true,
+      inverseReturnValue: true,
+    },
+    isNil: {
+      canSplitBooleanOutputs: true,
+      inverseReturnValue: true,
+    },
+    isNull: {
+      canSplitBooleanOutputs: true,
+      inverseReturnValue: true,
+    },
+    isNumber: {
+      canSplitBooleanOutputs: true,
+      inverseReturnValue: true,
+    },
+    isString: {
+      canSplitBooleanOutputs: true,
+      inverseReturnValue: true,
+    },
+    isUndefined: {
+      canSplitBooleanOutputs: true,
+      inverseReturnValue: true,
+    },
+    isIp: {
+      canSplitBooleanOutputs: true,
+      inverseReturnValue: true,
+    },
+    isUrl: {
+      canSplitBooleanOutputs: true,
+      inverseReturnValue: true,
+    },
+  },
+  object_utilities: {
+    getKeys: {
+      docs: docsFromRadash('object/keys'),
+    },
+  },
   network_utilities: {
     ipInformation: {
       docs: 'By default is your current IP address',
@@ -111,6 +122,12 @@ export const list = {
       docs: '4 or 6. 0 if invalid',
     },
     networkInterfaces: {},
+  },
+  math_utilities: {
+    mean: {},
+    median: {},
+    round: {},
+    sum: {},
   },
 };
 

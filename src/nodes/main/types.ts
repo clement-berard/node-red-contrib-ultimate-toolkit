@@ -8,4 +8,5 @@ export interface NodeMainProps extends EditorNodeProperties {
   mainValue: string;
   outputs: number;
   splitBooleanOutputs: boolean;
+  inverseReturnValue: boolean;
 }
