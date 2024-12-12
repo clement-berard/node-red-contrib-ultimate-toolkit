@@ -2,25 +2,33 @@ import { alphabetical } from 'radash';
 import { docsFromEsToolkit, docsFromRadash } from './docs';
 
 export const list = {
-  utility_functions: {
-    toNumber: {},
-    toNumberNonStrict: {
-      label: 'toNumber (non-strict)',
-      docs: 'If the value is not a number, it will return the original value',
+  array_utilities: {
+    toggle: {
+      docs: docsFromRadash('array/toggle'),
     },
-    toString: {},
-    toSafeInteger: {},
-    toBoolean: {},
-    toBooleanNumber: {},
-    gt: {
-      mainValue: {},
-      canSplitBooleanOutputs: true,
-      inverseReturnValue: true,
+    groupBy: {
+      mainValue: {
+        label: 'Property',
+      },
+      docs: docsFromEsToolkit('array/groupBy'),
     },
-    gte: {
-      mainValue: {},
-      canSplitBooleanOutputs: true,
-      inverseReturnValue: true,
+    keyBy: {
+      mainValue: {
+        label: 'Property',
+      },
+      docs: docsFromEsToolkit('array/keyBy'),
+    },
+    sum: {
+      mainValue: {
+        label: 'Property',
+      },
+      docs: docsFromRadash('array/sum'),
+    },
+    unique: {
+      mainValue: {
+        label: 'Property',
+      },
+      docs: docsFromRadash('array/unique'),
     },
   },
   string_utilities: {
@@ -41,6 +49,27 @@ export const list = {
     upperCase: {},
     upperFirst: {},
     words: {},
+  },
+  utility_functions: {
+    toNumber: {},
+    toNumberNonStrict: {
+      label: 'toNumber (non-strict)',
+      docs: 'If the value is not a number, it will return the original value',
+    },
+    toString: {},
+    toSafeInteger: {},
+    toBoolean: {},
+    toBooleanNumber: {},
+    gt: {
+      mainValue: {},
+      canSplitBooleanOutputs: true,
+      inverseReturnValue: true,
+    },
+    gte: {
+      mainValue: {},
+      canSplitBooleanOutputs: true,
+      inverseReturnValue: true,
+    },
   },
   predicates: {
     isBoolean: {
@@ -85,35 +114,6 @@ export const list = {
       docs: docsFromRadash('object/keys'),
     },
   },
-  array_utilities: {
-    toggle: {
-      docs: docsFromRadash('array/toggle'),
-    },
-    groupBy: {
-      mainValue: {
-        label: 'Property',
-      },
-      docs: docsFromEsToolkit('array/groupBy'),
-    },
-    keyBy: {
-      mainValue: {
-        label: 'Property',
-      },
-      docs: docsFromEsToolkit('array/keyBy'),
-    },
-    sum: {
-      mainValue: {
-        label: 'Property',
-      },
-      docs: docsFromRadash('array/sum'),
-    },
-    unique: {
-      mainValue: {
-        label: 'Property',
-      },
-      docs: docsFromRadash('array/unique'),
-    },
-  },
   network_utilities: {
     ipInformation: {
       docs: 'By default is your current IP address',
@@ -122,6 +122,12 @@ export const list = {
       docs: '4 or 6. 0 if invalid',
     },
     networkInterfaces: {},
+  },
+  math_utilities: {
+    mean: {},
+    median: {},
+    round: {},
+    sum: {},
   },
 };
 

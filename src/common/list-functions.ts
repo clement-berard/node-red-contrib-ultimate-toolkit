@@ -1,5 +1,6 @@
 import { keys } from 'radash';
 import { arrayUtilities } from './fns/array-utilities';
+import { mathUtilities } from './fns/math-utilities';
 import { networkUtilities } from './fns/network-utilities';
 import { predicates } from './fns/predicates';
 import { stringUtilities } from './fns/string-utilities';
@@ -14,4 +15,5 @@ export const listFunctions = {
   },
   array_utilities: arrayUtilities,
   network_utilities: networkUtilities,
+  math_utilities: mathUtilities,
 };

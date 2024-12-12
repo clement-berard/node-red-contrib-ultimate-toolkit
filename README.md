@@ -46,16 +46,13 @@ If native Node.js are available, they are used instead of the libraries.
 
 ## Features
 
-### Utility Functions
+### Array Utilities
 
-- `gt`
-- `gte`
-- `toBoolean`
-- `toBooleanNumber`
-- `toNumber`
-- `toNumberNonStrict`
-- `toSafeInteger`
-- `toString`
+- `groupBy`
+- `keyBy`
+- `sum`
+- `toggle`
+- `unique`
 
 ### String Utilities
 
@@ -77,12 +74,23 @@ If native Node.js are available, they are used instead of the libraries.
 - `upperFirst`
 - `words`
 
+### Utility Functions
+
+- `gt`
+- `gte`
+- `toBoolean`
+- `toBooleanNumber`
+- `toNumber`
+- `toNumberNonStrict`
+- `toSafeInteger`
+- `toString`
+
 ### Predicates
 
 - `isBoolean`
 - `isIp`
+- `isNaN`
 - `isNil`
-- `isNotNil`
 - `isNull`
 - `isNumber`
 - `isString`
@@ -93,19 +101,18 @@ If native Node.js are available, they are used instead of the libraries.
 
 - `getKeys`
 
-### Array Utilities
-
-- `groupBy`
-- `keyBy`
-- `sum`
-- `toggle`
-- `unique`
-
 ### Network Utilities
 
 - `ipInformation`
 - `ipVersion`
 - `networkInterfaces`
+
+### Math Utilities
+
+- `mean`
+- `median`
+- `round`
+- `sum`
 
 ## Performance
 
