@@ -1,4 +1,4 @@
-import { toString as _toString, gt, gte, toNumber, toSafeInteger } from 'es-toolkit/compat';
+import { toString as _toString, eq, gt, gte, lt, lte, toNumber, toSafeInteger } from 'es-toolkit/compat';
 import { _isNaN } from './predicates';
 
 export const utilityFunctions = {
@@ -24,4 +24,16 @@ export const utilityFunctions = {
 
     return gte(a, b);
   },
+  lt: (...args: unknown[]) => {
+    const [a, b] = args.map(toNumber);
+
+    return lt(a, b);
+  },
+  lte: (...args: unknown[]) => {
+    const [a, b] = args.map(toNumber);
+
+    return lte(a, b);
+  },
+  eq: eq,
+  now: Date.now,
 };

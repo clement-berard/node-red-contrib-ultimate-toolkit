@@ -76,8 +76,12 @@ If native Node.js are available, they are used instead of the libraries.
 
 ### Utility Functions
 
+- `eq`
 - `gt`
 - `gte`
+- `lt`
+- `lte`
+- `now`
 - `toBoolean`
 - `toBooleanNumber`
 - `toNumber`
@@ -109,10 +113,23 @@ If native Node.js are available, they are used instead of the libraries.
 
 ### Math Utilities
 
+- `abs`
+- `acos`
+- `asin`
+- `atan`
+- `ceil`
+- `cos`
+- `exp`
+- `floor`
+- `log`
 - `mean`
 - `median`
+- `random`
 - `round`
+- `sin`
 - `sum`
+- `tan`
+- `trunc`
 
 ## Performance
 

@@ -70,6 +70,24 @@ export const list = {
       canSplitBooleanOutputs: true,
       inverseReturnValue: true,
     },
+    lt: {
+      mainValue: {},
+      canSplitBooleanOutputs: true,
+      inverseReturnValue: true,
+    },
+    lte: {
+      mainValue: {},
+      canSplitBooleanOutputs: true,
+      inverseReturnValue: true,
+    },
+    eq: {
+      mainValue: {},
+      canSplitBooleanOutputs: true,
+      inverseReturnValue: true,
+    },
+    now: {
+      docs: 'Returns the number of milliseconds elapsed since the epoch',
+    },
   },
   predicates: {
     isBoolean: {
@@ -124,10 +142,23 @@ export const list = {
     networkInterfaces: {},
   },
   math_utilities: {
+    abs: {},
+    acos: {},
+    asin: {},
+    atan: {},
+    ceil: {},
+    cos: {},
+    exp: {},
+    floor: {},
+    log: {},
     mean: {},
     median: {},
+    random: {},
     round: {},
+    sin: {},
     sum: {},
+    tan: {},
+    trunc: {},
   },
 };
 
