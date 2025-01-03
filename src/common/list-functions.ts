@@ -1,4 +1,5 @@
-import { keys } from 'radash';
+import { takeRight } from 'es-toolkit';
+import { keys, sleep } from 'radash';
 import { arrayUtilities } from './fns/array-utilities';
 import { mathUtilities } from './fns/math-utilities';
 import { networkUtilities } from './fns/network-utilities';
@@ -16,4 +17,10 @@ export const listFunctions = {
   array_utilities: arrayUtilities,
   network_utilities: networkUtilities,
   math_utilities: mathUtilities,
+  async_utilities: {
+    delay: (_, inputProp: unknown) => {
+      const realProp = inputProp as number;
+      return sleep(realProp);
+    },
+  },
 };

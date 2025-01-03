@@ -4,16 +4,18 @@ import { list } from './src/common/list';
 
 const allFunctions = list;
 
+const allCategories = alphabetical(Object.keys(allFunctions), (f) => f);
+
 const allFns = new Map<string, string[]>();
 
-for (const [key, value] of Object.entries(allFunctions)) {
+for (const category of allCategories) {
+  const functions = allFunctions[category];
+
   allFns.set(
-    title(key),
-    alphabetical(Object.keys(value), (f) => f),
+    title(category),
+    alphabetical(Object.keys(functions), (f) => f),
   );
 }
-
-// console.log(allFns);
 
 const featurePart = `
 ## Features
@@ -80,7 +82,7 @@ ${featurePart}
 
 All used libraries are treeshaked and included in the final bundle. No extra dependencies are added.
 
-Very small distribution size ~ 20kb.
+Very small distribution size ~ 30kb.
 
 ## Contributing
 

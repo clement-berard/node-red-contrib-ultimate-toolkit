@@ -50,9 +50,59 @@ If native Node.js are available, they are used instead of the libraries.
 
 - `groupBy`
 - `keyBy`
+- `shuffle`
 - `sum`
+- `take`
+- `takeRight`
 - `toggle`
 - `unique`
+
+### Async Utilities
+
+- `delay`
+
+### Math Utilities
+
+- `abs`
+- `acos`
+- `asin`
+- `atan`
+- `ceil`
+- `cos`
+- `exp`
+- `floor`
+- `log`
+- `mean`
+- `median`
+- `random`
+- `round`
+- `sin`
+- `sum`
+- `tan`
+- `trunc`
+
+### Network Utilities
+
+- `ipInformation`
+- `ipVersion`
+- `networkInterfaces`
+
+### Object Utilities
+
+- `getKeys`
+
+### Predicates
+
+- `isBoolean`
+- `isBuffer`
+- `isIp`
+- `isNaN`
+- `isNil`
+- `isNull`
+- `isNumber`
+- `isString`
+- `isUndefined`
+- `isUrl`
 
 ### String Utilities
 
@@ -82,6 +132,7 @@ If native Node.js are available, they are used instead of the libraries.
 - `lt`
 - `lte`
 - `now`
+- `size`
 - `toBoolean`
 - `toBooleanNumber`
 - `toNumber`
@@ -89,53 +140,11 @@ If native Node.js are available, they are used instead of the libraries.
 - `toSafeInteger`
 - `toString`
 
-### Predicates
-
-- `isBoolean`
-- `isIp`
-- `isNaN`
-- `isNil`
-- `isNull`
-- `isNumber`
-- `isString`
-- `isUndefined`
-- `isUrl`
-
-### Object Utilities
-
-- `getKeys`
-
-### Network Utilities
-
-- `ipInformation`
-- `ipVersion`
-- `networkInterfaces`
-
-### Math Utilities
-
-- `abs`
-- `acos`
-- `asin`
-- `atan`
-- `ceil`
-- `cos`
-- `exp`
-- `floor`
-- `log`
-- `mean`
-- `median`
-- `random`
-- `round`
-- `sin`
-- `sum`
-- `tan`
-- `trunc`
-
 ## Performance
 
 All used libraries are treeshaked and included in the final bundle. No extra dependencies are added.
 
-Very small distribution size ~ 20kb.
+Very small distribution size ~ 30kb.
 
 ## Contributing
 

@@ -1,4 +1,4 @@
-import { toString as _toString, eq, gt, gte, lt, lte, toNumber, toSafeInteger } from 'es-toolkit/compat';
+import { toString as _toString, eq, gt, gte, lt, lte, size, toNumber, toSafeInteger } from 'es-toolkit/compat';
 import { _isNaN } from './predicates';
 
 export const utilityFunctions = {
@@ -36,4 +36,5 @@ export const utilityFunctions = {
   },
   eq: eq,
   now: Date.now,
+  size: size,
 };

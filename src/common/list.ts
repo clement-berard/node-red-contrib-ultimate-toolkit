@@ -6,6 +6,9 @@ export const list = {
     toggle: {
       docs: docsFromRadash('array/toggle'),
     },
+    shuffle: {
+      docs: docsFromEsToolkit('array/shuffle'),
+    },
     groupBy: {
       mainValue: {
         label: 'Property',
@@ -29,6 +32,18 @@ export const list = {
         label: 'Property',
       },
       docs: docsFromRadash('array/unique'),
+    },
+    take: {
+      mainValue: {
+        label: 'Count',
+      },
+      docs: docsFromEsToolkit('array/take'),
+    },
+    takeRight: {
+      mainValue: {
+        label: 'Count',
+      },
+      docs: docsFromEsToolkit('array/takeRight'),
     },
   },
   string_utilities: {
@@ -88,6 +103,9 @@ export const list = {
     now: {
       docs: 'Returns the number of milliseconds elapsed since the epoch',
     },
+    size: {
+      docs: 'Returns the size of an array, string, or object.',
+    },
   },
   predicates: {
     isBoolean: {
@@ -126,6 +144,10 @@ export const list = {
       canSplitBooleanOutputs: true,
       inverseReturnValue: true,
     },
+    isBuffer: {
+      canSplitBooleanOutputs: true,
+      inverseReturnValue: true,
+    },
   },
   object_utilities: {
     getKeys: {
@@ -159,6 +181,13 @@ export const list = {
     sum: {},
     tan: {},
     trunc: {},
+  },
+  async_utilities: {
+    delay: {
+      mainValue: {
+        label: 'Milliseconds',
+      },
+    },
   },
 };
 
