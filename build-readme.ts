@@ -1,7 +1,7 @@
 import * as fs from 'node:fs';
 import { alphabetical, title } from 'radash';
 import { list } from './src/common/list';
-// https://github.com/clement-berard/node-red-contrib-ultimate-toolkit/HEAD/docs/screenshot.png
+
 const allFunctions = list;
 
 const allCategories = alphabetical(Object.keys(allFunctions), (f) => f);
