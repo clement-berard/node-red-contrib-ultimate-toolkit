@@ -84,7 +84,7 @@ ${featurePart}
 
 All used libraries are treeshaked and included in the final bundle. No extra dependencies are added.
 
-Very small distribution size ~ 30kb.
+Very small distribution size < 30kb.
 
 ## Contributing
 
