@@ -72,8 +72,10 @@ If native Node.js are available, they are used instead of the libraries.
 - `exp`
 - `floor`
 - `log`
+- `max`
 - `mean`
 - `median`
+- `min`
 - `random`
 - `round`
 - `sin`
