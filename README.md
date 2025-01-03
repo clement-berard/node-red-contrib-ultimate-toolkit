@@ -43,6 +43,8 @@ If native Node.js are available, they are used instead of the libraries.
 
 **One node to rule them all!**
 
+![paring-config.png](docs/screenshot.png)
+
 
 ## Features
 
@@ -72,8 +74,10 @@ If native Node.js are available, they are used instead of the libraries.
 - `exp`
 - `floor`
 - `log`
+- `max`
 - `mean`
 - `median`
+- `min`
 - `random`
 - `round`
 - `sin`
@@ -142,9 +146,11 @@ If native Node.js are available, they are used instead of the libraries.
 
 ## Performance
 
-All used libraries are treeshaked and included in the final bundle. No extra dependencies are added.
+All used libraries are treeshaked and included in the final bundle. 
 
-Very small distribution size ~ 30kb.
+**No extra dependencies are added**
+
+[Very small distribution](https://www.npmjs.com/package/@keload/node-red-contrib-ultimate-toolkit?activeTab=code) size < 30kb.
 
 ## Contributing
 

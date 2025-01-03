@@ -1,4 +1,5 @@
-import { mean, median, sum } from 'es-toolkit';
+import { median } from 'es-toolkit';
+import { sum } from 'radash';
 
 export const mathUtilities = {
   abs: Math.abs,
@@ -10,12 +11,18 @@ export const mathUtilities = {
   exp: Math.exp,
   floor: Math.floor,
   log: Math.log,
-  mean: mean,
+  max: (inputArr: number[]) => Math.max(...inputArr),
+  mean: (inputArr: number[]) => {
+    return sum(inputArr) / inputArr.length;
+  },
   median: median,
+  min: (inputArr: number[]) => Math.min(...inputArr),
   random: Math.random,
   round: Math.round,
   sin: Math.sin,
-  sum: sum,
+  sum: (inputArr: number[]) => {
+    return sum(inputArr);
+  },
   tan: Math.tan,
   trunc: Math.trunc,
 };
