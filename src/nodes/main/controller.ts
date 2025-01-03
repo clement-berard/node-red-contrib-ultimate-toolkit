@@ -31,11 +31,11 @@ export default function (this: NodeControllerInst<NodeMainProps>, config: NodeCo
       },
     };
 
-    const finalResult = config.inverseReturnValue ? !result : result;
+    const finalResult = fnDetails?.inverseReturnValue && config.inverseReturnValue ? !result : result;
 
     const resp = { ...msg, payload: finalResult, ...commonReturn };
 
-    if (config.splitBooleanOutputs) {
+    if (fnDetails?.canSplitBooleanOutputs && config.splitBooleanOutputs) {
       const outputs = splitBooleanOutputs(finalResult, resp);
       this.send(outputs);
     } else {

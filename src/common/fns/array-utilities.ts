@@ -1,8 +1,9 @@
-import { groupBy, keyBy } from 'es-toolkit';
+import { groupBy, keyBy, shuffle, take, takeRight } from 'es-toolkit';
 import { sum, toggle, unique } from 'radash';
 
 export const arrayUtilities = {
   toggle: toggle,
+  shuffle: shuffle,
   groupBy: (inputArr: unknown[], inputProp: unknown) => {
     const realProp = inputProp as string;
     return groupBy(inputArr, (x) => x[realProp.trim()]);
@@ -18,5 +19,13 @@ export const arrayUtilities = {
   unique: (inputArr: object[], inputProp: unknown) => {
     const realProp = inputProp as string;
     return unique(inputArr, (x) => x[realProp.trim()]);
+  },
+  take: (inputArr: object[], inputProp: unknown) => {
+    const realProp = inputProp as number;
+    return take(inputArr, realProp);
+  },
+  takeRight: (inputArr: object[], inputProp: unknown) => {
+    const realProp = inputProp as number;
+    return takeRight(inputArr, realProp);
   },
 };
