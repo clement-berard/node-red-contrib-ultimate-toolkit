@@ -1,7 +1,7 @@
 import * as fs from 'node:fs';
 import { alphabetical, title } from 'radash';
 import { list } from './src/common/list';
-
+// https://github.com/clement-berard/node-red-contrib-ultimate-toolkit/HEAD/docs/screenshot.png
 const allFunctions = list;
 
 const allCategories = alphabetical(Object.keys(allFunctions), (f) => f);
@@ -75,6 +75,8 @@ Essentially based on [es-toolkit](https://es-toolkit.slash.page/) and [radash](h
 If native Node.js are available, they are used instead of the libraries.
 
 **One node to rule them all!**
+
+![paring-config.png](docs/screenshot.png)
 
 ${featurePart}
 

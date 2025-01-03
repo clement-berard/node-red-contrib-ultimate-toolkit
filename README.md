@@ -43,6 +43,8 @@ If native Node.js are available, they are used instead of the libraries.
 
 **One node to rule them all!**
 
+![paring-config.png](docs/screenshot.png)
+
 
 ## Features
 
