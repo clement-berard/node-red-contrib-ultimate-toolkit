@@ -51,7 +51,7 @@ Whenever possible, native Node.js methods take precedence for maximum efficiency
 
 ## Features
 
-### Array Utilities
+### → Array Utilities
 
 ― `Group By` 
 
@@ -85,13 +85,13 @@ Whenever possible, native Node.js methods take precedence for maximum efficiency
 
  
 
-### Async Utilities
+### → Async Utilities
 
 ― `Delay` 
 
  Delays the message by the specified amount of time
 
-### Date Utilities
+### → Date Utilities
 
 ― `Current Timezone` 
 
@@ -105,7 +105,7 @@ Whenever possible, native Node.js methods take precedence for maximum efficiency
 
  Routes messages depending on the time
 
-### Math Utilities
+### → Math Utilities
 
 ― `Abs` 
 
@@ -183,7 +183,7 @@ Whenever possible, native Node.js methods take precedence for maximum efficiency
 
  
 
-### Network Utilities
+### → Network Utilities
 
 ― `Ip Information` 
 
@@ -197,13 +197,13 @@ Whenever possible, native Node.js methods take precedence for maximum efficiency
 
  
 
-### Object Utilities
+### → Object Utilities
 
 ― `Get Keys` 
 
  
 
-### Predicates
+### → Predicates
 
 ― `Is Boolean` 
 
@@ -245,7 +245,7 @@ Whenever possible, native Node.js methods take precedence for maximum efficiency
 
  
 
-### String Utilities
+### → String Utilities
 
 ― `Camel Case` 
 
@@ -315,7 +315,7 @@ Whenever possible, native Node.js methods take precedence for maximum efficiency
 
  
 
-### Utility Functions
+### → Utility Functions
 
 ― `Eq` 
 
