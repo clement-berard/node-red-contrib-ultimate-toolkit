@@ -23,6 +23,7 @@ const Main: NodeEditorDefinition<NodeMainProps> = {
     mainValue: { value: '' },
     splitBooleanOutputs: { value: false },
     inverseReturnValue: { value: false },
+    dateUtilities: { value: {} },
     outputs: { value: 1 },
   },
   inputs: 1,
@@ -100,6 +101,9 @@ const Main: NodeEditorDefinition<NodeMainProps> = {
       } else {
         jqSelector('$inverseReturnValue').prop('checked', false);
       }
+      // reveal classes
+      const revealClassesSelectors = (fnDetails?.revealClasses || []).map((c) => `.${c}`).join(',');
+      $(revealClassesSelectors).removeClass('!hidden');
     }
 
     populateSelectFunction(this.category, this.function);

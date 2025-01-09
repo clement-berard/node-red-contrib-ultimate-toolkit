@@ -1,4 +1,4 @@
-import { alphabetical } from 'radash';
+import { alphabetical, title } from 'radash';
 import { docsFromEsToolkit, docsFromRadash } from './docs';
 
 export const list = {
@@ -45,6 +45,13 @@ export const list = {
       },
       docs: docsFromEsToolkit('array/takeRight'),
     },
+  },
+  date_utilities: {
+    now: {
+      docs: 'Returns the number of milliseconds elapsed since the epoch',
+      revealClasses: ['dateUtilities_now'],
+    },
+    currentTimezone: {},
   },
   string_utilities: {
     camelCase: {},
@@ -100,9 +107,6 @@ export const list = {
       canSplitBooleanOutputs: true,
       inverseReturnValue: true,
     },
-    now: {
-      docs: 'Returns the number of milliseconds elapsed since the epoch',
-    },
     size: {
       docs: 'Returns the size of an array, string, or object.',
     },
@@ -113,6 +117,7 @@ export const list = {
       inverseReturnValue: true,
     },
     isNaN: {
+      label: 'Is NaN',
       canSplitBooleanOutputs: true,
       inverseReturnValue: true,
     },
@@ -199,7 +204,7 @@ export function getFunctionsFromCategory(category: string) {
   const all = Object.keys(list[category]).map((v) => {
     return {
       key: v,
-      label: list[category][v].label || v,
+      label: list[category][v].label || title(v),
     };
   });
 

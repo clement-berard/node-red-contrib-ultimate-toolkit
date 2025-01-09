@@ -35,6 +35,5 @@ export const utilityFunctions = {
     return lte(a, b);
   },
   eq: eq,
-  now: Date.now,
   size: size,
 };

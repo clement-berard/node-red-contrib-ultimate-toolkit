@@ -1,19 +1,17 @@
 import * as fs from 'node:fs';
 import { alphabetical, title } from 'radash';
-import { list } from './src/common/list';
+import { getFunctionsFromCategory, list } from './src/common/list';
 
-const allFunctions = list;
-
-const allCategories = alphabetical(Object.keys(allFunctions), (f) => f);
+const allCategories = alphabetical(Object.keys(list), (f) => f);
 
 const allFns = new Map<string, string[]>();
 
 for (const category of allCategories) {
-  const functions = allFunctions[category];
+  const functions = getFunctionsFromCategory(category).map((v) => v.label);
 
   allFns.set(
     title(category),
-    alphabetical(Object.keys(functions), (f) => f),
+    alphabetical(functions, (f) => f),
   );
 }
 
@@ -100,4 +98,4 @@ Please feel free to contribute to this package by creating issues or pull reques
 MIT
 `.trim();
 
-fs.writeFileSync('./README.md', README);
+fs.writeFileSync('./README.md', `${README}\n`);

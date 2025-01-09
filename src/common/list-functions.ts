@@ -1,6 +1,7 @@
 import { takeRight } from 'es-toolkit';
 import { keys, sleep } from 'radash';
 import { arrayUtilities } from './fns/array-utilities';
+import { dateUtilities } from './fns/date-utilities';
 import { mathUtilities } from './fns/math-utilities';
 import { networkUtilities } from './fns/network-utilities';
 import { predicates } from './fns/predicates';
@@ -10,6 +11,7 @@ import { utilityFunctions } from './fns/utilityFunctions';
 export const listFunctions = {
   utility_functions: utilityFunctions,
   string_utilities: stringUtilities,
+  date_utilities: dateUtilities,
   predicates,
   object_utilities: {
     getKeys: keys,
