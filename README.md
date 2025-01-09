@@ -53,177 +53,316 @@ Whenever possible, native Node.js methods take precedence for maximum efficiency
 
 ### Array Utilities
 
-#### `Group By` 
+`Group By` 
+
  
-#### `Key By` 
+
+`Key By` 
+
  
-#### `Shuffle` 
+
+`Shuffle` 
+
  
-#### `Sum` 
+
+`Sum` 
+
  
-#### `Take` 
+
+`Take` 
+
  
-#### `Take Right` 
+
+`Take Right` 
+
  
-#### `Toggle` 
+
+`Toggle` 
+
  
-#### `Unique` 
+
+`Unique` 
+
  
 
 ### Async Utilities
 
-#### `Delay` 
+`Delay` 
+
  Delays the message by the specified amount of time
 
 ### Date Utilities
 
-#### `Current Timezone` 
+`Current Timezone` 
+
  Returns the current timezone
-#### `Now` 
+
+`Now` 
+
  Returns the current date with lot of formatting options
-#### `Range` 
+
+`Range` 
+
  Routes messages depending on the time
 
 ### Math Utilities
 
-#### `Abs` 
+`Abs` 
+
  
-#### `Acos` 
+
+`Acos` 
+
  
-#### `Asin` 
+
+`Asin` 
+
  
-#### `Atan` 
+
+`Atan` 
+
  
-#### `Ceil` 
+
+`Ceil` 
+
  
-#### `Cos` 
+
+`Cos` 
+
  
-#### `Exp` 
+
+`Exp` 
+
  
-#### `Floor` 
+
+`Floor` 
+
  
-#### `Log` 
+
+`Log` 
+
  
-#### `Max` 
+
+`Max` 
+
  
-#### `Mean` 
+
+`Mean` 
+
  
-#### `Median` 
+
+`Median` 
+
  
-#### `Min` 
+
+`Min` 
+
  
-#### `Random` 
+
+`Random` 
+
  
-#### `Round` 
+
+`Round` 
+
  
-#### `Sin` 
+
+`Sin` 
+
  
-#### `Sum` 
+
+`Sum` 
+
  
-#### `Tan` 
+
+`Tan` 
+
  
-#### `Trunc` 
+
+`Trunc` 
+
  
 
 ### Network Utilities
 
-#### `Ip Information` 
+`Ip Information` 
+
  
-#### `Ip Version` 
+
+`Ip Version` 
+
  
-#### `Network Interfaces` 
+
+`Network Interfaces` 
+
  
 
 ### Object Utilities
 
-#### `Get Keys` 
+`Get Keys` 
+
  
 
 ### Predicates
 
-#### `Is Boolean` 
+`Is Boolean` 
+
  
-#### `Is Buffer` 
+
+`Is Buffer` 
+
  
-#### `Is Ip` 
+
+`Is Ip` 
+
  
-#### `Is Na N` 
+
+`Is Na N` 
+
  
-#### `Is Nil` 
+
+`Is Nil` 
+
  
-#### `Is Null` 
+
+`Is Null` 
+
  
-#### `Is Number` 
+
+`Is Number` 
+
  
-#### `Is String` 
+
+`Is String` 
+
  
-#### `Is Undefined` 
+
+`Is Undefined` 
+
  
-#### `Is Url` 
+
+`Is Url` 
+
  
 
 ### String Utilities
 
-#### `Camel Case` 
+`Camel Case` 
+
  
-#### `Capitalize` 
+
+`Capitalize` 
+
  
-#### `Constant Case` 
+
+`Constant Case` 
+
  
-#### `Escape` 
+
+`Escape` 
+
  
-#### `Kebab Case` 
+
+`Kebab Case` 
+
  
-#### `Lower Case` 
+
+`Lower Case` 
+
  
-#### `Lower First` 
+
+`Lower First` 
+
  
-#### `Pascal Case` 
+
+`Pascal Case` 
+
  
-#### `Snake Case` 
+
+`Snake Case` 
+
  
-#### `Start Case` 
+
+`Start Case` 
+
  
-#### `Trim` 
+
+`Trim` 
+
  
-#### `Trim End` 
+
+`Trim End` 
+
  
-#### `Trim Start` 
+
+`Trim Start` 
+
  
-#### `Unescape` 
+
+`Unescape` 
+
  
-#### `Upper Case` 
+
+`Upper Case` 
+
  
-#### `Upper First` 
+
+`Upper First` 
+
  
-#### `Words` 
+
+`Words` 
+
  
 
 ### Utility Functions
 
-#### `Eq` 
+`Eq` 
+
  
-#### `Gt` 
+
+`Gt` 
+
  
-#### `Gte` 
+
+`Gte` 
+
  
-#### `Lt` 
+
+`Lt` 
+
  
-#### `Lte` 
+
+`Lte` 
+
  
-#### `Size` 
+
+`Size` 
+
  
-#### `To Boolean` 
+
+`To Boolean` 
+
  
-#### `To Boolean Number` 
+
+`To Boolean Number` 
+
  
-#### `To Number` 
+
+`To Number` 
+
  
-#### `To Number Non Strict` 
+
+`To Number Non Strict` 
+
  
-#### `To Safe Integer` 
+
+`To Safe Integer` 
+
  
-#### `To String` 
+
+`To String` 
+
  
 
 
