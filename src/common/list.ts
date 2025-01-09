@@ -1,57 +1,66 @@
 import { alphabetical, title } from 'radash';
-import { docsFromEsToolkit, docsFromRadash } from './docs';
+import * as docsHelper from './docs';
 
 export const list = {
   array_utilities: {
     toggle: {
-      docs: docsFromRadash('array/toggle'),
+      docs: docsHelper.docsFromRadash('array/toggle'),
     },
     shuffle: {
-      docs: docsFromEsToolkit('array/shuffle'),
+      docs: docsHelper.docsFromEsToolkit('array/shuffle'),
     },
     groupBy: {
       mainValue: {
         label: 'Property',
       },
-      docs: docsFromEsToolkit('array/groupBy'),
+      docs: docsHelper.docsFromEsToolkit('array/groupBy'),
     },
     keyBy: {
       mainValue: {
         label: 'Property',
       },
-      docs: docsFromEsToolkit('array/keyBy'),
+      docs: docsHelper.docsFromEsToolkit('array/keyBy'),
     },
     sum: {
       mainValue: {
         label: 'Property',
       },
-      docs: docsFromRadash('array/sum'),
+      docs: docsHelper.docsFromRadash('array/sum'),
     },
     unique: {
       mainValue: {
         label: 'Property',
       },
-      docs: docsFromRadash('array/unique'),
+      docs: docsHelper.docsFromRadash('array/unique'),
     },
     take: {
       mainValue: {
         label: 'Count',
       },
-      docs: docsFromEsToolkit('array/take'),
+      docs: docsHelper.docsFromEsToolkit('array/take'),
     },
     takeRight: {
       mainValue: {
         label: 'Count',
       },
-      docs: docsFromEsToolkit('array/takeRight'),
+      docs: docsHelper.docsFromEsToolkit('array/takeRight'),
     },
   },
   date_utilities: {
     now: {
-      docs: 'Returns the number of milliseconds elapsed since the epoch',
+      description: 'Returns the current date with lot of formatting options',
+      docs: 'If token is provided, <code>Format</code> will not be used',
       revealClasses: ['dateUtilities_now'],
+      configArgs: 'dateUtilities',
     },
-    currentTimezone: {},
+    range: {
+      description: 'Routes messages depending on the time',
+      revealClasses: ['dateUtilities_range'],
+      configArgs: 'dateUtilities',
+    },
+    currentTimezone: {
+      description: 'Returns the current timezone',
+    },
   },
   string_utilities: {
     camelCase: {},
@@ -156,7 +165,7 @@ export const list = {
   },
   object_utilities: {
     getKeys: {
-      docs: docsFromRadash('object/keys'),
+      docs: docsHelper.docsFromRadash('object/keys'),
     },
   },
   network_utilities: {
@@ -191,6 +200,7 @@ export const list = {
   },
   async_utilities: {
     delay: {
+      description: 'Delays the message by the specified amount of time',
       mainValue: {
         label: 'Milliseconds',
       },

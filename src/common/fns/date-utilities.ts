@@ -1,5 +1,5 @@
-// import { format } from '@formkit/tempo';
-
+import { format } from '@formkit/tempo';
+import type { NodeMainProps } from '../../nodes/main/types';
 function getCurrentTimezone() {
   const timezoneDefault = Intl.DateTimeFormat().resolvedOptions().timeZone;
   // @ts-ignore
@@ -7,12 +7,23 @@ function getCurrentTimezone() {
 }
 
 export const dateUtilities = {
-  now: () => {
-    // const date = new Date();
-    // @ts-ignore
-    // const timezone = getCurrentTimezone();
-    // These are the same:
-    return Date.now();
+  now: (_: unknown, options: NodeMainProps['dateUtilities']) => {
+    const date = new Date();
+    console.log('options', options);
+
+    if (options?.nowFormatToken.trim()) {
+      return format(date, options.nowFormatToken.trim());
+    }
+
+    const matched = {
+      timestamp: () => Date.now(),
+      full: () => format(date, 'full'),
+      long: () => format(date, 'long'),
+      medium: () => format(date, 'medium'),
+      short: () => format(date, 'short'),
+    };
+
+    return matched[options.nowFormat]();
   },
   currentTimezone: getCurrentTimezone,
 };

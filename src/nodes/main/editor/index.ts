@@ -1,9 +1,11 @@
 import type { NodeEditorDefinition } from '@keload/node-red-dxp/editor';
 import {
+  getFormValues,
   initSelect,
   isCheckboxChecked,
   jqSelector,
   resolveSelector,
+  setFormValues,
   watchInput,
 } from '@keload/node-red-dxp/editor/dom-helper';
 import { title } from 'radash';
@@ -40,8 +42,10 @@ const Main: NodeEditorDefinition<NodeMainProps> = {
   },
   oneditsave: function () {
     this.outputs = isCheckboxChecked('$splitBooleanOutputs') ? 2 : 1;
+    this.dateUtilities = getFormValues('dateUtilities');
   },
   oneditprepare: function () {
+    setFormValues('dateUtilities', this.dateUtilities);
     jqSelector('$entry').typedInput({
       types: ['msg', 'flow', 'global', 'str', 'json'],
       typeField: resolveSelector('$entryType'),
@@ -103,6 +107,7 @@ const Main: NodeEditorDefinition<NodeMainProps> = {
       }
       // reveal classes
       const revealClassesSelectors = (fnDetails?.revealClasses || []).map((c) => `.${c}`).join(',');
+      console.log('revealClassesSelectors', revealClassesSelectors);
       $(revealClassesSelectors).removeClass('!hidden');
     }
 

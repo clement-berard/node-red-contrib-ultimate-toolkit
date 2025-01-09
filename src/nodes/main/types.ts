@@ -11,5 +11,8 @@ export interface NodeMainProps extends EditorNodeProperties {
   outputs: number;
   splitBooleanOutputs: boolean;
   inverseReturnValue: boolean;
-  dateUtilities: Record<any, any>;
+  dateUtilities: OrEmpty<{
+    nowFormat: string;
+    nowFormatToken?: string;
+  }>;
 }

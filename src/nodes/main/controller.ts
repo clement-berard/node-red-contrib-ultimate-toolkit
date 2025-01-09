@@ -16,6 +16,10 @@ export default function (this: NodeControllerInst<NodeMainProps>, config: NodeCo
     if (fnDetails?.mainValue) {
       argsToCall.push(config.mainValue);
     }
+    if (fnDetails?.configArgs) {
+      argsToCall.push(config[fnDetails?.configArgs]);
+    }
+
     const matchedFunction = listFunctions[config.category][config.function];
     const toCall = tryit(matchedFunction);
     const [err, result] = await toCall(...argsToCall);
