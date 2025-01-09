@@ -31,7 +31,7 @@ const featurePart = `
 ## Features
 ${finalFeatures
   .map((cat) => {
-    return `<hr>\n\n### → ${cat.title}\n\n<hr>\n\n${cat.finalCatFns.map((v) => `― \`${v.name}\` \n\n ${v.description}`).join('\n\n')}`;
+    return `\n### → ${cat.title}\n\n<hr>\n\n${cat.finalCatFns.map((v) => `― \`${v.name}\` \n\n ${v.description}`).join('\n\n')}`;
   })
   .join('\n')}
 `;

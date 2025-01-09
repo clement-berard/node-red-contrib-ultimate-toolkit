@@ -50,7 +50,6 @@ Whenever possible, native Node.js methods take precedence for maximum efficiency
 
 
 ## Features
-<hr>
 
 ### → Array Utilities
 
@@ -87,7 +86,6 @@ Whenever possible, native Node.js methods take precedence for maximum efficiency
 ― `Unique` 
 
  
-<hr>
 
 ### → Async Utilities
 
@@ -96,7 +94,6 @@ Whenever possible, native Node.js methods take precedence for maximum efficiency
 ― `Delay` 
 
  Delays the message by the specified amount of time
-<hr>
 
 ### → Date Utilities
 
@@ -113,7 +110,6 @@ Whenever possible, native Node.js methods take precedence for maximum efficiency
 ― `Range` 
 
  Routes messages depending on the time
-<hr>
 
 ### → Math Utilities
 
@@ -194,7 +190,6 @@ Whenever possible, native Node.js methods take precedence for maximum efficiency
 ― `Trunc` 
 
  
-<hr>
 
 ### → Network Utilities
 
@@ -211,7 +206,6 @@ Whenever possible, native Node.js methods take precedence for maximum efficiency
 ― `Network Interfaces` 
 
  
-<hr>
 
 ### → Object Utilities
 
@@ -220,7 +214,6 @@ Whenever possible, native Node.js methods take precedence for maximum efficiency
 ― `Get Keys` 
 
  
-<hr>
 
 ### → Predicates
 
@@ -265,7 +258,6 @@ Whenever possible, native Node.js methods take precedence for maximum efficiency
 ― `Is Url` 
 
  
-<hr>
 
 ### → String Utilities
 
@@ -338,7 +330,6 @@ Whenever possible, native Node.js methods take precedence for maximum efficiency
 ― `Words` 
 
  
-<hr>
 
 ### → Utility Functions
 
