@@ -1,0 +1,27 @@
+.dxp-template-form-row.extra-field.additionalMainValue
+    label(for="node-input-mainValue")
+        i.fa.fa-plus
+        | Value
+    .content
+        input(type="text" id="node-input-mainValue")
+
+.dxp-template-form-row.extra-field.inverseReturnValue
+    label(for="node-input-inverseReturnValue")
+        i.fa.fa-arrow-circle-o-right
+        | Inverse
+    .content
+        .checkbox
+            input(type="checkbox" id="node-input-inverseReturnValue")
+            span
+                | Inverse the return value (
+                span.italic not
+                | ) of condition
+
+.dxp-template-form-row.extra-field.splitBooleanOutputs
+    label(for="node-input-splitBooleanOutputs")
+        i.fa.fa-map-signs
+        | Split out
+    .content
+        .checkbox
+            input(type="checkbox" id="node-input-splitBooleanOutputs")
+            span Split outputs in two distinct boolean

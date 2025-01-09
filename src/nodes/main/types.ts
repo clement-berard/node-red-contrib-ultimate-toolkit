@@ -1,5 +1,7 @@
 import type { EditorNodeProperties } from 'node-red';
 
+type OrEmpty<T> = T | Record<any, any>;
+
 export interface NodeMainProps extends EditorNodeProperties {
   entry: string;
   entryType: string;
@@ -9,4 +11,5 @@ export interface NodeMainProps extends EditorNodeProperties {
   outputs: number;
   splitBooleanOutputs: boolean;
   inverseReturnValue: boolean;
+  dateUtilities: Record<any, any>;
 }

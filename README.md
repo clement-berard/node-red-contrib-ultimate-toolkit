@@ -50,99 +50,103 @@ If native Node.js are available, they are used instead of the libraries.
 
 ### Array Utilities
 
-- `groupBy`
-- `keyBy`
-- `shuffle`
-- `sum`
-- `take`
-- `takeRight`
-- `toggle`
-- `unique`
+- `Group By`
+- `Key By`
+- `Shuffle`
+- `Sum`
+- `Take`
+- `Take Right`
+- `Toggle`
+- `Unique`
 
 ### Async Utilities
 
-- `delay`
+- `Delay`
+
+### Date Utilities
+
+- `Current Timezone`
+- `Now`
 
 ### Math Utilities
 
-- `abs`
-- `acos`
-- `asin`
-- `atan`
-- `ceil`
-- `cos`
-- `exp`
-- `floor`
-- `log`
-- `max`
-- `mean`
-- `median`
-- `min`
-- `random`
-- `round`
-- `sin`
-- `sum`
-- `tan`
-- `trunc`
+- `Abs`
+- `Acos`
+- `Asin`
+- `Atan`
+- `Ceil`
+- `Cos`
+- `Exp`
+- `Floor`
+- `Log`
+- `Max`
+- `Mean`
+- `Median`
+- `Min`
+- `Random`
+- `Round`
+- `Sin`
+- `Sum`
+- `Tan`
+- `Trunc`
 
 ### Network Utilities
 
-- `ipInformation`
-- `ipVersion`
-- `networkInterfaces`
+- `Ip Information`
+- `Ip Version`
+- `Network Interfaces`
 
 ### Object Utilities
 
-- `getKeys`
+- `Get Keys`
 
 ### Predicates
 
-- `isBoolean`
-- `isBuffer`
-- `isIp`
-- `isNaN`
-- `isNil`
-- `isNull`
-- `isNumber`
-- `isString`
-- `isUndefined`
-- `isUrl`
+- `Is Boolean`
+- `Is Buffer`
+- `Is Ip`
+- `Is NaN`
+- `Is Nil`
+- `Is Null`
+- `Is Number`
+- `Is String`
+- `Is Undefined`
+- `Is Url`
 
 ### String Utilities
 
-- `camelCase`
-- `capitalize`
-- `constantCase`
-- `escape`
-- `kebabCase`
-- `lowerCase`
-- `lowerFirst`
-- `pascalCase`
-- `snakeCase`
-- `startCase`
-- `trim`
-- `trimEnd`
-- `trimStart`
-- `unescape`
-- `upperCase`
-- `upperFirst`
-- `words`
+- `Camel Case`
+- `Capitalize`
+- `Constant Case`
+- `Escape`
+- `Kebab Case`
+- `Lower Case`
+- `Lower First`
+- `Pascal Case`
+- `Snake Case`
+- `Start Case`
+- `Trim`
+- `Trim End`
+- `Trim Start`
+- `Unescape`
+- `Upper Case`
+- `Upper First`
+- `Words`
 
 ### Utility Functions
 
-- `eq`
-- `gt`
-- `gte`
-- `lt`
-- `lte`
-- `now`
-- `size`
-- `toBoolean`
-- `toBooleanNumber`
-- `toNumber`
-- `toNumberNonStrict`
-- `toSafeInteger`
-- `toString`
+- `Eq`
+- `Gt`
+- `Gte`
+- `Lt`
+- `Lte`
+- `Size`
+- `To Boolean`
+- `To Boolean Number`
+- `To Number`
+- `To Safe Integer`
+- `To String`
+- `toNumber (non-strict)`
 
 ## Performance
 

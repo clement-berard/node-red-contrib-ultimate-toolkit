@@ -1,6 +1,6 @@
 import * as fs from 'node:fs';
 import { alphabetical, title } from 'radash';
-import { list } from './src/common/list';
+import { getFunctionsFromCategory, list } from './src/common/list';
 
 const allFunctions = list;
 
@@ -10,10 +10,11 @@ const allFns = new Map<string, string[]>();
 
 for (const category of allCategories) {
   const functions = allFunctions[category];
+  const tt = getFunctionsFromCategory(category).map((v) => v.label);
 
   allFns.set(
     title(category),
-    alphabetical(Object.keys(functions), (f) => f),
+    alphabetical(tt, (f) => f),
   );
 }
 
