@@ -28,7 +28,6 @@ for (const cat of allCategories) {
 }
 
 const featurePart = `
-## Features
 ${finalFeatures
   .map((cat) => {
     return `\n### → ${cat.title}\n\n<hr>\n\n${cat.finalCatFns.map((v) => `― \`${v.name}\` \n\n ${v.description}`).join('\n\n')}`;
@@ -70,7 +69,7 @@ A collection of utilities to help you build your Node-RED flows.
   </a>
 </p>
 
-## Overview
+## Overview 🔦
 
 ✨ Simplify and optimize your Node-RED flows with this versatile package! ✨
 
@@ -87,15 +86,17 @@ Whenever possible, native Node.js methods take precedence for maximum efficiency
 
 ![paring-config.png](docs/screenshot.png)
 
-${featurePart}
-
-## Performance
+## Performance 🚀
 
 All used libraries are treeshaked and included in the final bundle. 
 
 **No extra dependencies are added**
 
-[Very small distribution](https://www.npmjs.com/package/@keload/node-red-contrib-ultimate-toolkit?activeTab=code) size < 40kb.
+[Very small distribution](https://www.npmjs.com/package/@keload/node-red-contrib-ultimate-toolkit?activeTab=code) **size < 40kb**.
+
+## Features ✨
+
+${featurePart}
 
 ## Contributing & Developer Experience
 This package is built using [node-red-dxp](https://www.npmjs.com/package/@keload/node-red-dxp), offering a blazing-fast and seamless way to develop Node-RED packages. 
