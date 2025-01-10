@@ -1,6 +1,6 @@
 import { alphabetical, title } from 'radash';
 import type { UtilityList } from '../../types/UtilityList';
-import * as docsHelper from '../docs';
+import * as docsHelper from '../../utils/docs';
 
 export const list: UtilityList = {
   array_utilities: {
