@@ -1,6 +1,6 @@
 import * as fs from 'node:fs';
 import { alphabetical, title } from 'radash';
-import { list } from './src/common/client-side/list';
+import { list } from './src/lib/client-side/list';
 
 const sortByKey = (obj) => {
   return Object.fromEntries(Object.entries(obj).sort((a, b) => a[0].localeCompare(b[0])));
