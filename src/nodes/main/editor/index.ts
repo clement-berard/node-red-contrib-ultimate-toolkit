@@ -1,9 +1,11 @@
 import type { NodeEditorDefinition } from '@keload/node-red-dxp/editor';
 import {
+  getFormValues,
   initSelect,
   isCheckboxChecked,
   jqSelector,
   resolveSelector,
+  setFormValues,
   watchInput,
 } from '@keload/node-red-dxp/editor/dom-helper';
 import { title } from 'radash';
@@ -39,9 +41,15 @@ const Main: NodeEditorDefinition<NodeMainProps> = {
     return this.name || `${this.inverseReturnValue ? '!' : ''}${this.function}` || 'toolkit';
   },
   oneditsave: function () {
-    this.outputs = isCheckboxChecked('$splitBooleanOutputs') ? 2 : 1;
+    const { forceSplitBooleanOutputs = false } = getFunctionDetails(
+      jqSelector('$category').val() as string,
+      jqSelector('$function').val() as string,
+    );
+    this.outputs = isCheckboxChecked('$splitBooleanOutputs') || forceSplitBooleanOutputs ? 2 : 1;
+    this.dateUtilities = getFormValues('dateUtilities');
   },
   oneditprepare: function () {
+    setFormValues('dateUtilities', this.dateUtilities);
     jqSelector('$entry').typedInput({
       types: ['msg', 'flow', 'global', 'str', 'json'],
       typeField: resolveSelector('$entryType'),
@@ -74,9 +82,11 @@ const Main: NodeEditorDefinition<NodeMainProps> = {
       // force hide optionals fields
       jqSelector('.extra-field').addClass('!hidden');
       //docs part
-      const docs = fnDetails?.docs;
-      if (docs) {
-        jqSelector('.fn-docs').html(docs).removeClass('!hidden');
+      const docs = fnDetails?.nodeDocs;
+      if (docs.replace(/(<br>|\n)/g, '').trim()) {
+        jqSelector('.fn-docs')
+          .html(docs.replace(/^(<br\s*\/?>|\n)+|(<br\s*\/?>|\n)+$/g, ''))
+          .removeClass('!hidden');
       }
       // additional values part
       const hasMainValue = !!fnDetails?.mainValue;

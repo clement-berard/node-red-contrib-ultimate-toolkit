@@ -9,3 +9,7 @@ export function docsFromEsToolkit(entity: string) {
 📖 <a href="https://es-toolkit.slash.page/reference/${entity}.html" target="_blank">View documentation on <span class="font-bold">ES Toolkit</span> <i class="fa fa-external-link"></a></i>
   `;
 }
+
+export function codeTag(content = '') {
+  return `<code>${content}</code>`;
+}

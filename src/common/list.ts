@@ -1,57 +1,75 @@
 import { alphabetical, title } from 'radash';
-import { docsFromEsToolkit, docsFromRadash } from './docs';
+import * as docsHelper from './docs';
+import type { UtilityList } from './types';
 
-export const list = {
+export const list: UtilityList = {
   array_utilities: {
     toggle: {
-      docs: docsFromRadash('array/toggle'),
+      docs: docsHelper.docsFromRadash('array/toggle'),
     },
     shuffle: {
-      docs: docsFromEsToolkit('array/shuffle'),
+      docs: docsHelper.docsFromEsToolkit('array/shuffle'),
     },
     groupBy: {
       mainValue: {
         label: 'Property',
       },
-      docs: docsFromEsToolkit('array/groupBy'),
+      docs: docsHelper.docsFromEsToolkit('array/groupBy'),
     },
     keyBy: {
       mainValue: {
         label: 'Property',
       },
-      docs: docsFromEsToolkit('array/keyBy'),
+      docs: docsHelper.docsFromEsToolkit('array/keyBy'),
     },
     sum: {
       mainValue: {
         label: 'Property',
       },
-      docs: docsFromRadash('array/sum'),
+      docs: docsHelper.docsFromRadash('array/sum'),
     },
     unique: {
       mainValue: {
         label: 'Property',
       },
-      docs: docsFromRadash('array/unique'),
+      docs: docsHelper.docsFromRadash('array/unique'),
     },
     take: {
       mainValue: {
         label: 'Count',
       },
-      docs: docsFromEsToolkit('array/take'),
+      docs: docsHelper.docsFromEsToolkit('array/take'),
     },
     takeRight: {
       mainValue: {
         label: 'Count',
       },
-      docs: docsFromEsToolkit('array/takeRight'),
+      docs: docsHelper.docsFromEsToolkit('array/takeRight'),
     },
   },
   date_utilities: {
     now: {
-      docs: 'Returns the number of milliseconds elapsed since the epoch',
+      description: 'Returns the current date with lot of formatting options',
+      docs: 'If token is provided, <code>Format</code> will not be used',
       revealClasses: ['dateUtilities_now'],
+      configArgs: 'dateUtilities',
     },
-    currentTimezone: {},
+    format: {
+      description: 'Return formatted date from a date',
+      docs: 'If token is provided, <code>Format</code> will not be used',
+      revealClasses: ['dateUtilities_now'],
+      configArgs: 'dateUtilities',
+    },
+    timeRange: {
+      description: 'Routes messages depending on the time',
+      docs: 'Time range checker that validates if current time is<br>between given start and end times (HH:mm format).',
+      revealClasses: ['dateUtilities_timeRange'],
+      configArgs: 'dateUtilities',
+      forceSplitBooleanOutputs: true,
+    },
+    currentTimezone: {
+      description: 'Returns the current timezone',
+    },
   },
   string_utilities: {
     camelCase: {},
@@ -156,17 +174,20 @@ export const list = {
   },
   object_utilities: {
     getKeys: {
-      docs: docsFromRadash('object/keys'),
+      docs: docsHelper.docsFromRadash('object/keys'),
     },
   },
   network_utilities: {
     ipInformation: {
+      description: 'Fetches detailed information about an IP address',
       docs: 'By default is your current IP address',
     },
     ipVersion: {
-      docs: '4 or 6. 0 if invalid',
+      description: 'Returns IP version (4, 6, or 0 if invalid) for a given IP address string',
     },
-    networkInterfaces: {},
+    networkInterfaces: {
+      description: 'Lists all network interfaces of the current machine (ethernet, wifi, etc.)',
+    },
   },
   math_utilities: {
     abs: {},
@@ -191,6 +212,7 @@ export const list = {
   },
   async_utilities: {
     delay: {
+      description: 'Delays the message by the specified amount of time',
       mainValue: {
         label: 'Milliseconds',
       },
@@ -212,5 +234,13 @@ export function getFunctionsFromCategory(category: string) {
 }
 
 export function getFunctionDetails(category: string, fn: string) {
-  return list?.[category]?.[fn];
+  const foundFn = list?.[category]?.[fn];
+  return {
+    ...foundFn,
+    nodeDocs: `
+    ${foundFn?.description || ''}
+    <br><br>
+    ${foundFn?.docs || ''}
+    `.trim(),
+  };
 }
