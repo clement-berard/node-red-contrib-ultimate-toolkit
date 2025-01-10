@@ -5,13 +5,19 @@ import { listFunctions } from '../../common/list-functions';
 import { splitBooleanOutputs } from './helpers/outputs';
 import type { NodeMainProps } from './types';
 
+// Main Node-RED node controller
+// Handles the node's initialization and message processing
 export default function (this: NodeControllerInst<NodeMainProps>, config: NodeControllerConfig<NodeMainProps>) {
   RED.nodes.createNode(this, config);
 
+  // Event handler for incoming messages
   this.on('input', async (msg) => {
     const argsToCall = [];
+    // Evaluate the input value based on node configuration
     const innerPayload = RED.util.evaluateNodeProperty(config.entry, config.entryType, this, msg);
     argsToCall.push(innerPayload);
+
+    // Get function metadata and prepare additional arguments if needed
     const fnDetails = getFunctionDetails(config.category, config.function);
     if (fnDetails?.mainValue) {
       argsToCall.push(config.mainValue);
@@ -20,8 +26,11 @@ export default function (this: NodeControllerInst<NodeMainProps>, config: NodeCo
       argsToCall.push(config[fnDetails?.configArgs]);
     }
 
+    // Get and prepare the actual function to be executed
     const matchedFunction = listFunctions[config.category][config.function];
     const toCall = tryit(matchedFunction);
+
+    // Execute the function with error handling
     const [err, result] = await toCall(...argsToCall);
     if (err) {
       this.error(err, msg);
@@ -29,8 +38,10 @@ export default function (this: NodeControllerInst<NodeMainProps>, config: NodeCo
       return;
     }
 
+    // Clear node status on success
     this.status({});
 
+    // Prepare metadata about the function call
     const commonReturn = {
       nodeParams: {
         callWith: argsToCall,
@@ -38,10 +49,13 @@ export default function (this: NodeControllerInst<NodeMainProps>, config: NodeCo
       },
     };
 
+    // Handle result inversion if configured
     const finalResult = fnDetails?.inverseReturnValue && config.inverseReturnValue ? !result : result;
 
+    // Prepare the final response object
     const resp = { ...msg, payload: finalResult, ...commonReturn };
 
+    // Route the output based on configuration and result type
     if ((fnDetails?.canSplitBooleanOutputs && config.splitBooleanOutputs) || fnDetails?.forceSplitBooleanOutputs) {
       const outputs = splitBooleanOutputs(finalResult, resp);
       this.send(outputs);
