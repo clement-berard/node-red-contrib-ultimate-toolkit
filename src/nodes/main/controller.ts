@@ -2,7 +2,7 @@ import type { NodeControllerConfig, NodeControllerInst } from '@keload/node-red-
 import { splitBooleanOutputs } from '@keload/node-red-dxp/utils/controller';
 import { tryit } from 'radash';
 import { getFunctionDetails } from '../../lib/client-side';
-import { listFunctions } from '../../lib/server-side/list-functions';
+import { listFunctions } from '../../lib/server-side';
 import type { NodeMainProps } from '../../types/NodeMainProps';
 
 // Main Node-RED node controller
