@@ -1,5 +1,5 @@
 import { date, format } from '@formkit/tempo';
-import type { NodeMainProps } from '../../types/NodeMainProps';
+import type { NodeMainProps } from '../../../types/NodeMainProps';
 function getCurrentTimezone() {
   const timezoneDefault = Intl.DateTimeFormat().resolvedOptions().timeZone;
   // @ts-ignore
