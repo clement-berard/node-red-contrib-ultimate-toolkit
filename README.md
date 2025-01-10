@@ -112,11 +112,15 @@ All used libraries are treeshaked and included in the final bundle.
 
  Returns the current timezone
 
+― `Format` 
+
+ Return formatted date from a date
+
 ― `Now` 
 
  Returns the current date with lot of formatting options
 
-― `Range` 
+― `Time Range` 
 
  Routes messages depending on the time
 

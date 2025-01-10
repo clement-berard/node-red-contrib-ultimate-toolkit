@@ -41,7 +41,11 @@ const Main: NodeEditorDefinition<NodeMainProps> = {
     return this.name || `${this.inverseReturnValue ? '!' : ''}${this.function}` || 'toolkit';
   },
   oneditsave: function () {
-    this.outputs = isCheckboxChecked('$splitBooleanOutputs') ? 2 : 1;
+    const { forceSplitBooleanOutputs = false } = getFunctionDetails(
+      jqSelector('$category').val() as string,
+      jqSelector('$function').val() as string,
+    );
+    this.outputs = isCheckboxChecked('$splitBooleanOutputs') || forceSplitBooleanOutputs ? 2 : 1;
     this.dateUtilities = getFormValues('dateUtilities');
   },
   oneditprepare: function () {
@@ -107,7 +111,6 @@ const Main: NodeEditorDefinition<NodeMainProps> = {
       }
       // reveal classes
       const revealClassesSelectors = (fnDetails?.revealClasses || []).map((c) => `.${c}`).join(',');
-      console.log('revealClassesSelectors', revealClassesSelectors);
       $(revealClassesSelectors).removeClass('!hidden');
     }
 

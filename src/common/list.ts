@@ -1,7 +1,8 @@
 import { alphabetical, title } from 'radash';
 import * as docsHelper from './docs';
+import type { UtilityList } from './types';
 
-export const list = {
+export const list: UtilityList = {
   array_utilities: {
     toggle: {
       docs: docsHelper.docsFromRadash('array/toggle'),
@@ -53,10 +54,18 @@ export const list = {
       revealClasses: ['dateUtilities_now'],
       configArgs: 'dateUtilities',
     },
-    range: {
-      description: 'Routes messages depending on the time',
-      revealClasses: ['dateUtilities_range'],
+    format: {
+      description: 'Return formatted date from a date',
+      docs: 'If token is provided, <code>Format</code> will not be used',
+      revealClasses: ['dateUtilities_now'],
       configArgs: 'dateUtilities',
+    },
+    timeRange: {
+      description: 'Routes messages depending on the time',
+      docs: 'Time range checker that validates if current time is<br>between given start and end times (HH:mm format).',
+      revealClasses: ['dateUtilities_timeRange'],
+      configArgs: 'dateUtilities',
+      forceSplitBooleanOutputs: true,
     },
     currentTimezone: {
       description: 'Returns the current timezone',

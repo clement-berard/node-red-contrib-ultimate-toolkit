@@ -14,5 +14,7 @@ export interface NodeMainProps extends EditorNodeProperties {
   dateUtilities: OrEmpty<{
     nowFormat: string;
     nowFormatToken?: string;
+    rangeStartTime?: string;
+    rangeEndTime?: string;
   }>;
 }

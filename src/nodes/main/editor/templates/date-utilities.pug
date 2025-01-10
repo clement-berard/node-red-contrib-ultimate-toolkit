@@ -6,12 +6,14 @@ include ../../../../../.node-red-dxp/pug-helper
         .content
             select#node-input-dateUtilities-nowFormat
                 option(value="timestamp" selected) timestamp
+                option(value="iso8601") iso8601
+                option(value="utcString") utcString
                 option(value="full") full
                 option(value="long") long
                 option(value="medium") medium
                 option(value="short") short
     +dxpFormRowInputText('dateUtilities-nowFormatToken', 'token', '', 'YYY-MM-DD')
 
-.extra-field.dateUtilities_range
+.extra-field.dateUtilities_timeRange
     +dxpFormRowInputText('dateUtilities-rangeStartTime', 'Start time', 'clock-o')(type='time')
     +dxpFormRowInputText('dateUtilities-rangeEndTime', 'End time', 'clock-o')(type='time')

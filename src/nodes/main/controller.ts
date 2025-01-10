@@ -25,8 +25,11 @@ export default function (this: NodeControllerInst<NodeMainProps>, config: NodeCo
     const [err, result] = await toCall(...argsToCall);
     if (err) {
       this.error(err, msg);
+      this.status({ fill: 'red', shape: 'ring', text: 'Error' });
       return;
     }
+
+    this.status({});
 
     const commonReturn = {
       nodeParams: {
@@ -39,7 +42,7 @@ export default function (this: NodeControllerInst<NodeMainProps>, config: NodeCo
 
     const resp = { ...msg, payload: finalResult, ...commonReturn };
 
-    if (fnDetails?.canSplitBooleanOutputs && config.splitBooleanOutputs) {
+    if ((fnDetails?.canSplitBooleanOutputs && config.splitBooleanOutputs) || fnDetails?.forceSplitBooleanOutputs) {
       const outputs = splitBooleanOutputs(finalResult, resp);
       this.send(outputs);
     } else {
