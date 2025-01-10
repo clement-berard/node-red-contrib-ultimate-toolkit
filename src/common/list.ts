@@ -179,12 +179,15 @@ export const list: UtilityList = {
   },
   network_utilities: {
     ipInformation: {
+      description: 'Fetches detailed information about an IP address',
       docs: 'By default is your current IP address',
     },
     ipVersion: {
-      docs: '4 or 6. 0 if invalid',
+      description: 'Returns IP version (4, 6, or 0 if invalid) for a given IP address string',
     },
-    networkInterfaces: {},
+    networkInterfaces: {
+      description: 'Lists all network interfaces of the current machine (ethernet, wifi, etc.)',
+    },
   },
   math_utilities: {
     abs: {},
@@ -231,5 +234,13 @@ export function getFunctionsFromCategory(category: string) {
 }
 
 export function getFunctionDetails(category: string, fn: string) {
-  return list?.[category]?.[fn];
+  const foundFn = list?.[category]?.[fn];
+  return {
+    ...foundFn,
+    nodeDocs: `
+    ${foundFn?.description || ''}
+    <br><br>
+    ${foundFn?.docs || ''}
+    `.trim(),
+  };
 }

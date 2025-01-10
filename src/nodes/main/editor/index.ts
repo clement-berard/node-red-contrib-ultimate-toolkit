@@ -82,9 +82,11 @@ const Main: NodeEditorDefinition<NodeMainProps> = {
       // force hide optionals fields
       jqSelector('.extra-field').addClass('!hidden');
       //docs part
-      const docs = fnDetails?.docs;
-      if (docs) {
-        jqSelector('.fn-docs').html(docs).removeClass('!hidden');
+      const docs = fnDetails?.nodeDocs;
+      if (docs.replace(/(<br>|\n)/g, '').trim()) {
+        jqSelector('.fn-docs')
+          .html(docs.replace(/^(<br\s*\/?>|\n)+|(<br\s*\/?>|\n)+$/g, ''))
+          .removeClass('!hidden');
       }
       // additional values part
       const hasMainValue = !!fnDetails?.mainValue;

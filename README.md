@@ -210,15 +210,15 @@ All used libraries are treeshaked and included in the final bundle.
 
 ― `Ip Information` 
 
- 
+ Fetches detailed information about an IP address
 
 ― `Ip Version` 
 
- 
+ Returns IP version (4, 6, or 0 if invalid) for a given IP address string
 
 ― `Network Interfaces` 
 
- 
+ Lists all network interfaces of the current machine (ethernet, wifi, etc.)
 
 ### → Object Utilities
 
