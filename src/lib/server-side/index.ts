@@ -1,4 +1,3 @@
-import { takeRight } from 'es-toolkit';
 import { keys, sleep } from 'radash';
 import { arrayUtilities } from './fns/array-utilities';
 import { dateUtilities } from './fns/date-utilities';
@@ -6,7 +5,7 @@ import { mathUtilities } from './fns/math-utilities';
 import { networkUtilities } from './fns/network-utilities';
 import { predicates } from './fns/predicates';
 import { stringUtilities } from './fns/string-utilities';
-import { utilityFunctions } from './fns/utilityFunctions';
+import { utilityFunctions } from './fns/utility-functions';
 
 export const listFunctions = {
   utility_functions: utilityFunctions,
