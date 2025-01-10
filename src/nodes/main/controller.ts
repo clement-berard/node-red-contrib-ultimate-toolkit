@@ -1,6 +1,6 @@
 import type { NodeControllerConfig, NodeControllerInst } from '@keload/node-red-dxp/editor';
 import { tryit } from 'radash';
-import { getFunctionDetails } from '../../common/list';
+import { getFunctionDetails } from '../../common/client-side/list';
 import { listFunctions } from '../../common/list-functions';
 import { splitBooleanOutputs } from './helpers/outputs';
 import type { NodeMainProps } from './types';

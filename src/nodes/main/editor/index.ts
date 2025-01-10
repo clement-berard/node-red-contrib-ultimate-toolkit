@@ -9,7 +9,7 @@ import {
   watchInput,
 } from '@keload/node-red-dxp/editor/dom-helper';
 import { title } from 'radash';
-import { getCategories, getFunctionDetails, getFunctionsFromCategory } from '../../../common/list';
+import { getCategories, getFunctionDetails, getFunctionsFromCategory } from '../../../common/client-side/list';
 import type { NodeMainProps } from '../types';
 
 const Main: NodeEditorDefinition<NodeMainProps> = {

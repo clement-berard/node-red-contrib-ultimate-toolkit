@@ -8,6 +8,7 @@ export type UtilityItem = {
     label?: string;
   };
   label?: string;
+  enabled?: boolean;
   revealClasses?: string[];
   configArgs?: string;
 };

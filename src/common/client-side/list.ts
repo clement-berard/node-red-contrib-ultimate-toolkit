@@ -1,6 +1,6 @@
 import { alphabetical, title } from 'radash';
-import * as docsHelper from './docs';
-import type { UtilityList } from './types';
+import type { UtilityList } from '../../types/types';
+import * as docsHelper from '../docs';
 
 export const list: UtilityList = {
   array_utilities: {
@@ -223,12 +223,16 @@ export const list: UtilityList = {
 export const getCategories = alphabetical(Object.keys(list), (f) => f);
 
 export function getFunctionsFromCategory(category: string) {
-  const all = Object.keys(list[category]).map((v) => {
-    return {
-      key: v,
-      label: list[category][v].label || title(v),
-    };
-  });
+  const all = Object.keys(list[category])
+    .map((v) => {
+      const fn = list[category][v];
+      return {
+        key: v,
+        label: fn.label || title(v),
+        enabled: fn?.enabled ?? true,
+      };
+    })
+    .filter((v) => v.enabled);
 
   return alphabetical(all, (f) => f.label);
 }
