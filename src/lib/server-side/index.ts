@@ -1,27 +1,21 @@
-import { keys, sleep } from 'radash';
 import { arrayUtilities } from './fns/array-utilities';
+import { asyncUtilities } from './fns/async-utilities';
 import { dateUtilities } from './fns/date-utilities';
 import { mathUtilities } from './fns/math-utilities';
 import { networkUtilities } from './fns/network-utilities';
+import { objectUtilities } from './fns/object-utilities';
 import { predicates } from './fns/predicates';
 import { stringUtilities } from './fns/string-utilities';
 import { utilityFunctions } from './fns/utility-functions';
 
 export const listFunctions = {
-  utility_functions: utilityFunctions,
-  string_utilities: stringUtilities,
-  date_utilities: dateUtilities,
-  predicates,
-  object_utilities: {
-    getKeys: keys,
-  },
   array_utilities: arrayUtilities,
-  network_utilities: networkUtilities,
+  async_utilities: asyncUtilities,
+  date_utilities: dateUtilities,
   math_utilities: mathUtilities,
-  async_utilities: {
-    delay: (_, inputProp: unknown) => {
-      const realProp = inputProp as number;
-      return sleep(realProp);
-    },
-  },
+  network_utilities: networkUtilities,
+  object_utilities: objectUtilities,
+  predicates,
+  string_utilities: stringUtilities,
+  utility_functions: utilityFunctions,
 };
