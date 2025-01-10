@@ -10,7 +10,7 @@ import {
 } from '@keload/node-red-dxp/editor/dom-helper';
 import { title } from 'radash';
 import { getCategories, getFunctionDetails, getFunctionsFromCategory } from '../../../common/client-side/list';
-import type { NodeMainProps } from '../NodeMainProps';
+import type { NodeMainProps } from '../../../types/NodeMainProps';
 
 const Main: NodeEditorDefinition<NodeMainProps> = {
   category: 'toolkit',
