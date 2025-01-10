@@ -9,8 +9,8 @@ import {
   watchInput,
 } from '@keload/node-red-dxp/editor/dom-helper';
 import { title } from 'radash';
-import { getCategories, getFunctionDetails, getFunctionsFromCategory } from '../../../common/list';
-import type { NodeMainProps } from '../types';
+import { getCategories, getFunctionDetails, getFunctionsFromCategory } from '../../../lib/client-side';
+import type { NodeMainProps } from '../../../types/NodeMainProps';
 
 const Main: NodeEditorDefinition<NodeMainProps> = {
   category: 'toolkit',

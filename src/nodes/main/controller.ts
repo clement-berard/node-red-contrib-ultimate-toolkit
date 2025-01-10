@@ -1,9 +1,9 @@
 import type { NodeControllerConfig, NodeControllerInst } from '@keload/node-red-dxp/editor';
+import { splitBooleanOutputs } from '@keload/node-red-dxp/utils/controller';
 import { tryit } from 'radash';
-import { getFunctionDetails } from '../../common/list';
-import { listFunctions } from '../../common/list-functions';
-import { splitBooleanOutputs } from './helpers/outputs';
-import type { NodeMainProps } from './types';
+import { getFunctionDetails } from '../../lib/client-side';
+import { listFunctions } from '../../lib/server-side';
+import type { NodeMainProps } from '../../types/NodeMainProps';
 
 // Main Node-RED node controller
 // Handles the node's initialization and message processing

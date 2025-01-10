@@ -1,6 +1,5 @@
-import { alphabetical, title } from 'radash';
-import * as docsHelper from './docs';
-import type { UtilityList } from './types';
+import type { UtilityList } from '../../types/UtilityList';
+import * as docsHelper from '../../utils/docs';
 
 export const list: UtilityList = {
   array_utilities: {
@@ -219,28 +218,3 @@ export const list: UtilityList = {
     },
   },
 };
-
-export const getCategories = alphabetical(Object.keys(list), (f) => f);
-
-export function getFunctionsFromCategory(category: string) {
-  const all = Object.keys(list[category]).map((v) => {
-    return {
-      key: v,
-      label: list[category][v].label || title(v),
-    };
-  });
-
-  return alphabetical(all, (f) => f.label);
-}
-
-export function getFunctionDetails(category: string, fn: string) {
-  const foundFn = list?.[category]?.[fn];
-  return {
-    ...foundFn,
-    nodeDocs: `
-    ${foundFn?.description || ''}
-    <br><br>
-    ${foundFn?.docs || ''}
-    `.trim(),
-  };
-}
