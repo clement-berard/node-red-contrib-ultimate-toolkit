@@ -64,6 +64,10 @@ All used libraries are treeshaked and included in the final bundle.
 
 <hr>
 
+― `Get Random Item` 
+
+ 
+
 ― `Group By` 
 
  
