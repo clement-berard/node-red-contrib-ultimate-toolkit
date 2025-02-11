@@ -1,5 +1,5 @@
 import { groupBy, keyBy, shuffle, take, takeRight } from 'es-toolkit';
-import { sum, toggle, unique } from 'radash';
+import { random, sum, toggle, unique } from 'radash';
 
 export const arrayUtilities = {
   toggle: toggle,
@@ -27,5 +27,13 @@ export const arrayUtilities = {
   takeRight: (inputArr: object[], inputProp: unknown) => {
     const realProp = inputProp as number;
     return takeRight(inputArr, realProp);
+  },
+  getRandomItem: (inputArr: unknown[]) => {
+    if (!inputArr.length) {
+      return null;
+    }
+    const limit = inputArr.length - 1;
+
+    return inputArr[random(0, limit)];
   },
 };

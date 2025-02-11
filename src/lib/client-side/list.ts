@@ -45,6 +45,9 @@ export const list: UtilityList = {
       },
       docs: docsHelper.docsFromEsToolkit('array/takeRight'),
     },
+    getRandomItem: {
+      docs: 'Get a random item from input array',
+    },
   },
   date_utilities: {
     now: {
