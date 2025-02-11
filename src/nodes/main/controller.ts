@@ -1,5 +1,5 @@
 import type { NodeControllerConfig, NodeControllerInst } from '@keload/node-red-dxp/editor';
-import { splitBooleanOutputs } from '@keload/node-red-dxp/utils/controller';
+import { evaluateNodeProperty, splitBooleanOutputs } from '@keload/node-red-dxp/utils/controller';
 import { tryit } from 'radash';
 import { getFunctionDetails } from '../../lib/client-side';
 import { listFunctions } from '../../lib/server-side';
@@ -14,7 +14,14 @@ export default function (this: NodeControllerInst<NodeMainProps>, config: NodeCo
   this.on('input', async (msg) => {
     const argsToCall = [];
     // Evaluate the input value based on node configuration
-    const innerPayload = RED.util.evaluateNodeProperty(config.entry, config.entryType, this, msg);
+
+    const [, innerPayload] = await evaluateNodeProperty({
+      msg,
+      type: config.entryType,
+      node: this,
+      value: config.entry,
+    });
+
     argsToCall.push(innerPayload);
 
     // Get function metadata and prepare additional arguments if needed
@@ -57,7 +64,7 @@ export default function (this: NodeControllerInst<NodeMainProps>, config: NodeCo
 
     // Route the output based on configuration and result type
     if ((fnDetails?.canSplitBooleanOutputs && config.splitBooleanOutputs) || fnDetails?.forceSplitBooleanOutputs) {
-      const outputs = splitBooleanOutputs(finalResult, resp);
+      const outputs = splitBooleanOutputs(Boolean(finalResult), resp);
       this.send(outputs);
     } else {
       this.send(resp);

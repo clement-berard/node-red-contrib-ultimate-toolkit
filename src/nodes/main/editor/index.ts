@@ -51,7 +51,7 @@ const Main: NodeEditorDefinition<NodeMainProps> = {
   oneditprepare: function () {
     setFormValues('dateUtilities', this.dateUtilities);
     jqSelector('$entry').typedInput({
-      types: ['msg', 'flow', 'global', 'str', 'json'],
+      types: ['msg', 'flow', 'global', 'str', 'json', 'jsonata'],
       typeField: resolveSelector('$entryType'),
     });
 
