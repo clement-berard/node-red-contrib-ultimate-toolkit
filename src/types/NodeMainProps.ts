@@ -17,4 +17,11 @@ export interface NodeMainProps extends EditorNodeProperties {
     rangeStartTime?: string;
     rangeEndTime?: string;
   }>;
+  tools: OrEmpty<{
+    cyclicCounter?: {
+      maxCount: number;
+      nodeId: number;
+      resetDelay?: number;
+    };
+  }>;
 }

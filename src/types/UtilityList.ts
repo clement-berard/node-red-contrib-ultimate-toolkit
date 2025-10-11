@@ -11,6 +11,7 @@ export type UtilityItem = {
   enabled?: boolean;
   revealClasses?: string[];
   configArgs?: string;
+  addNodeIdToConfigArgs?: boolean;
 };
 
 export type UtilityCategory = {

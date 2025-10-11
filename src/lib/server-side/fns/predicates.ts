@@ -18,7 +18,7 @@ export const predicates = {
     try {
       new URL(input);
       return true;
-    } catch (e) {
+    } catch (_e) {
       return false;
     }
   },

@@ -348,6 +348,14 @@ All used libraries are treeshaked and included in the final bundle.
 
  
 
+### → Tools
+
+<hr>
+
+― `Cyclic Counter` 
+
+ A customizable cyclic counter node for Node-RED that iterates through a defined sequence of numbers and can reset after a set timeout. It allows flexible control over the counter's behavior, making it useful in a variety of automation scenarios.
+
 ### → Utility Functions
 
 <hr>

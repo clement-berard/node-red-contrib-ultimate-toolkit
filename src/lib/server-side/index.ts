@@ -6,6 +6,7 @@ import { networkUtilities } from './fns/network-utilities';
 import { objectUtilities } from './fns/object-utilities';
 import { predicates } from './fns/predicates';
 import { stringUtilities } from './fns/string-utilities';
+import { tools } from './fns/tools';
 import { utilityFunctions } from './fns/utility-functions';
 
 export const listFunctions = {
@@ -18,4 +19,5 @@ export const listFunctions = {
   predicates,
   string_utilities: stringUtilities,
   utility_functions: utilityFunctions,
+  tools,
 };
