@@ -54,7 +54,7 @@ All used libraries are treeshaked and included in the final bundle.
 
 **No extra dependencies are added**
 
-[Very small distribution](https://www.npmjs.com/package/@keload/node-red-contrib-ultimate-toolkit?activeTab=code) **size < 40kb**.
+[Very small distribution](https://www.npmjs.com/package/@keload/node-red-contrib-ultimate-toolkit?activeTab=code) **size < 45kb**.
 
 ## Features ✨
 
