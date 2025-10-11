@@ -26,6 +26,7 @@ const Main: NodeEditorDefinition<NodeMainProps> = {
     splitBooleanOutputs: { value: false },
     inverseReturnValue: { value: false },
     dateUtilities: { value: {} },
+    tools: { value: {} },
     outputs: { value: 1 },
   },
   inputs: 1,
@@ -47,9 +48,11 @@ const Main: NodeEditorDefinition<NodeMainProps> = {
     );
     this.outputs = isCheckboxChecked('$splitBooleanOutputs') || forceSplitBooleanOutputs ? 2 : 1;
     this.dateUtilities = getFormValues('dateUtilities');
+    this.tools = getFormValues('tools');
   },
   oneditprepare: function () {
     setFormValues('dateUtilities', this.dateUtilities);
+    setFormValues('tools', this.tools);
     jqSelector('$entry').typedInput({
       types: ['msg', 'flow', 'global', 'str', 'json', 'jsonata'],
       typeField: resolveSelector('$entryType'),

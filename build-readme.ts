@@ -17,7 +17,7 @@ for (const cat of allCategories) {
   for (const [key, value] of Object.entries(catFns)) {
     finalCatFns.push({
       name: title(key),
-      // @ts-ignore
+      // @ts-expect-error
       description: value?.description || '',
     });
   }
@@ -92,7 +92,7 @@ All used libraries are treeshaked and included in the final bundle.
 
 **No extra dependencies are added**
 
-[Very small distribution](https://www.npmjs.com/package/@keload/node-red-contrib-ultimate-toolkit?activeTab=code) **size < 40kb**.
+[Very small distribution](https://www.npmjs.com/package/@keload/node-red-contrib-ultimate-toolkit?activeTab=code) **size < 45kb**.
 
 ## Features ✨
 

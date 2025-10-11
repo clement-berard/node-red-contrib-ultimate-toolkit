@@ -54,7 +54,7 @@ All used libraries are treeshaked and included in the final bundle.
 
 **No extra dependencies are added**
 
-[Very small distribution](https://www.npmjs.com/package/@keload/node-red-contrib-ultimate-toolkit?activeTab=code) **size < 40kb**.
+[Very small distribution](https://www.npmjs.com/package/@keload/node-red-contrib-ultimate-toolkit?activeTab=code) **size < 45kb**.
 
 ## Features ✨
 
@@ -347,6 +347,14 @@ All used libraries are treeshaked and included in the final bundle.
 ― `Words` 
 
  
+
+### → Tools
+
+<hr>
+
+― `Cyclic Counter` 
+
+ A customizable cyclic counter node for Node-RED that iterates through a defined sequence of numbers and can reset after a set timeout. It allows flexible control over the counter's behavior, making it useful in a variety of automation scenarios.
 
 ### → Utility Functions
 

@@ -1,8 +1,9 @@
 import { date, format } from '@formkit/tempo';
 import type { NodeMainProps } from '../../../types/NodeMainProps';
+
 function getCurrentTimezone() {
   const timezoneDefault = Intl.DateTimeFormat().resolvedOptions().timeZone;
-  // @ts-ignore
+  // @ts-expect-error
   return RED.settings.timezone || process.env.TZ || timezoneDefault;
 }
 
@@ -37,7 +38,7 @@ export const dateUtilities = {
 
     return formatDate(payloadDate, options);
   },
-  timeRange: (payload: unknown, options: NodeMainProps['dateUtilities']) => {
+  timeRange: (_payload: unknown, options: NodeMainProps['dateUtilities']) => {
     const currentTime = format(new Date(), 'HH:mm');
 
     if (!options?.rangeStartTime || !options?.rangeEndTime) {

@@ -1,8 +1,9 @@
 import type { NodeControllerConfig, NodeControllerInst } from '@keload/node-red-dxp/editor';
 import { evaluateNodeProperty, splitBooleanOutputs } from '@keload/node-red-dxp/utils/controller';
-import { tryit } from 'radash';
+import { isObject, tryit } from 'radash';
 import { getFunctionDetails } from '../../lib/client-side';
 import { listFunctions } from '../../lib/server-side';
+import { tools } from '../../lib/server-side/fns/tools';
 import type { NodeMainProps } from '../../types/NodeMainProps';
 
 // Main Node-RED node controller
@@ -30,7 +31,13 @@ export default function (this: NodeControllerInst<NodeMainProps>, config: NodeCo
       argsToCall.push(config.mainValue);
     }
     if (fnDetails?.configArgs) {
-      argsToCall.push(config[fnDetails?.configArgs]);
+      const extraArgs = config[fnDetails?.configArgs];
+
+      if (isObject(extraArgs) && fnDetails?.addNodeIdToConfigArgs) {
+        (extraArgs as Record<string, unknown>).nodeId = this.id;
+      }
+
+      argsToCall.push(extraArgs);
     }
 
     // Get and prepare the actual function to be executed
@@ -39,6 +46,7 @@ export default function (this: NodeControllerInst<NodeMainProps>, config: NodeCo
 
     // Execute the function with error handling
     const [err, result] = await toCall(...argsToCall);
+
     if (err) {
       this.error(err, msg);
       this.status({ fill: 'red', shape: 'ring', text: 'Error' });
@@ -69,5 +77,9 @@ export default function (this: NodeControllerInst<NodeMainProps>, config: NodeCo
     } else {
       this.send(resp);
     }
+  });
+
+  this.on('close', () => {
+    tools.clearCounter();
   });
 }
