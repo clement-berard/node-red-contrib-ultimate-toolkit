@@ -2,7 +2,7 @@ import type { NodeControllerConfig, NodeControllerInst } from '@keload/node-red-
 import { evaluateNodeProperty, splitBooleanOutputs } from '@keload/node-red-dxp/utils/controller';
 import { isObject, tryit } from 'radash';
 import { getFunctionDetails } from '../../lib/client-side';
-import { listFunctions } from '../../lib/server-side';
+import { listFunctions as serverSideFunctions } from '../../lib/server-side';
 import { tools } from '../../lib/server-side/fns/tools';
 import type { NodeMainProps } from '../../types/NodeMainProps';
 
@@ -41,11 +41,11 @@ export default function (this: NodeControllerInst<NodeMainProps>, config: NodeCo
     }
 
     // Get and prepare the actual function to be executed
-    const matchedFunction = listFunctions[config.category][config.function];
-    const toCall = tryit(matchedFunction);
+    const matchedServerFunction = serverSideFunctions[config.category][config.function];
+    const serverFunctionToCall = tryit(matchedServerFunction);
 
     // Execute the function with error handling
-    const [err, result] = await toCall(...argsToCall);
+    const [err, result] = await serverFunctionToCall(...argsToCall);
 
     if (err) {
       this.error(err, msg);

@@ -1,27 +1,24 @@
-.dxp-template-form-row.extra-field.additionalMainValue
-    label(for="node-input-mainValue")
-        i.fa.fa-plus
-        | Value
-    .content
-        input(type="text" id="node-input-mainValue")
+include ../../../../../.node-red-dxp/pug/helper
 
-.dxp-template-form-row.extra-field.inverseReturnValue
-    label(for="node-input-inverseReturnValue")
-        i.fa.fa-arrow-circle-o-right
-        | Inverse
-    .content
-        .checkbox
-            input(type="checkbox" id="node-input-inverseReturnValue")
-            span
-                | Inverse the return value (
-                span.italic not
-                | ) of condition
++dxpFormRowInputText({
+    id: 'mainValue',
+    label: 'Value',
+    icon: 'plus',
+    rowClasses: 'extra-field additionalMainValue'
+})
 
-.dxp-template-form-row.extra-field.splitBooleanOutputs
-    label(for="node-input-splitBooleanOutputs")
-        i.fa.fa-map-signs
-        | Split out
-    .content
-        .checkbox
-            input(type="checkbox" id="node-input-splitBooleanOutputs")
-            span Split outputs in two distinct boolean
++dxpFormRowCheckbox({
+    id: "inverseReturnValue",
+    label: "Inverse",
+    icon: 'arrow-circle-o-right',
+    text: 'Inverse the return value (not) of condition',
+    rowClasses: 'extra-field inverseReturnValue'
+})
+
++dxpFormRowCheckbox({
+    id: "splitBooleanOutputs",
+    label: "Split out",
+    icon: 'map-signs',
+    text: 'Split outputs in two distinct boolean',
+    rowClasses: 'extra-field splitBooleanOutputs'
+})
