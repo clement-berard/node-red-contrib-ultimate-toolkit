@@ -28,7 +28,7 @@
   "devDependencies": {
     "@biomejs/biome": "2.3.5",
     "@formkit/tempo": "^0.1.2",
-    "@keload/node-red-dxp": "^1.25.0",
+    "@keload/node-red-dxp": "^1.26.0",
     "@release-it/conventional-changelog": "10.0.1",
     "@types/jquery": "3.5.33",
     "@types/jqueryui": "1.12.24",

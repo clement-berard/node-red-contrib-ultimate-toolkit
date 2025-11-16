@@ -1,5 +1,14 @@
+include ../../../../../.node-red-dxp/pug/helper
+
 .extra-field.tools_cyclicCounter
-    +dxpFormRowInputText('tools-cyclicCounter-maxCount', 'Max count', 'sort-numeric-asc')(type='number')
-    +dxpFormRowInputText('tools-cyclicCounter-resetDelay', 'Reset delay', 'clock-o')(type='number')
-        +dxpHint
-            |  Number in ms - Default 0: no reset
+    +dxpFormRowInputText({
+        id: 'tools-cyclicCounter-maxCount',
+        label: 'Max count',
+        icon: 'sort-numeric-asc',
+    })(type='number')
+    +dxpFormRowInputText({
+        id: 'tools-cyclicCounter-resetDelay',
+        label: 'Reset delay',
+        icon: 'clock-o',
+    })(type='number')
+        +dxpHint Number in ms - Default 0: no reset
