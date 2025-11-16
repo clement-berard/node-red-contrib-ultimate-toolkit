@@ -15,8 +15,8 @@ importers:
         specifier: ^0.1.2
         version: 0.1.2
       '@keload/node-red-dxp':
-        specifier: ^1.25.0
-        version: 1.25.0(tsx@4.20.6)(typescript@5.9.3)(yaml@2.8.1)
+        specifier: ^1.26.0
+        version: 1.26.0(tsx@4.20.6)(typescript@5.9.3)(yaml@2.8.1)
       '@release-it/conventional-changelog':
         specifier: 10.0.1
         version: 10.0.1(conventional-commits-filter@5.0.0)(conventional-commits-parser@6.1.0)(release-it@19.0.6(@types/node@24.10.1))
@@ -641,8 +641,8 @@ packages:
   '@jridgewell/trace-mapping@0.3.31':
     resolution: {integrity: sha512-zzNR+SdQSDJzc8joaeP8QQoCQr8NuYx2dIIytl1QeBEZHJ9uW6hebsrYgbz8hJwUQao3TWCMtmfV8Nu1twOLAw==}
 
-  '@keload/node-red-dxp@1.25.0':
-    resolution: {integrity: sha512-IDCLQSaigq+EBPk0DQhEh0BSHj/orKIsIe/JK87F2BpMEpcV6d3tDMAQATXR5lZWtCplY7yqeEDERpFb/3d60w==}
+  '@keload/node-red-dxp@1.26.0':
+    resolution: {integrity: sha512-eH5WimjRoG4xK3EI6YDdWy4jueB04cYbuwblOksa9MraoP1k43l+ub7dXJyZuFwnjsDwzfjH86sWGHL0tDxvIw==}
     hasBin: true
 
   '@mdx-js/esbuild@3.1.1':
@@ -4179,7 +4179,7 @@ snapshots:
       '@jridgewell/resolve-uri': 3.1.2
       '@jridgewell/sourcemap-codec': 1.5.5
 
-  '@keload/node-red-dxp@1.25.0(tsx@4.20.6)(typescript@5.9.3)(yaml@2.8.1)':
+  '@keload/node-red-dxp@1.26.0(tsx@4.20.6)(typescript@5.9.3)(yaml@2.8.1)':
     dependencies:
       '@fullhuman/postcss-purgecss': 7.0.2(postcss@8.5.6)
       '@types/html-minifier-terser': 7.0.2
