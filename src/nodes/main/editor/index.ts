@@ -1,10 +1,10 @@
 import type { NodeEditorDefinition } from '@keload/node-red-dxp/editor';
 import {
+  applyTypedInput,
   getFormValues,
   initSelect,
   isCheckboxChecked,
   jqSelector,
-  resolveSelector,
   setFormValues,
   watchInput,
 } from '@keload/node-red-dxp/editor/dom-helper';
@@ -53,9 +53,10 @@ const Main: NodeEditorDefinition<NodeMainProps> = {
   oneditprepare: function () {
     setFormValues('dateUtilities', this.dateUtilities);
     setFormValues('tools', this.tools);
-    jqSelector('$entry').typedInput({
-      types: ['msg', 'flow', 'global', 'str', 'json', 'jsonata'],
-      typeField: resolveSelector('$entryType'),
+
+    applyTypedInput({
+      selector: '$entry',
+      types: ['msg', 'flow', 'global', 'str', 'json', 'jsonata', 'env'],
     });
 
     initSelect(

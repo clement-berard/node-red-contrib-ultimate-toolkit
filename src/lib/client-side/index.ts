@@ -1,4 +1,5 @@
 import { alphabetical, title } from 'radash';
+import { getValueOrEmptyString } from '../../utils/utils';
 import { list } from './list';
 
 export const getCategories = alphabetical(Object.keys(list), (f) => f);
@@ -20,12 +21,15 @@ export function getFunctionsFromCategory(category: string) {
 
 export function getFunctionDetails(category: string, fn: string) {
   const foundFn = list?.[category]?.[fn];
+
+  const nodeDocs = `
+    ${getValueOrEmptyString(foundFn?.description)}
+    <br><br>
+    ${getValueOrEmptyString(foundFn?.docs)}
+    `.trim();
+
   return {
     ...foundFn,
-    nodeDocs: `
-    ${foundFn?.description || ''}
-    <br><br>
-    ${foundFn?.docs || ''}
-    `.trim(),
+    nodeDocs,
   };
 }

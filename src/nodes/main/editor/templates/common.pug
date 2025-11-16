@@ -1,6 +1,6 @@
-include ../../../../../.node-red-dxp/pug-helper
+include ../../../../../.node-red-dxp/pug/helper
 
-+dxpFormRowInputText('name', 'name', 'tag', 'name')
-+dxpFormRowInputTextTyped('entry', 'Input Data', 'arrow-circle-o-right')
-+dxpFormRowSelect('category', 'Category', 'list-alt')
-+dxpFormRowSelect('function', 'Function', 'code')
++dxpFormRowInputText({ id: 'name', label: 'name', icon: 'tag' })
++dxpFormRowInputText({ id: 'entry', label: 'Input Data', icon: 'arrow-circle-o-right', isTyped: true })
++dxpFormRowSelect({ id: "category", label: "Category", icon: 'list-alt' })
++dxpFormRowSelect({ id: "function", label: "Function", icon: 'code' })
