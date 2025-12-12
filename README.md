@@ -80,10 +80,6 @@ All used libraries are treeshaked and included in the final bundle.
 
  
 
-― `Sum` 
-
- 
-
 ― `Take` 
 
  
