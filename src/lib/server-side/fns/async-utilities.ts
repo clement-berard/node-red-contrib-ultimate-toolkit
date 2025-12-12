@@ -1,8 +1,8 @@
-import { sleep } from 'radash';
+import { delay } from 'es-toolkit';
 
 export const asyncUtilities = {
   delay: (_, inputProp: unknown) => {
     const realProp = inputProp as number;
-    return sleep(realProp);
+    return delay(realProp);
   },
 };

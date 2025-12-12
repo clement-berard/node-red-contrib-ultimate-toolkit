@@ -1,5 +1,5 @@
 import { groupBy, keyBy, shuffle, take, takeRight } from 'es-toolkit';
-import { random, sum, toggle, unique } from 'radash';
+import { random, toggle, unique } from 'radash';
 
 export const arrayUtilities = {
   toggle: toggle,
@@ -11,10 +11,6 @@ export const arrayUtilities = {
   keyBy: (inputArr: unknown[], inputProp: unknown) => {
     const realProp = inputProp as string;
     return keyBy(inputArr, (x) => x[realProp.trim()]);
-  },
-  sum: (inputArr: object[], inputProp: unknown) => {
-    const realProp = inputProp as string;
-    return sum(inputArr, (x) => x[realProp.trim()]);
   },
   unique: (inputArr: object[], inputProp: unknown) => {
     const realProp = inputProp as string;

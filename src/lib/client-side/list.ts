@@ -21,12 +21,6 @@ export const list: UtilityList = {
       },
       docs: docsHelper.docsFromEsToolkit('array/keyBy'),
     },
-    sum: {
-      mainValue: {
-        label: 'Property',
-      },
-      docs: docsHelper.docsFromRadash('array/sum'),
-    },
     unique: {
       mainValue: {
         label: 'Property',
@@ -208,7 +202,9 @@ export const list: UtilityList = {
     random: {},
     round: {},
     sin: {},
-    sum: {},
+    sum: {
+      docs: docsHelper.docsFromEsToolkit('math/sum'),
+    },
     tan: {},
     trunc: {},
   },

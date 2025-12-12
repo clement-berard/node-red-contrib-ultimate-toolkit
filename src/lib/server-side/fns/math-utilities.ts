@@ -1,5 +1,4 @@
-import { median } from 'es-toolkit';
-import { sum } from 'radash';
+import { median, sum } from 'es-toolkit';
 
 export const mathUtilities = {
   abs: Math.abs,
@@ -20,9 +19,7 @@ export const mathUtilities = {
   random: Math.random,
   round: Math.round,
   sin: Math.sin,
-  sum: (inputArr: number[]) => {
-    return sum(inputArr);
-  },
+  sum,
   tan: Math.tan,
   trunc: Math.trunc,
 };

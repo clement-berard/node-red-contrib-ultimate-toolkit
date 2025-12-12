@@ -1,6 +1,6 @@
 import type { NodeControllerConfig, NodeControllerInst } from '@keload/node-red-dxp/editor';
 import { evaluateNodeProperty, splitBooleanOutputs } from '@keload/node-red-dxp/utils/controller';
-import { isObject, tryit } from 'radash';
+import { attemptAsync, isPlainObject } from 'es-toolkit';
 import { getFunctionDetails } from '../../lib/client-side';
 import { listFunctions as serverSideFunctions } from '../../lib/server-side';
 import { tools } from '../../lib/server-side/fns/tools';
@@ -13,7 +13,7 @@ export default function (this: NodeControllerInst<NodeMainProps>, config: NodeCo
 
   // Event handler for incoming messages
   this.on('input', async (msg) => {
-    const argsToCall = [];
+    const argsToCall: unknown[] = [];
     // Evaluate the input value based on node configuration
 
     const [, innerPayload] = await evaluateNodeProperty({
@@ -33,7 +33,7 @@ export default function (this: NodeControllerInst<NodeMainProps>, config: NodeCo
     if (fnDetails?.configArgs) {
       const extraArgs = config[fnDetails?.configArgs];
 
-      if (isObject(extraArgs) && fnDetails?.addNodeIdToConfigArgs) {
+      if (isPlainObject(extraArgs) && fnDetails?.addNodeIdToConfigArgs) {
         (extraArgs as Record<string, unknown>).nodeId = this.id;
       }
 
@@ -42,10 +42,11 @@ export default function (this: NodeControllerInst<NodeMainProps>, config: NodeCo
 
     // Get and prepare the actual function to be executed
     const matchedServerFunction = serverSideFunctions[config.category][config.function];
-    const serverFunctionToCall = tryit(matchedServerFunction);
 
     // Execute the function with error handling
-    const [err, result] = await serverFunctionToCall(...argsToCall);
+    const [err, result] = await attemptAsync(async () => {
+      return await matchedServerFunction(...(argsToCall as any[]));
+    });
 
     if (err) {
       this.error(err, msg);
