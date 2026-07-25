@@ -14,7 +14,7 @@ function formatDate(innerDate: Date | string, options: NodeMainProps['dateUtilit
     return format(realDate, options.nowFormatToken.trim());
   }
 
-  const matched = {
+  const matched: Record<string, () => string | number> = {
     timestamp: () => Date.now(),
     full: () => format(realDate, 'full'),
     long: () => format(realDate, 'long'),

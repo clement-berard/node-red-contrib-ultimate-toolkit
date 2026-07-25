@@ -9,6 +9,7 @@
     "access": "public"
   },
   "scripts": {
+    "prebuild": "pnpm typecheck",
     "build": "node-red-dxp build",
     "dev": "node-red-dxp watch",
     "format": "biome format",
@@ -17,7 +18,8 @@
     "release": "pnpm release-it",
     "release:test": "pnpm release-it --dry-run",
     "generate:readme": "pnpm tsx build-readme.ts",
-    "test": "vitest"
+    "test": "vitest",
+    "typecheck": "tsc --noEmit -p tsconfig.json"
   },
   "node-red": {
     "version": ">=2.0.0",
