@@ -4,17 +4,17 @@ import { random, toggle, unique } from 'radash';
 export const arrayUtilities = {
   toggle: toggle,
   shuffle: shuffle,
-  groupBy: (inputArr: unknown[], inputProp: unknown) => {
+  groupBy: (inputArr: Record<string, unknown>[], inputProp: unknown) => {
     const realProp = inputProp as string;
-    return groupBy(inputArr, (x) => x[realProp.trim()]);
+    return groupBy(inputArr, (x) => x[realProp.trim()] as PropertyKey);
   },
-  keyBy: (inputArr: unknown[], inputProp: unknown) => {
+  keyBy: (inputArr: Record<string, unknown>[], inputProp: unknown) => {
     const realProp = inputProp as string;
-    return keyBy(inputArr, (x) => x[realProp.trim()]);
+    return keyBy(inputArr, (x) => x[realProp.trim()] as PropertyKey);
   },
-  unique: (inputArr: object[], inputProp: unknown) => {
+  unique: (inputArr: Record<string, unknown>[], inputProp: unknown) => {
     const realProp = inputProp as string;
-    return unique(inputArr, (x) => x[realProp.trim()]);
+    return unique(inputArr, (x) => x[realProp.trim()] as PropertyKey);
   },
   take: (inputArr: object[], inputProp: unknown) => {
     const realProp = inputProp as number;

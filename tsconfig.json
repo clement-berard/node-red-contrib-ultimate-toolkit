@@ -11,12 +11,5 @@
     "rootDir": "./",
     "types": ["jquery", "jqueryui", "node-red", "@keload/node-red-dxp"]
   },
-  "include": ["./src/**/*.ts"],
-  "exclude": [
-    "./src/editor.ts",
-    "./src/editor/**/*",
-    "./src/nodes/**/editor/**/*",
-    "./src/nodes/**/editor.*",
-    "./test"
-  ]
+  "include": ["./src/**/*.ts"]
 }

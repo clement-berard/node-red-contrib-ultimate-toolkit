@@ -1,6 +1,7 @@
 import type { NodeControllerConfig, NodeControllerInst } from '@keload/node-red-dxp/editor';
 import { evaluateNodeProperty, splitBooleanOutputs } from '@keload/node-red-dxp/utils/controller';
 import { attemptAsync, isPlainObject } from 'es-toolkit';
+import type { NodeMessage } from 'node-red';
 import { getFunctionDetails } from '../../lib/client-side';
 import { listFunctions as serverSideFunctions } from '../../lib/server-side';
 import { tools } from '../../lib/server-side/fns/tools';
@@ -31,7 +32,7 @@ export default function (this: NodeControllerInst<NodeMainProps>, config: NodeCo
       argsToCall.push(config.mainValue);
     }
     if (fnDetails?.configArgs) {
-      const extraArgs = config[fnDetails?.configArgs];
+      const extraArgs = (config as unknown as Record<string, unknown>)[fnDetails.configArgs];
 
       if (isPlainObject(extraArgs) && fnDetails?.addNodeIdToConfigArgs) {
         (extraArgs as Record<string, unknown>).nodeId = this.id;
@@ -41,7 +42,9 @@ export default function (this: NodeControllerInst<NodeMainProps>, config: NodeCo
     }
 
     // Get and prepare the actual function to be executed
-    const matchedServerFunction = serverSideFunctions[config.category][config.function];
+    const matchedServerFunction = (
+      serverSideFunctions as Record<string, Record<string, (...args: unknown[]) => unknown>>
+    )[config.category][config.function];
 
     // Execute the function with error handling
     const [err, result] = await attemptAsync(async () => {
@@ -74,7 +77,7 @@ export default function (this: NodeControllerInst<NodeMainProps>, config: NodeCo
     // Route the output based on configuration and result type
     if ((fnDetails?.canSplitBooleanOutputs && config.splitBooleanOutputs) || fnDetails?.forceSplitBooleanOutputs) {
       const outputs = splitBooleanOutputs(Boolean(finalResult), resp);
-      this.send(outputs);
+      this.send(outputs as (NodeMessage | null)[]);
     } else {
       this.send(resp);
     }

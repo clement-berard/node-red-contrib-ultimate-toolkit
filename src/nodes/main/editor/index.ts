@@ -35,7 +35,7 @@ const Main: NodeEditorDefinition<NodeMainProps> = {
     if (this.outputs > 1) {
       return index === 0 ? 'True' : 'False';
     }
-    return null;
+    return undefined;
   },
   icon: 'font-awesome/fa-wrench',
   label: function () {
