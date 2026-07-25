@@ -1,7 +1,0 @@
-{
-  "builder": {
-    "esbuildControllerOptions": {
-      "includeInBundle": ["es-toolkit", "radash", "@formkit/tempo"]
-    }
-  }
-}

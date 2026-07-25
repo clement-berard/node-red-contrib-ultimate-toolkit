@@ -25,17 +25,20 @@ jobs:
       - uses: pnpm/action-setup@v4
         name: Install pnpm
         with:
-          version: 10
+          version: 11
           run_install: true
 
       - name: Setup Node
         uses: actions/setup-node@v4
         with:
-          node-version: 22
+          node-version: 24
           cache: pnpm
 
       - name: Lint
         run: pnpm lint:check
+
+      - name: Unit Tests
+        run: pnpm test
 
       - name: Build
         run: pnpm build
