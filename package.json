@@ -11,6 +11,7 @@
   "scripts": {
     "prebuild": "pnpm typecheck",
     "build": "node-red-dxp build",
+    "postbuild": "pnpm generate:readme",
     "dev": "node-red-dxp watch",
     "format": "biome format",
     "lint": "pnpm biome lint",
