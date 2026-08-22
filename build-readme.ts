@@ -80,7 +80,7 @@ ${finalFeatures
 const README = `
 # node-red-contrib-ultimate-toolkit
 
-<h3 align="center">The Swiss Army knife for Node-RED — dates, math, strings, arrays & more, all in one lightweight node.</h3>
+<h3 align="center">The multi-tool for Node-RED, all in one lightweight node.</h3>
 
 <br/>
 <p align="center">
