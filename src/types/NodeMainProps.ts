@@ -24,4 +24,7 @@ export interface NodeMainProps extends EditorNodeProperties {
       resetDelay?: number;
     };
   }>;
+  asyncUtilities: OrEmpty<{
+    milliseconds?: string;
+  }>;
 }
