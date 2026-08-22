@@ -1,6 +1,6 @@
 # node-red-contrib-ultimate-toolkit
 
-A collection of utilities to help you build your Node-RED flows.
+<h3 align="center">The Swiss Army knife for Node-RED — dates, math, strings, arrays & more, all in one lightweight node.</h3>
 
 <br/>
 <p align="center">
@@ -32,6 +32,10 @@ A collection of utilities to help you build your Node-RED flows.
 </p>
 <table align="center">
   <tr>
+    <td align="center">
+      <h2>✨ 76</h2>
+      <sub><b>Built-in Utilities</b></sub>
+    </td>
     <td align="center">
       <h2>🍃 0</h2>
       <sub><b>Runtime Dependencies</b></sub>

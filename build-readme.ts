@@ -23,6 +23,8 @@ const bundleSizeKb = Math.round(getDirectorySizeBytes(distPath) / 1024);
 
 const dependenciesCount = Object.keys((pkg as { dependencies?: Record<string, string> }).dependencies ?? {}).length;
 
+const featuresCount = Object.values(list).reduce((acc, catFns) => acc + Object.keys(catFns).length, 0);
+
 const statCard = (emoji: string, value: string, label: string) => `    <td align="center">
       <h2>${emoji} ${value}</h2>
       <sub><b>${label}</b></sub>
@@ -30,6 +32,7 @@ const statCard = (emoji: string, value: string, label: string) => `    <td align
 
 const statCardsPart = `<table align="center">
   <tr>
+${statCard('✨', `${featuresCount}`, 'Built-in Utilities')}
 ${statCard('🍃', `${dependenciesCount}`, 'Runtime Dependencies')}
 ${statCard('🚀', `${bundleSizeKb} kB`, 'Bundle Size')}
   </tr>
@@ -77,7 +80,7 @@ ${finalFeatures
 const README = `
 # node-red-contrib-ultimate-toolkit
 
-A collection of utilities to help you build your Node-RED flows.
+<h3 align="center">The Swiss Army knife for Node-RED — dates, math, strings, arrays & more, all in one lightweight node.</h3>
 
 <br/>
 <p align="center">
