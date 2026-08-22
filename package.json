@@ -9,7 +9,7 @@
     "access": "public"
   },
   "scripts": {
-    "prebuild": "pnpm typecheck",
+    "prebuild": "pnpm generate:readme && pnpm typecheck",
     "build": "node-red-dxp build",
     "dev": "node-red-dxp watch",
     "format": "biome format",
