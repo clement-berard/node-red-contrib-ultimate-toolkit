@@ -30,6 +30,18 @@ A collection of utilities to help you build your Node-RED flows.
     <img alt="NPM Downloads" src="https://img.shields.io/npm/dt/@keload/node-red-contrib-ultimate-toolkit?label=Downloads&style=for-the-badge&color=67ACF3">
   </a>
 </p>
+<table align="center">
+  <tr>
+    <td align="center">
+      <h2>🍃 0</h2>
+      <sub><b>Runtime Dependencies</b></sub>
+    </td>
+    <td align="center">
+      <h2>🚀 53 kB</h2>
+      <sub><b>Bundle Size</b></sub>
+    </td>
+  </tr>
+</table>
 
 ## Overview 🔦
 
@@ -48,13 +60,19 @@ Whenever possible, native Node.js methods take precedence for maximum efficiency
 
 ![paring-config.png](docs/screenshot.png)
 
+## Installation 📦
+
+```bash
+npm install @keload/node-red-contrib-ultimate-toolkit
+```
+
+You can also install it directly from the Node-RED editor via **Manage Palette**.
+
 ## Performance 🚀
 
-All used libraries are treeshaked and included in the final bundle. 
+All used libraries are treeshaked and included in the final bundle.
 
-**No extra dependencies are added**
-
-[Very small distribution](https://www.npmjs.com/package/@keload/node-red-contrib-ultimate-toolkit?activeTab=code) **size < 45kb**.
+**No extra dependencies are added.**
 
 ## Features ✨
 
@@ -62,347 +80,56 @@ All used libraries are treeshaked and included in the final bundle.
 
 ### → Array Utilities
 
-<hr>
-
-― `Get Random Item` 
-
- 
-
-― `Group By` 
-
- 
-
-― `Key By` 
-
- 
-
-― `Shuffle` 
-
- 
-
-― `Take` 
-
- 
-
-― `Take Right` 
-
- 
-
-― `Toggle` 
-
- 
-
-― `Unique` 
-
- 
+`Get Random Item` · `Group By` · `Key By` · `Shuffle` · `Take` · `Take Right` · `Toggle` · `Unique`
 
 ### → Async Utilities
 
-<hr>
-
-― `Delay` 
-
- Delays the message by the specified amount of time
+| Name | Description |
+| --- | --- |
+| `Delay` | Delays the message by the specified amount of time |
 
 ### → Date Utilities
 
-<hr>
-
-― `Current Timezone` 
-
- Returns the current timezone
-
-― `Format` 
-
- Return formatted date from a date
-
-― `Now` 
-
- Returns the current date with lot of formatting options
-
-― `Time Range` 
-
- Routes messages depending on the time
+| Name | Description |
+| --- | --- |
+| `Current Timezone` | Returns the current timezone |
+| `Format` | Return formatted date from a date |
+| `Now` | Returns the current date with lot of formatting options |
+| `Time Range` | Routes messages depending on the time |
 
 ### → Math Utilities
 
-<hr>
-
-― `Abs` 
-
- 
-
-― `Acos` 
-
- 
-
-― `Asin` 
-
- 
-
-― `Atan` 
-
- 
-
-― `Ceil` 
-
- 
-
-― `Cos` 
-
- 
-
-― `Exp` 
-
- 
-
-― `Floor` 
-
- 
-
-― `Log` 
-
- 
-
-― `Max` 
-
- 
-
-― `Mean` 
-
- 
-
-― `Median` 
-
- 
-
-― `Min` 
-
- 
-
-― `Random` 
-
- 
-
-― `Round` 
-
- 
-
-― `Sin` 
-
- 
-
-― `Sum` 
-
- 
-
-― `Tan` 
-
- 
-
-― `Trunc` 
-
- 
+`Abs` · `Acos` · `Asin` · `Atan` · `Ceil` · `Cos` · `Exp` · `Floor` · `Log` · `Max` · `Mean` · `Median` · `Min` · `Random` · `Round` · `Sin` · `Sum` · `Tan` · `Trunc`
 
 ### → Network Utilities
 
-<hr>
-
-― `Ip Information` 
-
- Fetches detailed information about an IP address
-
-― `Ip Version` 
-
- Returns IP version (4, 6, or 0 if invalid) for a given IP address string
-
-― `Network Interfaces` 
-
- Lists all network interfaces of the current machine (ethernet, wifi, etc.)
+| Name | Description |
+| --- | --- |
+| `Ip Information` | Fetches detailed information about an IP address |
+| `Ip Version` | Returns IP version (4, 6, or 0 if invalid) for a given IP address string |
+| `Network Interfaces` | Lists all network interfaces of the current machine (ethernet, wifi, etc.) |
 
 ### → Object Utilities
 
-<hr>
-
-― `Get Keys` 
-
- 
+`Get Keys`
 
 ### → Predicates
 
-<hr>
-
-― `Is Boolean` 
-
- 
-
-― `Is Buffer` 
-
- 
-
-― `Is Ip` 
-
- 
-
-― `Is Na N` 
-
- 
-
-― `Is Nil` 
-
- 
-
-― `Is Null` 
-
- 
-
-― `Is Number` 
-
- 
-
-― `Is String` 
-
- 
-
-― `Is Undefined` 
-
- 
-
-― `Is Url` 
-
- 
+`Is Boolean` · `Is Buffer` · `Is Ip` · `Is Na N` · `Is Nil` · `Is Null` · `Is Number` · `Is String` · `Is Undefined` · `Is Url`
 
 ### → String Utilities
 
-<hr>
-
-― `Camel Case` 
-
- 
-
-― `Capitalize` 
-
- 
-
-― `Constant Case` 
-
- 
-
-― `Escape` 
-
- 
-
-― `Kebab Case` 
-
- 
-
-― `Lower Case` 
-
- 
-
-― `Lower First` 
-
- 
-
-― `Pascal Case` 
-
- 
-
-― `Snake Case` 
-
- 
-
-― `Start Case` 
-
- 
-
-― `Trim` 
-
- 
-
-― `Trim End` 
-
- 
-
-― `Trim Start` 
-
- 
-
-― `Unescape` 
-
- 
-
-― `Upper Case` 
-
- 
-
-― `Upper First` 
-
- 
-
-― `Words` 
-
- 
+`Camel Case` · `Capitalize` · `Constant Case` · `Escape` · `Kebab Case` · `Lower Case` · `Lower First` · `Pascal Case` · `Snake Case` · `Start Case` · `Trim` · `Trim End` · `Trim Start` · `Unescape` · `Upper Case` · `Upper First` · `Words`
 
 ### → Tools
 
-<hr>
-
-― `Cyclic Counter` 
-
- A customizable cyclic counter node for Node-RED that iterates through a defined sequence of numbers and can reset after a set timeout. It allows flexible control over the counter's behavior, making it useful in a variety of automation scenarios.
+| Name | Description |
+| --- | --- |
+| `Cyclic Counter` | A customizable cyclic counter node for Node-RED that iterates through a defined sequence of numbers and can reset after a set timeout. It allows flexible control over the counter's behavior, making it useful in a variety of automation scenarios. |
 
 ### → Utility Functions
 
-<hr>
-
-― `Eq` 
-
- 
-
-― `Gt` 
-
- 
-
-― `Gte` 
-
- 
-
-― `Lt` 
-
- 
-
-― `Lte` 
-
- 
-
-― `Size` 
-
- 
-
-― `To Boolean` 
-
- 
-
-― `To Boolean Number` 
-
- 
-
-― `To Number` 
-
- 
-
-― `To Number Non Strict` 
-
- 
-
-― `To Safe Integer` 
-
- 
-
-― `To String` 
-
- 
+`Eq` · `Gt` · `Gte` · `Lt` · `Lte` · `Size` · `To Boolean` · `To Boolean Number` · `To Number` · `To Number Non Strict` · `To Safe Integer` · `To String`
 
 
 ## Contributing & Developer Experience

@@ -1,8 +1,41 @@
 import * as fs from 'node:fs';
+import * as path from 'node:path';
 import { alphabetical, title } from 'radash';
+import pkg from './package.json';
 import { list } from './src/lib/client-side/list';
 
-const sortByKey = (obj) => {
+const getDirectorySizeBytes = (dirPath: string): number => {
+  let total = 0;
+  for (const entry of fs.readdirSync(dirPath, { withFileTypes: true })) {
+    const entryPath = path.join(dirPath, entry.name);
+    total += entry.isDirectory() ? getDirectorySizeBytes(entryPath) : fs.statSync(entryPath).size;
+  }
+  return total;
+};
+
+const distPath = path.join(__dirname, 'dist');
+if (!fs.existsSync(distPath)) {
+  throw new Error(
+    `Cannot compute bundle size: "${distPath}" does not exist. Run "pnpm build" before "pnpm generate:readme".`,
+  );
+}
+const bundleSizeKb = Math.round(getDirectorySizeBytes(distPath) / 1024);
+
+const dependenciesCount = Object.keys((pkg as { dependencies?: Record<string, string> }).dependencies ?? {}).length;
+
+const statCard = (emoji: string, value: string, label: string) => `    <td align="center">
+      <h2>${emoji} ${value}</h2>
+      <sub><b>${label}</b></sub>
+    </td>`;
+
+const statCardsPart = `<table align="center">
+  <tr>
+${statCard('🍃', `${dependenciesCount}`, 'Runtime Dependencies')}
+${statCard('🚀', `${bundleSizeKb} kB`, 'Bundle Size')}
+  </tr>
+</table>`;
+
+const sortByKey = (obj: Record<string, unknown>) => {
   return Object.fromEntries(Object.entries(obj).sort((a, b) => a[0].localeCompare(b[0])));
 };
 
@@ -30,7 +63,13 @@ for (const cat of allCategories) {
 const featurePart = `
 ${finalFeatures
   .map((cat) => {
-    return `\n### → ${cat.title}\n\n<hr>\n\n${cat.finalCatFns.map((v) => `― \`${v.name}\` \n\n ${v.description}`).join('\n\n')}`;
+    const hasDescriptions = cat.finalCatFns.some((v) => v.description);
+    if (!hasDescriptions) {
+      const pills = cat.finalCatFns.map((v) => `\`${v.name}\``).join(' · ');
+      return `\n### → ${cat.title}\n\n${pills}`;
+    }
+    const rows = cat.finalCatFns.map((v) => `| \`${v.name}\` | ${v.description || '—'} |`).join('\n');
+    return `\n### → ${cat.title}\n\n| Name | Description |\n| --- | --- |\n${rows}`;
   })
   .join('\n')}
 `;
@@ -68,6 +107,7 @@ A collection of utilities to help you build your Node-RED flows.
     <img alt="NPM Downloads" src="https://img.shields.io/npm/dt/@keload/node-red-contrib-ultimate-toolkit?label=Downloads&style=for-the-badge&color=67ACF3">
   </a>
 </p>
+${statCardsPart}
 
 ## Overview 🔦
 
@@ -86,13 +126,19 @@ Whenever possible, native Node.js methods take precedence for maximum efficiency
 
 ![paring-config.png](docs/screenshot.png)
 
+## Installation 📦
+
+\`\`\`bash
+npm install @keload/node-red-contrib-ultimate-toolkit
+\`\`\`
+
+You can also install it directly from the Node-RED editor via **Manage Palette**.
+
 ## Performance 🚀
 
-All used libraries are treeshaked and included in the final bundle. 
+All used libraries are treeshaked and included in the final bundle.
 
-**No extra dependencies are added**
-
-[Very small distribution](https://www.npmjs.com/package/@keload/node-red-contrib-ultimate-toolkit?activeTab=code) **size < 45kb**.
+**No extra dependencies are added.**
 
 ## Features ✨
 
