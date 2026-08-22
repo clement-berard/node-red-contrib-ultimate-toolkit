@@ -84,19 +84,19 @@ const Main: NodeEditorDefinition<NodeMainProps> = {
       // get details
       const fnDetails = getFunctionDetails(category as string, currentFunction as string);
       // force hide optionals fields
-      jqSelector('.extra-field').addClass('!hidden');
+      jqSelector('.extra-field').addClass('hidden!');
       //docs part
       const docs = fnDetails?.nodeDocs;
       if (docs.replace(/(<br>|\n)/g, '').trim()) {
         jqSelector('.fn-docs')
           .html(docs.replace(/^(<br\s*\/?>|\n)+|(<br\s*\/?>|\n)+$/g, ''))
-          .removeClass('!hidden');
+          .removeClass('hidden!');
       }
       // additional values part
       const hasMainValue = !!fnDetails?.mainValue;
 
       if (hasMainValue) {
-        jqSelector('.additionalMainValue').removeClass('!hidden');
+        jqSelector('.additionalMainValue').removeClass('hidden!');
         if (fnDetails?.mainValue?.label) {
           jqSelector('.additionalMainValue label').text(fnDetails.mainValue.label);
         }
@@ -104,20 +104,20 @@ const Main: NodeEditorDefinition<NodeMainProps> = {
       // split boolean outputs
       const hasCanSplitBooleanOutputs = !!fnDetails?.canSplitBooleanOutputs;
       if (hasCanSplitBooleanOutputs) {
-        jqSelector('.splitBooleanOutputs').removeClass('!hidden');
+        jqSelector('.splitBooleanOutputs').removeClass('hidden!');
       } else {
         jqSelector('$splitBooleanOutputs').prop('checked', false);
       }
       // inverse boolean value
       const hasInverseReturnValue = !!fnDetails?.inverseReturnValue;
       if (hasInverseReturnValue) {
-        jqSelector('.inverseReturnValue').removeClass('!hidden');
+        jqSelector('.inverseReturnValue').removeClass('hidden!');
       } else {
         jqSelector('$inverseReturnValue').prop('checked', false);
       }
       // reveal classes
       const revealClassesSelectors = (fnDetails?.revealClasses || []).map((c) => `.${c}`).join(',');
-      $(revealClassesSelectors).removeClass('!hidden');
+      $(revealClassesSelectors).removeClass('hidden!');
     }
 
     populateSelectFunction(this.category, this.function);
