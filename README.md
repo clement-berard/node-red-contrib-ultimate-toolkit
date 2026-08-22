@@ -1,6 +1,6 @@
 # node-red-contrib-ultimate-toolkit
 
-<h3 align="center">The Swiss Army knife for Node-RED — dates, math, strings, arrays & more, all in one lightweight node.</h3>
+<h3 align="center">The multi-tool for Node-RED, all in one lightweight node.</h3>
 
 <br/>
 <p align="center">
@@ -41,7 +41,7 @@
       <sub><b>Runtime Dependencies</b></sub>
     </td>
     <td align="center">
-      <h2>🚀 88 kB</h2>
+      <h2>🚀 53 kB</h2>
       <sub><b>Bundle Size</b></sub>
     </td>
   </tr>
