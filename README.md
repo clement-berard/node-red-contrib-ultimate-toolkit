@@ -41,7 +41,7 @@
       <sub><b>Runtime Dependencies</b></sub>
     </td>
     <td align="center">
-      <h2>🚀 53 kB</h2>
+      <h2>🚀 54 kB</h2>
       <sub><b>Bundle Size</b></sub>
     </td>
   </tr>

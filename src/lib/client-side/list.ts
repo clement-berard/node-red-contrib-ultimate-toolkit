@@ -211,9 +211,8 @@ export const list: UtilityList = {
   async_utilities: {
     delay: {
       description: 'Delays the message by the specified amount of time',
-      mainValue: {
-        label: 'Milliseconds',
-      },
+      revealClasses: ['asyncUtilities_delay'],
+      configArgs: 'asyncUtilities',
     },
   },
   tools: {

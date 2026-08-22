@@ -27,6 +27,7 @@ const Main: NodeEditorDefinition<NodeMainProps> = {
     inverseReturnValue: { value: false },
     dateUtilities: { value: {} },
     tools: { value: {} },
+    asyncUtilities: { value: {} },
     outputs: { value: 1 },
   },
   inputs: 1,
@@ -49,10 +50,12 @@ const Main: NodeEditorDefinition<NodeMainProps> = {
     this.outputs = isCheckboxChecked('$splitBooleanOutputs') || forceSplitBooleanOutputs ? 2 : 1;
     this.dateUtilities = getFormValues('dateUtilities');
     this.tools = getFormValues('tools');
+    this.asyncUtilities = getFormValues('asyncUtilities');
   },
   oneditprepare: function () {
     setFormValues('dateUtilities', this.dateUtilities);
     setFormValues('tools', this.tools);
+    setFormValues('asyncUtilities', this.asyncUtilities);
 
     applyTypedInput({
       selector: '$entry',

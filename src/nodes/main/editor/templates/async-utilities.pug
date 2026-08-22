@@ -1,0 +1,8 @@
+include ../../../../../.node-red-dxp/pug/helper
+
+.extra-field.asyncUtilities_delay
+    +dxpFormRowInputText({
+        id: 'asyncUtilities-milliseconds',
+        label: 'Milliseconds',
+        icon: 'clock-o',
+    })(type='number' min='0')
