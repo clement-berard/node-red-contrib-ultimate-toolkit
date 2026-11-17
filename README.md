@@ -41,7 +41,7 @@
       <sub><b>Runtime Dependencies</b></sub>
     </td>
     <td align="center">
-      <h2>🚀 70 kB</h2>
+      <h2>🚀 75 kB</h2>
       <sub><b>Bundle Size</b></sub>
     </td>
   </tr>
@@ -86,33 +86,33 @@ All used libraries are treeshaked and included in the final bundle.
 
 | Name | Description |
 | --- | --- |
-| `Chunk` | — |
-| `Compact` | — |
-| `Count By` | — |
-| `Drop` | — |
-| `Drop Right` | — |
-| `Flatten` | — |
-| `Flatten Deep` | — |
-| `Get Random Item` | — |
-| `Group By` | — |
-| `Head` | — |
-| `Initial` | — |
-| `Key By` | — |
-| `Last` | — |
-| `Max By` | — |
-| `Min By` | — |
-| `Order By` | — |
-| `Partition` | — |
-| `Sample Size` | — |
-| `Shuffle` | — |
-| `Sort By` | — |
-| `Tail` | — |
-| `Take` | — |
-| `Take Right` | — |
-| `Toggle` | — |
-| `Unique` | Without property, dedupes simple values |
-| `Unzip` | — |
-| `Windowed` | — |
+| `Chunk` | Splits the array into groups of the given size |
+| `Compact` | Removes falsy values (0, '', null, undefined, false, NaN) |
+| `Count By` | Counts items per property value: {value: count} |
+| `Drop` | Removes the first N items |
+| `Drop Right` | Removes the last N items |
+| `Flatten` | Flattens the array by one level |
+| `Flatten Deep` | Flattens the array at every depth |
+| `Get Random Item` | Returns one random item, null if the array is empty |
+| `Group By` | Groups items into an object keyed by the property value |
+| `Head` | Returns the first item, null if empty |
+| `Initial` | Returns everything except the last item |
+| `Key By` | Maps each item to an object keyed by the property value (last wins) |
+| `Last` | Returns the last item, null if empty |
+| `Max By` | Returns the item with the highest property value, null if empty |
+| `Min By` | Returns the item with the lowest property value, null if empty |
+| `Order By` | Sorts objects by the property, ascending or descending |
+| `Partition` | Splits into [truthy, falsy] arrays based on the property |
+| `Sample Size` | Returns N random items, without repeats |
+| `Shuffle` | Returns a randomly reordered copy of the array |
+| `Sort By` | Sorts objects by the property, ascending |
+| `Tail` | Returns everything except the first item |
+| `Take` | Returns the first N items |
+| `Take Right` | Returns the last N items |
+| `Toggle` | Adds the item if absent, removes it if present |
+| `Unique` | Removes duplicates, by property value or by simple value if empty |
+| `Unzip` | Regroups tuples by position: [[1,'a'],[2,'b']] → [[1,2],['a','b']] |
+| `Windowed` | Returns sliding windows of the given size: [1,2,3] with 2 → [[1,2],[2,3]] |
 
 ### → Async Utilities
 
@@ -145,25 +145,25 @@ All used libraries are treeshaked and included in the final bundle.
 
 | Name | Description |
 | --- | --- |
-| `Clone Deep` | — |
-| `Construct` | — |
+| `Clone Deep` | Returns a deep copy, independent from the original |
+| `Construct` | Rebuilds nesting from dot paths: {'a.b':1} → {a:{b:1}} |
 | `Find Key` | Returns the first key holding this value, null if none |
-| `Flatten Object` | — |
-| `Get` | Path like <code>a.b[0].c</code>, null if missing |
-| `Get Keys` | — |
-| `Invert` | — |
-| `Listify` | — |
-| `Lowerize` | — |
-| `Omit` | Comma separated keys |
-| `Pick` | Comma separated keys |
-| `Shake` | — |
-| `Sort Keys` | — |
-| `To Camel Case Keys` | — |
-| `To Constant Case Keys` | — |
-| `To Kebab Case Keys` | — |
-| `To Pascal Case Keys` | — |
-| `To Snake Case Keys` | — |
-| `Upperize` | — |
+| `Flatten Object` | Flattens nested keys to dot paths: {a:{b:1}} → {'a.b':1} |
+| `Get` | Reads a value by path like <code>a.b[0].c</code>, null if missing |
+| `Get Keys` | Returns the keys of the object as an array |
+| `Invert` | Swaps keys and values: {a:'x'} → {x:'a'} |
+| `Listify` | Converts the object to an array of {key, value} |
+| `Lowerize` | Converts keys to lower case |
+| `Omit` | Removes the listed keys (comma separated) |
+| `Pick` | Keeps only the listed keys (comma separated) |
+| `Shake` | Removes keys whose value is undefined |
+| `Sort Keys` | Returns the object with keys sorted alphabetically |
+| `To Camel Case Keys` | Converts keys to camelCase, deeply |
+| `To Constant Case Keys` | Converts keys to CONSTANT_CASE, deeply |
+| `To Kebab Case Keys` | Converts keys to kebab-case, deeply |
+| `To Pascal Case Keys` | Converts keys to PascalCase, deeply |
+| `To Snake Case Keys` | Converts keys to snake_case, deeply |
+| `Upperize` | Converts keys to upper case |
 
 ### → Predicates
 
