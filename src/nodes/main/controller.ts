@@ -13,74 +13,75 @@ export default function (this: NodeControllerInst<NodeMainProps>, config: NodeCo
   RED.nodes.createNode(this, config);
 
   // Event handler for incoming messages
-  this.on('input', async (msg) => {
-    const argsToCall: unknown[] = [];
-    // Evaluate the input value based on node configuration
+  this.on('input', async (msg, send, done) => {
+    // Everything runs inside attemptAsync: a bad entry or an unknown category/function is reported like any other error
+    const [err, outputs] = await attemptAsync(async () => {
+      const argsToCall: unknown[] = [];
+      // Evaluate the input value based on node configuration
+      const [, innerPayload] = await evaluateNodeProperty({
+        msg,
+        type: config.entryType,
+        node: this,
+        value: config.entry,
+      });
 
-    const [, innerPayload] = await evaluateNodeProperty({
-      msg,
-      type: config.entryType,
-      node: this,
-      value: config.entry,
-    });
+      argsToCall.push(innerPayload);
 
-    argsToCall.push(innerPayload);
+      // Get function metadata and prepare additional arguments if needed
+      const fnDetails = getFunctionDetails(config.category, config.function);
+      if (fnDetails?.mainValue) {
+        argsToCall.push(config.mainValue);
+      }
+      if (fnDetails?.configArgs) {
+        const extraArgs = (config as unknown as Record<string, unknown>)[fnDetails.configArgs];
 
-    // Get function metadata and prepare additional arguments if needed
-    const fnDetails = getFunctionDetails(config.category, config.function);
-    if (fnDetails?.mainValue) {
-      argsToCall.push(config.mainValue);
-    }
-    if (fnDetails?.configArgs) {
-      const extraArgs = (config as unknown as Record<string, unknown>)[fnDetails.configArgs];
-
-      if (isPlainObject(extraArgs) && fnDetails?.addNodeIdToConfigArgs) {
-        (extraArgs as Record<string, unknown>).nodeId = this.id;
+        // Copy to avoid mutating the node configuration shared by every message
+        argsToCall.push(
+          isPlainObject(extraArgs) && fnDetails?.addNodeIdToConfigArgs ? { ...extraArgs, nodeId: this.id } : extraArgs,
+        );
       }
 
-      argsToCall.push(extraArgs);
-    }
+      // Get and prepare the actual function to be executed
+      const matchedServerFunction = (
+        serverSideFunctions as Record<string, Record<string, (...args: unknown[]) => unknown>>
+      )[config.category]?.[config.function];
 
-    // Get and prepare the actual function to be executed
-    const matchedServerFunction = (
-      serverSideFunctions as Record<string, Record<string, (...args: unknown[]) => unknown>>
-    )[config.category][config.function];
+      if (!matchedServerFunction) {
+        throw new Error(`Unknown function "${config.category}.${config.function}"`);
+      }
 
-    // Execute the function with error handling
-    const [err, result] = await attemptAsync(async () => {
-      return await matchedServerFunction(...(argsToCall as any[]));
+      const result = await matchedServerFunction(...(argsToCall as any[]));
+
+      // Handle result inversion if configured
+      const finalResult = fnDetails?.inverseReturnValue && config.inverseReturnValue ? !result : result;
+
+      // Prepare the final response object, with metadata about the function call
+      const resp = {
+        ...msg,
+        payload: finalResult,
+        nodeParams: {
+          callWith: argsToCall,
+          callFunction: config.function,
+        },
+      };
+
+      // Route the output based on configuration and result type
+      if ((fnDetails?.canSplitBooleanOutputs && config.splitBooleanOutputs) || fnDetails?.forceSplitBooleanOutputs) {
+        return splitBooleanOutputs(Boolean(finalResult), resp) as (NodeMessage | null)[];
+      }
+      return resp;
     });
 
     if (err) {
-      this.error(err, msg);
       this.status({ fill: 'red', shape: 'ring', text: 'Error' });
+      done(err as Error);
       return;
     }
 
     // Clear node status on success
     this.status({});
-
-    // Prepare metadata about the function call
-    const commonReturn = {
-      nodeParams: {
-        callWith: argsToCall,
-        callFunction: config.function,
-      },
-    };
-
-    // Handle result inversion if configured
-    const finalResult = fnDetails?.inverseReturnValue && config.inverseReturnValue ? !result : result;
-
-    // Prepare the final response object
-    const resp = { ...msg, payload: finalResult, ...commonReturn };
-
-    // Route the output based on configuration and result type
-    if ((fnDetails?.canSplitBooleanOutputs && config.splitBooleanOutputs) || fnDetails?.forceSplitBooleanOutputs) {
-      const outputs = splitBooleanOutputs(Boolean(finalResult), resp);
-      this.send(outputs as (NodeMessage | null)[]);
-    } else {
-      this.send(resp);
-    }
+    send(outputs as NodeMessage | (NodeMessage | null)[]);
+    done();
   });
 
   this.on('close', () => {

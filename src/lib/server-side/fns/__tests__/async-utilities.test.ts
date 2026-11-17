@@ -7,6 +7,12 @@ describe('asyncUtilities', () => {
   });
 
   describe('delay', () => {
+    it.each(['abc', '-5'])('throws on invalid milliseconds %j', (milliseconds) => {
+      expect(() => asyncUtilities.delay(null, { milliseconds } as any)).toThrow(
+        'Milliseconds must be a positive number',
+      );
+    });
+
     it('resolves after the given milliseconds', async () => {
       vi.useFakeTimers();
       let done = false;

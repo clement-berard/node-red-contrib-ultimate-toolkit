@@ -51,14 +51,8 @@ const toSize = (input: unknown) => {
 export const arrayUtilities = {
   toggle: toggle,
   shuffle: shuffle,
-  groupBy: (inputArr: Record<string, unknown>[], inputProp: unknown) => {
-    const realProp = inputProp as string;
-    return groupBy(inputArr, (x) => x[realProp.trim()] as PropertyKey);
-  },
-  keyBy: (inputArr: Record<string, unknown>[], inputProp: unknown) => {
-    const realProp = inputProp as string;
-    return keyBy(inputArr, (x) => x[realProp.trim()] as PropertyKey);
-  },
+  groupBy: (inputArr: Row[], inputProp: unknown) => groupBy(inputArr, (x) => x[toProp(inputProp)] as PropertyKey),
+  keyBy: (inputArr: Row[], inputProp: unknown) => keyBy(inputArr, (x) => x[toProp(inputProp)] as PropertyKey),
   unique: (inputArr: unknown[], inputProp?: unknown) => {
     const realProp = toProp(inputProp);
     if (!realProp) {
@@ -66,14 +60,8 @@ export const arrayUtilities = {
     }
     return unique(inputArr as Row[], (x) => x[realProp] as PropertyKey);
   },
-  take: (inputArr: object[], inputProp: unknown) => {
-    const realProp = inputProp as number;
-    return take(inputArr, realProp);
-  },
-  takeRight: (inputArr: object[], inputProp: unknown) => {
-    const realProp = inputProp as number;
-    return takeRight(inputArr, realProp);
-  },
+  take: (inputArr: unknown[], inputProp: unknown) => take(inputArr, toCount(inputProp)),
+  takeRight: (inputArr: unknown[], inputProp: unknown) => takeRight(inputArr, toCount(inputProp)),
   getRandomItem: (inputArr: unknown[]) => {
     if (!inputArr.length) {
       return null;

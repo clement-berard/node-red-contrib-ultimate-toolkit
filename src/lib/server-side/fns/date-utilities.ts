@@ -24,7 +24,11 @@ function formatDate(innerDate: Date | string, options: NodeMainProps['dateUtilit
     utcString: () => realDate.toUTCString(),
   };
 
-  return matched[options.nowFormat]();
+  const formatter = matched[options?.nowFormat];
+  if (!formatter) {
+    throw new Error(`Unknown format "${options?.nowFormat}"`);
+  }
+  return formatter();
 }
 
 export const dateUtilities = {
