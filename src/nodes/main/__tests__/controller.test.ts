@@ -1,8 +1,14 @@
-import { set } from 'es-toolkit/compat';
+import { get, set } from 'es-toolkit/compat';
 import { beforeEach, describe, expect, it, vi } from 'vitest';
 
 vi.mock('@keload/node-red-dxp/utils/controller', () => ({
-  evaluateNodeProperty: vi.fn(async ({ value }: { value: unknown }) => [null, value]),
+  // msg-typed strings are read from the message, any other value is returned as is (entry values in these tests)
+  evaluateNodeProperty: vi.fn(async ({ type, value, msg }: { type: string; value: unknown; msg: object }) => {
+    if (type === 'fail') {
+      return [new Error('cannot evaluate'), undefined];
+    }
+    return [undefined, type === 'msg' && typeof value === 'string' ? get(msg, value) : value];
+  }),
   splitBooleanOutputs: vi.fn((value: boolean, msg: unknown) => (value ? [msg, null] : [null, msg])),
 }));
 
@@ -108,11 +114,11 @@ describe('controller', () => {
     const { send, run } = setup({
       category: 'predicates',
       function: 'isString',
-      entry: 'a',
+      entry: 'payload',
       entryType: 'msg',
       inverseReturnValue: true,
     });
-    await run({});
+    await run({ payload: 'a' });
     expect(send.mock.calls[0][0].payload).toBe(false);
   });
 
@@ -120,48 +126,96 @@ describe('controller', () => {
     const { send, run } = setup({
       category: 'predicates',
       function: 'isString',
-      entry: 'a',
+      entry: 'payload',
       entryType: 'msg',
       splitBooleanOutputs: true,
     });
-    await run({});
+    await run({ payload: 'a' });
     const [outputs] = send.mock.calls[0];
     expect(outputs[0].payload).toBe(true);
     expect(outputs[1]).toBeNull();
   });
 
-  describe('output property', () => {
+  describe('output properties', () => {
     const base = { category: 'array_utilities', function: 'compact', entry: [0, 1, 2], entryType: 'msg' };
-
-    it('writes to msg.payload by default, even for nodes saved before the option existed', async () => {
-      const { send, run } = setup(base);
-      await run({ payload: 'in' });
-      expect(send.mock.calls[0][0].payload).toEqual([1, 2]);
+    const rule = (extra: Record<string, unknown>) => ({
+      target: 'payload',
+      targetType: 'msg',
+      source: '',
+      sourceType: 'result',
+      ...extra,
     });
 
-    it('writes to the chosen msg property and keeps the original payload', async () => {
-      const { send, run } = setup({ ...base, output: 'result.items', outputType: 'msg' });
+    it('writes the result to msg.payload by default, also for nodes saved without rules', async () => {
+      for (const outputProps of [undefined, []]) {
+        const { send, run } = setup({ ...base, outputProps });
+        await run({ payload: 'in' });
+        expect(send.mock.calls[0][0].payload).toEqual([1, 2]);
+      }
+    });
+
+    it('writes the result to a nested msg property and keeps the original payload', async () => {
+      const { send, run } = setup({ ...base, outputProps: [rule({ target: 'result.items' })] });
       await run({ payload: 'in' });
       const sent = send.mock.calls[0][0];
       expect(sent.result).toEqual({ items: [1, 2] });
       expect(sent.payload).toBe('in');
     });
 
-    it('writes to the flow context and keeps the message untouched', async () => {
-      const { send, run } = setup({ ...base, output: 'items', outputType: 'flow' });
+    it('writes to the flow and global contexts', async () => {
+      const { send, run } = setup({
+        ...base,
+        outputProps: [rule({ target: 'f', targetType: 'flow' }), rule({ target: 'g', targetType: 'global' })],
+      });
       await run({ payload: 'in' });
-      expect(flowSet).toHaveBeenCalledWith('items', [1, 2]);
+      expect(flowSet).toHaveBeenCalledWith('f', [1, 2]);
+      expect(globalSet).toHaveBeenCalledWith('g', [1, 2]);
       expect(send.mock.calls[0][0].payload).toBe('in');
     });
 
-    it('writes to the global context', async () => {
-      const { run } = setup({ ...base, output: 'items', outputType: 'global' });
-      await run({});
-      expect(globalSet).toHaveBeenCalledWith('items', [1, 2]);
+    it('handles several lines with result, input and evaluated sources', async () => {
+      const { send, run } = setup({
+        ...base,
+        outputProps: [
+          rule({ target: 'payload' }),
+          rule({ target: 'original', sourceType: 'input' }),
+          rule({ target: 'topic', sourceType: 'str', source: 'my-topic' }),
+          rule({ target: 'copy', sourceType: 'msg', source: 'extra.value' }),
+        ],
+      });
+      await run({ extra: { value: 42 } });
+      const sent = send.mock.calls[0][0];
+      expect(sent.payload).toEqual([1, 2]);
+      expect(sent.original).toEqual([0, 1, 2]);
+      expect(sent.topic).toBe('my-topic');
+      expect(sent.copy).toBe(42);
     });
 
-    it('reports an unsupported output type', async () => {
-      const { send, done, run } = setup({ ...base, output: 'x', outputType: 'str' });
+    it('evaluates the sources against the incoming message, not the one being built', async () => {
+      const { send, run } = setup({
+        ...base,
+        outputProps: [rule({ target: 'payload' }), rule({ target: 'before', sourceType: 'msg', source: 'payload' })],
+      });
+      await run({ payload: 'in' });
+      expect(send.mock.calls[0][0].before).toBe('in');
+    });
+
+    it('reports an empty target', async () => {
+      const { send, done, run } = setup({ ...base, outputProps: [rule({ target: '  ' })] });
+      await run({});
+      expect(done).toHaveBeenCalledWith(expect.objectContaining({ message: 'Output property must not be empty' }));
+      expect(send).not.toHaveBeenCalled();
+    });
+
+    it('reports a source that cannot be evaluated', async () => {
+      const { send, done, run } = setup({ ...base, outputProps: [rule({ sourceType: 'fail', source: 'x' })] });
+      await run({});
+      expect(done).toHaveBeenCalledWith(expect.objectContaining({ message: 'cannot evaluate' }));
+      expect(send).not.toHaveBeenCalled();
+    });
+
+    it('reports an unsupported target type', async () => {
+      const { send, done, run } = setup({ ...base, outputProps: [rule({ targetType: 'str' })] });
       await run({});
       expect(done).toHaveBeenCalledWith(expect.objectContaining({ message: 'Unsupported output type "str"' }));
       expect(send).not.toHaveBeenCalled();

@@ -11,6 +11,7 @@ import {
 import { title } from 'radash';
 import { getCategories, getFunctionDetails, getFunctionsFromCategory } from '../../../lib/client-side';
 import type { NodeMainProps } from '../../../types/NodeMainProps';
+import { initOutputList, readOutputList } from './output-list';
 
 // Categories having dedicated fields (`configArgs` in list.ts): one entry per category, nothing else to wire
 const CONFIG_CATEGORIES = [
@@ -31,8 +32,7 @@ const Main: NodeEditorDefinition<NodeMainProps> = {
     entry: { value: 'payload', required: true },
     entryType: { value: 'msg', required: true },
     // not required: nodes saved before this option existed must not be flagged invalid
-    output: { value: 'payload' },
-    outputType: { value: 'msg' },
+    outputProps: { value: [] },
     category: { value: '', required: true },
     function: { value: '', required: true },
     mainValue: { value: '' },
@@ -65,21 +65,15 @@ const Main: NodeEditorDefinition<NodeMainProps> = {
     for (const category of CONFIG_CATEGORIES) {
       this[category] = getFormValues(category);
     }
+    this.outputProps = readOutputList();
   },
   oneditprepare: function () {
     for (const category of CONFIG_CATEGORIES) {
       setFormValues(category, this[category]);
     }
 
-    // nodes saved before the output option existed have no value: show the historical target
-    if (!this.output) {
-      jqSelector('$output').val('payload');
-    }
-
-    applyTypedInput({
-      selector: '$output',
-      types: ['msg', 'flow', 'global'],
-    });
+    // nodes saved before the output list existed show the historical target (msg.payload = result)
+    initOutputList(this.outputProps);
 
     applyTypedInput({
       selector: '$entry',
