@@ -184,104 +184,344 @@ export const list: UtilityList = {
     },
   },
   string_utilities: {
-    camelCase: {},
-    capitalize: {},
-    constantCase: {},
-    escape: {},
-    kebabCase: {},
-    lowerCase: {},
-    lowerFirst: {},
-    pascalCase: {},
-    snakeCase: {},
-    startCase: {},
-    trim: {},
-    trimEnd: {},
-    trimStart: {},
-    unescape: {},
-    upperCase: {},
-    upperFirst: {},
-    words: {},
+    camelCase: {
+      description: 'Converts to camelCase: foo bar → fooBar',
+      docs: docsHelper.docsFromEsToolkit('string/camelCase'),
+    },
+    capitalize: {
+      description: 'Uppercases the first letter, lowercases the rest',
+      docs: docsHelper.docsFromEsToolkit('string/capitalize'),
+    },
+    constantCase: {
+      description: 'Converts to CONSTANT_CASE: foo bar → FOO_BAR',
+      docs: docsHelper.docsFromEsToolkit('string/constantCase'),
+    },
+    deburr: {
+      description: 'Removes accents: crème brûlée → creme brulee',
+      docs: docsHelper.docsFromEsToolkit('string/deburr'),
+    },
+    dedent: {
+      description: 'Removes the common leading indentation of every line',
+      docs: docsHelper.docsFromEsToolkit('string/dedent'),
+    },
+    escape: {
+      description: 'Escapes HTML characters (&, <, >, quotes)',
+      docs: docsHelper.docsFromEsToolkit('string/escape'),
+    },
+    escapeRegExp: {
+      description: 'Escapes regex special characters so the text can be used literally in a RegExp',
+      docs: docsHelper.docsFromEsToolkit('string/escapeRegExp'),
+    },
+    kebabCase: {
+      description: 'Converts to kebab-case: foo bar → foo-bar',
+      docs: docsHelper.docsFromEsToolkit('string/kebabCase'),
+    },
+    lowerCase: {
+      description: 'Converts to lower case words separated by spaces: fooBar → foo bar',
+      docs: docsHelper.docsFromEsToolkit('string/lowerCase'),
+    },
+    lowerFirst: {
+      description: 'Lowercases the first letter only',
+      docs: docsHelper.docsFromEsToolkit('string/lowerFirst'),
+    },
+    pad: {
+      description: 'Centers the text with spaces up to the given length',
+      mainValue: {
+        label: 'Length',
+      },
+      docs: docsHelper.docsFromEsToolkit('string/pad'),
+    },
+    pascalCase: {
+      description: 'Converts to PascalCase: foo bar → FooBar',
+      docs: docsHelper.docsFromEsToolkit('string/pascalCase'),
+    },
+    reverseString: {
+      description: 'Reverses the characters of the text',
+      docs: docsHelper.docsFromEsToolkit('string/reverseString'),
+    },
+    sentenceCase: {
+      description: 'Converts to a sentence: fooBar → Foo bar',
+      docs: docsHelper.docsFromEsToolkit('string/sentenceCase'),
+    },
+    snakeCase: {
+      description: 'Converts to snake_case: foo bar → foo_bar',
+      docs: docsHelper.docsFromEsToolkit('string/snakeCase'),
+    },
+    startCase: {
+      description: 'Converts to Start Case: fooBar → Foo Bar',
+      docs: docsHelper.docsFromEsToolkit('string/startCase'),
+    },
+    title: {
+      description: 'Capitalizes each word: hello world → Hello World',
+      docs: docsHelper.docsFromRadash('string/title'),
+    },
+    trim: {
+      description: 'Removes whitespace at both ends',
+      docs: docsHelper.docsFromEsToolkit('string/trim'),
+    },
+    trimEnd: {
+      description: 'Removes whitespace at the end',
+      docs: docsHelper.docsFromEsToolkit('string/trimEnd'),
+    },
+    trimStart: {
+      description: 'Removes whitespace at the start',
+      docs: docsHelper.docsFromEsToolkit('string/trimStart'),
+    },
+    unescape: {
+      description: 'Reverses escape: &amp; → &',
+      docs: docsHelper.docsFromEsToolkit('string/unescape'),
+    },
+    upperCase: {
+      description: 'Converts to UPPER CASE words separated by spaces: fooBar → FOO BAR',
+      docs: docsHelper.docsFromEsToolkit('string/upperCase'),
+    },
+    upperFirst: {
+      description: 'Uppercases the first letter only',
+      docs: docsHelper.docsFromEsToolkit('string/upperFirst'),
+    },
+    words: {
+      description: 'Splits the text into an array of words',
+      docs: docsHelper.docsFromEsToolkit('string/words'),
+    },
   },
   utility_functions: {
-    toNumber: {},
+    toNumber: {
+      description: 'Converts the value to a number (NaN if not convertible)',
+      docs: docsHelper.docsFromEsToolkit('compat/util/toNumber'),
+    },
     toNumberNonStrict: {
       label: 'toNumber (non-strict)',
-      docs: 'If the value is not a number, it will return the original value',
+      description: 'Converts to a number, returns the original value if not convertible',
     },
-    toString: {},
-    toSafeInteger: {},
-    toBoolean: {},
-    toBooleanNumber: {},
+    toString: {
+      description: 'Converts the value to a string (null and undefined become an empty string)',
+      docs: docsHelper.docsFromEsToolkit('compat/util/toString'),
+    },
+    toSafeInteger: {
+      description: 'Converts to an integer clamped to the safe integer range',
+      docs: docsHelper.docsFromEsToolkit('compat/util/toSafeInteger'),
+    },
+    toBoolean: {
+      description: 'Converts to true or false based on truthiness',
+    },
+    toBooleanNumber: {
+      description: 'Returns 1 if the value is falsy, 0 if truthy',
+    },
     gt: {
-      mainValue: {},
+      description: 'True if the payload is greater than the value',
+      mainValue: {
+        label: 'Value',
+      },
       canSplitBooleanOutputs: true,
       inverseReturnValue: true,
+      docs: docsHelper.docsFromEsToolkit('compat/util/gt'),
     },
     gte: {
-      mainValue: {},
+      description: 'True if the payload is greater than or equal to the value',
+      mainValue: {
+        label: 'Value',
+      },
       canSplitBooleanOutputs: true,
       inverseReturnValue: true,
+      docs: docsHelper.docsFromEsToolkit('compat/util/gte'),
     },
     lt: {
-      mainValue: {},
+      description: 'True if the payload is lower than the value',
+      mainValue: {
+        label: 'Value',
+      },
       canSplitBooleanOutputs: true,
       inverseReturnValue: true,
+      docs: docsHelper.docsFromEsToolkit('compat/util/lt'),
     },
     lte: {
-      mainValue: {},
+      description: 'True if the payload is lower than or equal to the value',
+      mainValue: {
+        label: 'Value',
+      },
       canSplitBooleanOutputs: true,
       inverseReturnValue: true,
+      docs: docsHelper.docsFromEsToolkit('compat/util/lte'),
     },
     eq: {
-      mainValue: {},
+      description: 'True if the payload equals the value (SameValueZero, so NaN equals NaN)',
+      mainValue: {
+        label: 'Value',
+      },
       canSplitBooleanOutputs: true,
       inverseReturnValue: true,
+      docs: docsHelper.docsFromEsToolkit('compat/util/eq'),
     },
     size: {
-      docs: 'Returns the size of an array, string, or object.',
+      description: 'Returns the length of an array or string, or the key count of an object',
+      docs: docsHelper.docsFromEsToolkit('compat/array/size'),
+    },
+    toInteger: {
+      description: 'Converts to an integer, truncating decimals',
+      docs: docsHelper.docsFromEsToolkit('compat/util/toInteger'),
+    },
+    toFinite: {
+      description: 'Converts to a finite number: Infinity becomes the max number, NaN becomes 0',
+      docs: docsHelper.docsFromEsToolkit('compat/util/toFinite'),
+    },
+    toArray: {
+      description: 'Converts a value, string or object to an array',
+      docs: docsHelper.docsFromEsToolkit('compat/util/toArray'),
+    },
+    castArray: {
+      description: 'Wraps the value in an array unless it already is one',
+      docs: docsHelper.docsFromEsToolkit('compat/array/castArray'),
+    },
+    defaultTo: {
+      description:
+        'Returns the value if set, otherwise the fallback (null, undefined and NaN are replaced). Fallback is read as JSON or text',
+      mainValue: {
+        label: 'Fallback',
+      },
+      docs: docsHelper.docsFromEsToolkit('compat/util/defaultTo'),
+    },
+    uid: {
+      description: 'Generates a random id, the payload is ignored',
+      mainValue: {
+        label: 'Length (optional, default 8)',
+      },
+      docs: docsHelper.docsFromRadash('random/uid'),
     },
   },
   predicates: {
     isBoolean: {
+      description: 'True if the value is a boolean',
       canSplitBooleanOutputs: true,
       inverseReturnValue: true,
+      docs: docsHelper.docsFromEsToolkit('predicate/isBoolean'),
+    },
+    isBuffer: {
+      description: 'True if the value is a Buffer',
+      canSplitBooleanOutputs: true,
+      inverseReturnValue: true,
+      docs: docsHelper.docsFromEsToolkit('predicate/isBuffer'),
     },
     isNaN: {
       label: 'Is NaN',
+      description: 'True if the value is NaN',
       canSplitBooleanOutputs: true,
       inverseReturnValue: true,
     },
     isNil: {
+      description: 'True if the value is null or undefined',
       canSplitBooleanOutputs: true,
       inverseReturnValue: true,
+      docs: docsHelper.docsFromEsToolkit('predicate/isNil'),
     },
     isNull: {
+      description: 'True if the value is null',
       canSplitBooleanOutputs: true,
       inverseReturnValue: true,
+      docs: docsHelper.docsFromEsToolkit('predicate/isNull'),
     },
     isNumber: {
+      description: 'True if the value is a number',
       canSplitBooleanOutputs: true,
       inverseReturnValue: true,
+      docs: docsHelper.docsFromEsToolkit('predicate/isNumber'),
     },
     isString: {
+      description: 'True if the value is a string',
       canSplitBooleanOutputs: true,
       inverseReturnValue: true,
+      docs: docsHelper.docsFromEsToolkit('predicate/isString'),
     },
     isUndefined: {
+      description: 'True if the value is undefined',
       canSplitBooleanOutputs: true,
       inverseReturnValue: true,
+      docs: docsHelper.docsFromEsToolkit('predicate/isUndefined'),
     },
     isIp: {
+      description: 'True if the value is a valid IPv4 or IPv6 address',
       canSplitBooleanOutputs: true,
       inverseReturnValue: true,
     },
     isUrl: {
+      description: 'True if the value is a valid URL',
       canSplitBooleanOutputs: true,
       inverseReturnValue: true,
     },
-    isBuffer: {
+    isArray: {
+      description: 'True if the value is an array',
       canSplitBooleanOutputs: true,
       inverseReturnValue: true,
+      docs: docsHelper.docsFromRadash('typed/isArray'),
+    },
+    isDate: {
+      description: 'True if the value is a Date object',
+      canSplitBooleanOutputs: true,
+      inverseReturnValue: true,
+      docs: docsHelper.docsFromEsToolkit('predicate/isDate'),
+    },
+    isPlainObject: {
+      description: 'True if the value is a plain object ({}), not an array or class instance',
+      canSplitBooleanOutputs: true,
+      inverseReturnValue: true,
+      docs: docsHelper.docsFromEsToolkit('predicate/isPlainObject'),
+    },
+    isEmptyObject: {
+      description: 'True if the value is an object without any key',
+      canSplitBooleanOutputs: true,
+      inverseReturnValue: true,
+      docs: docsHelper.docsFromEsToolkit('predicate/isEmptyObject'),
+    },
+    isEmpty: {
+      description: 'True if the value is an empty string, array, object, or zero-like value',
+      canSplitBooleanOutputs: true,
+      inverseReturnValue: true,
+      docs: docsHelper.docsFromRadash('typed/isEmpty'),
+    },
+    isNotNil: {
+      description: 'True if the value is neither null nor undefined',
+      canSplitBooleanOutputs: true,
+      inverseReturnValue: true,
+      docs: docsHelper.docsFromEsToolkit('predicate/isNotNil'),
+    },
+    isJSON: {
+      label: 'Is JSON',
+      description: 'True if the value is a string holding valid JSON',
+      canSplitBooleanOutputs: true,
+      inverseReturnValue: true,
+      docs: docsHelper.docsFromEsToolkit('predicate/isJSON'),
+    },
+    isInt: {
+      description: 'True if the value is an integer',
+      canSplitBooleanOutputs: true,
+      inverseReturnValue: true,
+      docs: docsHelper.docsFromRadash('typed/isInt'),
+    },
+    isFloat: {
+      description: 'True if the value is a non-integer number',
+      canSplitBooleanOutputs: true,
+      inverseReturnValue: true,
+      docs: docsHelper.docsFromRadash('typed/isFloat'),
+    },
+    isError: {
+      description: 'True if the value is an Error object',
+      canSplitBooleanOutputs: true,
+      inverseReturnValue: true,
+      docs: docsHelper.docsFromEsToolkit('predicate/isError'),
+    },
+    isPrimitive: {
+      description: 'True if the value is a primitive (string, number, boolean, null, undefined, symbol, bigint)',
+      canSplitBooleanOutputs: true,
+      inverseReturnValue: true,
+      docs: docsHelper.docsFromEsToolkit('predicate/isPrimitive'),
+    },
+    isEqual: {
+      description: 'Deep comparison with a value, parsed as JSON or kept as text if not valid JSON',
+      mainValue: {
+        label: 'Value',
+      },
+      canSplitBooleanOutputs: true,
+      inverseReturnValue: true,
+      docs: docsHelper.docsFromEsToolkit('predicate/isEqual'),
     },
   },
   object_utilities: {
@@ -392,9 +632,23 @@ export const list: UtilityList = {
     asin: {},
     atan: {},
     ceil: {},
+    clamp: {
+      description: 'Restricts the number between Min and Max',
+      revealClasses: ['mathUtilities_range'],
+      configArgs: 'mathUtilities',
+      docs: docsHelper.docsFromEsToolkit('math/clamp'),
+    },
     cos: {},
     exp: {},
     floor: {},
+    inRange: {
+      description: 'True if the number is greater than or equal to Min and lower than Max',
+      revealClasses: ['mathUtilities_range'],
+      configArgs: 'mathUtilities',
+      canSplitBooleanOutputs: true,
+      inverseReturnValue: true,
+      docs: docsHelper.docsFromEsToolkit('math/inRange'),
+    },
     log: {},
     max: {},
     mean: {},

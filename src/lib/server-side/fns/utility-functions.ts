@@ -1,4 +1,21 @@
-import { toString as _toString, eq, gt, gte, lt, lte, size, toNumber, toSafeInteger } from 'es-toolkit/compat';
+import {
+  toString as _toString,
+  castArray,
+  defaultTo,
+  eq,
+  gt,
+  gte,
+  lt,
+  lte,
+  size,
+  toArray,
+  toFinite,
+  toInteger,
+  toNumber,
+  toSafeInteger,
+} from 'es-toolkit/compat';
+import { uid } from 'radash';
+import { parseJsonOrRaw } from '../../../utils/utils';
 import { _isNaN } from './predicates';
 
 export const utilityFunctions = {
@@ -36,4 +53,17 @@ export const utilityFunctions = {
   },
   eq: eq,
   size: size,
+  toInteger: toInteger,
+  toFinite: toFinite,
+  toArray: (input: unknown) => toArray(input),
+  castArray: (input: unknown) => castArray(input),
+  defaultTo: (input: unknown, inputProp: unknown) => defaultTo(input, parseJsonOrRaw(inputProp)),
+  uid: (_: unknown, inputProp: unknown) => {
+    const raw = String(inputProp ?? '').trim();
+    const length = raw ? Number(raw) : 8;
+    if (!Number.isInteger(length) || length < 1) {
+      throw new Error('Length must be an integer greater than 0');
+    }
+    return uid(length);
+  },
 };

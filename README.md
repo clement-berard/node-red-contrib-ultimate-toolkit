@@ -33,7 +33,7 @@
 <table align="center">
   <tr>
     <td align="center">
-      <h2>✨ 113</h2>
+      <h2>✨ 140</h2>
       <sub><b>Built-in Utilities</b></sub>
     </td>
     <td align="center">
@@ -41,7 +41,7 @@
       <sub><b>Runtime Dependencies</b></sub>
     </td>
     <td align="center">
-      <h2>🚀 75 kB</h2>
+      <h2>🚀 96 kB</h2>
       <sub><b>Bundle Size</b></sub>
     </td>
   </tr>
@@ -131,7 +131,29 @@ All used libraries are treeshaked and included in the final bundle.
 
 ### → Math Utilities
 
-`Abs` · `Acos` · `Asin` · `Atan` · `Ceil` · `Cos` · `Exp` · `Floor` · `Log` · `Max` · `Mean` · `Median` · `Min` · `Random` · `Round` · `Sin` · `Sum` · `Tan` · `Trunc`
+| Name | Description |
+| --- | --- |
+| `Abs` | — |
+| `Acos` | — |
+| `Asin` | — |
+| `Atan` | — |
+| `Ceil` | — |
+| `Clamp` | Restricts the number between Min and Max |
+| `Cos` | — |
+| `Exp` | — |
+| `Floor` | — |
+| `In Range` | True if the number is greater than or equal to Min and lower than Max |
+| `Log` | — |
+| `Max` | — |
+| `Mean` | — |
+| `Median` | — |
+| `Min` | — |
+| `Random` | — |
+| `Round` | — |
+| `Sin` | — |
+| `Sum` | — |
+| `Tan` | — |
+| `Trunc` | — |
 
 ### → Network Utilities
 
@@ -167,11 +189,59 @@ All used libraries are treeshaked and included in the final bundle.
 
 ### → Predicates
 
-`Is Boolean` · `Is Buffer` · `Is Ip` · `Is Na N` · `Is Nil` · `Is Null` · `Is Number` · `Is String` · `Is Undefined` · `Is Url`
+| Name | Description |
+| --- | --- |
+| `Is Array` | True if the value is an array |
+| `Is Boolean` | True if the value is a boolean |
+| `Is Buffer` | True if the value is a Buffer |
+| `Is Date` | True if the value is a Date object |
+| `Is Empty` | True if the value is an empty string, array, object, or zero-like value |
+| `Is Empty Object` | True if the value is an object without any key |
+| `Is Equal` | Deep comparison with a value, parsed as JSON or kept as text if not valid JSON |
+| `Is Error` | True if the value is an Error object |
+| `Is Float` | True if the value is a non-integer number |
+| `Is Int` | True if the value is an integer |
+| `Is Ip` | True if the value is a valid IPv4 or IPv6 address |
+| `Is J S O N` | True if the value is a string holding valid JSON |
+| `Is Na N` | True if the value is NaN |
+| `Is Nil` | True if the value is null or undefined |
+| `Is Not Nil` | True if the value is neither null nor undefined |
+| `Is Null` | True if the value is null |
+| `Is Number` | True if the value is a number |
+| `Is Plain Object` | True if the value is a plain object ({}), not an array or class instance |
+| `Is Primitive` | True if the value is a primitive (string, number, boolean, null, undefined, symbol, bigint) |
+| `Is String` | True if the value is a string |
+| `Is Undefined` | True if the value is undefined |
+| `Is Url` | True if the value is a valid URL |
 
 ### → String Utilities
 
-`Camel Case` · `Capitalize` · `Constant Case` · `Escape` · `Kebab Case` · `Lower Case` · `Lower First` · `Pascal Case` · `Snake Case` · `Start Case` · `Trim` · `Trim End` · `Trim Start` · `Unescape` · `Upper Case` · `Upper First` · `Words`
+| Name | Description |
+| --- | --- |
+| `Camel Case` | Converts to camelCase: foo bar → fooBar |
+| `Capitalize` | Uppercases the first letter, lowercases the rest |
+| `Constant Case` | Converts to CONSTANT_CASE: foo bar → FOO_BAR |
+| `Deburr` | Removes accents: crème brûlée → creme brulee |
+| `Dedent` | Removes the common leading indentation of every line |
+| `Escape` | Escapes HTML characters (&, <, >, quotes) |
+| `Escape Reg Exp` | Escapes regex special characters so the text can be used literally in a RegExp |
+| `Kebab Case` | Converts to kebab-case: foo bar → foo-bar |
+| `Lower Case` | Converts to lower case words separated by spaces: fooBar → foo bar |
+| `Lower First` | Lowercases the first letter only |
+| `Pad` | Centers the text with spaces up to the given length |
+| `Pascal Case` | Converts to PascalCase: foo bar → FooBar |
+| `Reverse String` | Reverses the characters of the text |
+| `Sentence Case` | Converts to a sentence: fooBar → Foo bar |
+| `Snake Case` | Converts to snake_case: foo bar → foo_bar |
+| `Start Case` | Converts to Start Case: fooBar → Foo Bar |
+| `Title` | Capitalizes each word: hello world → Hello World |
+| `Trim` | Removes whitespace at both ends |
+| `Trim End` | Removes whitespace at the end |
+| `Trim Start` | Removes whitespace at the start |
+| `Unescape` | Reverses escape: &amp; → & |
+| `Upper Case` | Converts to UPPER CASE words separated by spaces: fooBar → FOO BAR |
+| `Upper First` | Uppercases the first letter only |
+| `Words` | Splits the text into an array of words |
 
 ### → Tools
 
@@ -181,7 +251,26 @@ All used libraries are treeshaked and included in the final bundle.
 
 ### → Utility Functions
 
-`Eq` · `Gt` · `Gte` · `Lt` · `Lte` · `Size` · `To Boolean` · `To Boolean Number` · `To Number` · `To Number Non Strict` · `To Safe Integer` · `To String`
+| Name | Description |
+| --- | --- |
+| `Cast Array` | Wraps the value in an array unless it already is one |
+| `Default To` | Returns the value if set, otherwise the fallback (null, undefined and NaN are replaced). Fallback is read as JSON or text |
+| `Eq` | True if the payload equals the value (SameValueZero, so NaN equals NaN) |
+| `Gt` | True if the payload is greater than the value |
+| `Gte` | True if the payload is greater than or equal to the value |
+| `Lt` | True if the payload is lower than the value |
+| `Lte` | True if the payload is lower than or equal to the value |
+| `Size` | Returns the length of an array or string, or the key count of an object |
+| `To Array` | Converts a value, string or object to an array |
+| `To Boolean` | Converts to true or false based on truthiness |
+| `To Boolean Number` | Returns 1 if the value is falsy, 0 if truthy |
+| `To Finite` | Converts to a finite number: Infinity becomes the max number, NaN becomes 0 |
+| `To Integer` | Converts to an integer, truncating decimals |
+| `To Number` | Converts the value to a number (NaN if not convertible) |
+| `To Number Non Strict` | Converts to a number, returns the original value if not convertible |
+| `To Safe Integer` | Converts to an integer clamped to the safe integer range |
+| `To String` | Converts the value to a string (null and undefined become an empty string) |
+| `Uid` | Generates a random id, the payload is ignored |
 
 
 ## Contributing & Developer Experience

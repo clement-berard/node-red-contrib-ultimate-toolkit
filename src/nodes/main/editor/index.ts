@@ -26,6 +26,7 @@ const Main: NodeEditorDefinition<NodeMainProps> = {
     splitBooleanOutputs: { value: false },
     inverseReturnValue: { value: false },
     arrayUtilities: { value: {} },
+    mathUtilities: { value: {} },
     dateUtilities: { value: {} },
     tools: { value: {} },
     asyncUtilities: { value: {} },
@@ -50,12 +51,14 @@ const Main: NodeEditorDefinition<NodeMainProps> = {
     );
     this.outputs = isCheckboxChecked('$splitBooleanOutputs') || forceSplitBooleanOutputs ? 2 : 1;
     this.arrayUtilities = getFormValues('arrayUtilities');
+    this.mathUtilities = getFormValues('mathUtilities');
     this.dateUtilities = getFormValues('dateUtilities');
     this.tools = getFormValues('tools');
     this.asyncUtilities = getFormValues('asyncUtilities');
   },
   oneditprepare: function () {
     setFormValues('arrayUtilities', this.arrayUtilities);
+    setFormValues('mathUtilities', this.mathUtilities);
     setFormValues('dateUtilities', this.dateUtilities);
     setFormValues('tools', this.tools);
     setFormValues('asyncUtilities', this.asyncUtilities);
