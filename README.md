@@ -33,7 +33,7 @@
 <table align="center">
   <tr>
     <td align="center">
-      <h2>✨ 140</h2>
+      <h2>✨ 141</h2>
       <sub><b>Built-in Utilities</b></sub>
     </td>
     <td align="center">
@@ -41,7 +41,7 @@
       <sub><b>Runtime Dependencies</b></sub>
     </td>
     <td align="center">
-      <h2>🚀 117 kB</h2>
+      <h2>🚀 119 kB</h2>
       <sub><b>Bundle Size</b></sub>
     </td>
   </tr>
@@ -187,6 +187,12 @@ All used libraries are treeshaked and included in the final bundle.
 | `To Snake Case Keys` | Converts keys to snake_case, deeply |
 | `Upperize` | Converts keys to upper case |
 
+### → Parsers
+
+| Name | Description |
+| --- | --- |
+| `JSON` | Converts between a JSON string and an object, like the native json node |
+
 ### → Predicates
 
 | Name | Description |
@@ -202,8 +208,8 @@ All used libraries are treeshaked and included in the final bundle.
 | `Is Float` | True if the value is a non-integer number |
 | `Is Int` | True if the value is an integer |
 | `Is Ip` | True if the value is a valid IPv4 or IPv6 address |
-| `Is J S O N` | True if the value is a string holding valid JSON |
-| `Is Na N` | True if the value is NaN |
+| `Is JSON` | True if the value is a string holding valid JSON |
+| `Is NaN` | True if the value is NaN |
 | `Is Nil` | True if the value is null or undefined |
 | `Is Not Nil` | True if the value is neither null nor undefined |
 | `Is Null` | True if the value is null |
@@ -267,7 +273,7 @@ All used libraries are treeshaked and included in the final bundle.
 | `To Finite` | Converts to a finite number: Infinity becomes the max number, NaN becomes 0 |
 | `To Integer` | Converts to an integer, truncating decimals |
 | `To Number` | Converts the value to a number (NaN if not convertible) |
-| `To Number Non Strict` | Converts to a number, returns the original value if not convertible |
+| `toNumber (non-strict)` | Converts to a number, returns the original value if not convertible |
 | `To Safe Integer` | Converts to an integer clamped to the safe integer range |
 | `To String` | Converts the value to a string (null and undefined become an empty string) |
 | `Uid` | Generates a random id, the payload is ignored |

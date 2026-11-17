@@ -1,0 +1,15 @@
+include ../../../../../.node-red-dxp/pug/helper
+
+.extra-field.parsers_json
+    .dxp-template-form-row
+        label(for="node-input-parsers-action") Action
+        .content
+            select#node-input-parsers-action
+                option(value="auto" selected) Convert between JSON String & Object
+                option(value="stringify") Always convert to JSON String
+                option(value="parse") Always convert to JavaScript Object
+    +dxpFormRowCheckbox({
+        id: 'parsers-pretty',
+        label: 'Format',
+        text: 'Format JSON string',
+    })

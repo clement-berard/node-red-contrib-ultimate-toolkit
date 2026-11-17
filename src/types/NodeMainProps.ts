@@ -5,6 +5,8 @@ type OrEmpty<T> = T | Record<any, any>;
 export interface NodeMainProps extends EditorNodeProperties {
   entry: string;
   entryType: string;
+  output: string;
+  outputType: string;
   category: string;
   function: string;
   mainValue: string;
@@ -31,6 +33,10 @@ export interface NodeMainProps extends EditorNodeProperties {
       nodeId: string;
       resetDelay?: number;
     };
+  }>;
+  parsers: OrEmpty<{
+    action?: 'auto' | 'parse' | 'stringify';
+    pretty?: boolean;
   }>;
   asyncUtilities: OrEmpty<{
     milliseconds?: string;

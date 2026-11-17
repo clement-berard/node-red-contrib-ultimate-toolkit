@@ -1,3 +1,4 @@
+import { set } from 'es-toolkit/compat';
 import { beforeEach, describe, expect, it, vi } from 'vitest';
 
 vi.mock('@keload/node-red-dxp/utils/controller', () => ({
@@ -10,6 +11,9 @@ import controller from '../controller';
 
 type Handler = (msg: any, send?: unknown, done?: unknown) => Promise<void>;
 
+const flowSet = vi.fn();
+const globalSet = vi.fn();
+
 function setup(config: Record<string, unknown>) {
   const handlers: Record<string, Handler> = {};
   const node = {
@@ -18,10 +22,15 @@ function setup(config: Record<string, unknown>) {
       handlers[event] = handler;
     }),
     status: vi.fn(),
+    context: () => ({ flow: { set: flowSet }, global: { set: globalSet } }),
   };
   const send = vi.fn();
   const done = vi.fn();
-  (globalThis as any).RED = { nodes: { createNode: vi.fn() } };
+  (globalThis as any).RED = {
+    nodes: { createNode: vi.fn() },
+    // same contract as RED.util.setMessageProperty(msg, property, value, createMissing)
+    util: { setMessageProperty: (msg: object, property: string, value: unknown) => set(msg, property, value) },
+  };
   controller.call(node as any, config as any);
   const run = (msg: any) => handlers.input(msg, send, done);
   return { node, handlers, send, done, run };
@@ -119,6 +128,44 @@ describe('controller', () => {
     const [outputs] = send.mock.calls[0];
     expect(outputs[0].payload).toBe(true);
     expect(outputs[1]).toBeNull();
+  });
+
+  describe('output property', () => {
+    const base = { category: 'array_utilities', function: 'compact', entry: [0, 1, 2], entryType: 'msg' };
+
+    it('writes to msg.payload by default, even for nodes saved before the option existed', async () => {
+      const { send, run } = setup(base);
+      await run({ payload: 'in' });
+      expect(send.mock.calls[0][0].payload).toEqual([1, 2]);
+    });
+
+    it('writes to the chosen msg property and keeps the original payload', async () => {
+      const { send, run } = setup({ ...base, output: 'result.items', outputType: 'msg' });
+      await run({ payload: 'in' });
+      const sent = send.mock.calls[0][0];
+      expect(sent.result).toEqual({ items: [1, 2] });
+      expect(sent.payload).toBe('in');
+    });
+
+    it('writes to the flow context and keeps the message untouched', async () => {
+      const { send, run } = setup({ ...base, output: 'items', outputType: 'flow' });
+      await run({ payload: 'in' });
+      expect(flowSet).toHaveBeenCalledWith('items', [1, 2]);
+      expect(send.mock.calls[0][0].payload).toBe('in');
+    });
+
+    it('writes to the global context', async () => {
+      const { run } = setup({ ...base, output: 'items', outputType: 'global' });
+      await run({});
+      expect(globalSet).toHaveBeenCalledWith('items', [1, 2]);
+    });
+
+    it('reports an unsupported output type', async () => {
+      const { send, done, run } = setup({ ...base, output: 'x', outputType: 'str' });
+      await run({});
+      expect(done).toHaveBeenCalledWith(expect.objectContaining({ message: 'Unsupported output type "str"' }));
+      expect(send).not.toHaveBeenCalled();
+    });
   });
 
   it('clears the counters on close', () => {
