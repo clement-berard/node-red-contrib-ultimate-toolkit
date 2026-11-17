@@ -12,6 +12,9 @@ import { title } from 'radash';
 import { getCategories, getFunctionDetails, getFunctionsFromCategory } from '../../../lib/client-side';
 import type { NodeMainProps } from '../../../types/NodeMainProps';
 
+// Categories having dedicated fields (`configArgs` in list.ts): one entry per category, nothing else to wire
+const CONFIG_CATEGORIES = ['arrayUtilities', 'mathUtilities', 'dateUtilities', 'tools', 'asyncUtilities'] as const;
+
 const Main: NodeEditorDefinition<NodeMainProps> = {
   category: 'toolkit',
   color: '#8EA3A6',
@@ -25,11 +28,10 @@ const Main: NodeEditorDefinition<NodeMainProps> = {
     mainValue: { value: '' },
     splitBooleanOutputs: { value: false },
     inverseReturnValue: { value: false },
-    arrayUtilities: { value: {} },
-    mathUtilities: { value: {} },
-    dateUtilities: { value: {} },
-    tools: { value: {} },
-    asyncUtilities: { value: {} },
+    ...(Object.fromEntries(CONFIG_CATEGORIES.map((category) => [category, { value: {} }])) as Record<
+      (typeof CONFIG_CATEGORIES)[number],
+      { value: object }
+    >),
     outputs: { value: 1 },
   },
   inputs: 1,
@@ -50,18 +52,14 @@ const Main: NodeEditorDefinition<NodeMainProps> = {
       jqSelector('$function').val() as string,
     );
     this.outputs = isCheckboxChecked('$splitBooleanOutputs') || forceSplitBooleanOutputs ? 2 : 1;
-    this.arrayUtilities = getFormValues('arrayUtilities');
-    this.mathUtilities = getFormValues('mathUtilities');
-    this.dateUtilities = getFormValues('dateUtilities');
-    this.tools = getFormValues('tools');
-    this.asyncUtilities = getFormValues('asyncUtilities');
+    for (const category of CONFIG_CATEGORIES) {
+      this[category] = getFormValues(category);
+    }
   },
   oneditprepare: function () {
-    setFormValues('arrayUtilities', this.arrayUtilities);
-    setFormValues('mathUtilities', this.mathUtilities);
-    setFormValues('dateUtilities', this.dateUtilities);
-    setFormValues('tools', this.tools);
-    setFormValues('asyncUtilities', this.asyncUtilities);
+    for (const category of CONFIG_CATEGORIES) {
+      setFormValues(category, this[category]);
+    }
 
     applyTypedInput({
       selector: '$entry',
