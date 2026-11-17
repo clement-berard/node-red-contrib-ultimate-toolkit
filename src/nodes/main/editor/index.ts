@@ -13,7 +13,14 @@ import { getCategories, getFunctionDetails, getFunctionsFromCategory } from '../
 import type { NodeMainProps } from '../../../types/NodeMainProps';
 
 // Categories having dedicated fields (`configArgs` in list.ts): one entry per category, nothing else to wire
-const CONFIG_CATEGORIES = ['arrayUtilities', 'mathUtilities', 'dateUtilities', 'tools', 'asyncUtilities'] as const;
+const CONFIG_CATEGORIES = [
+  'arrayUtilities',
+  'mathUtilities',
+  'dateUtilities',
+  'tools',
+  'asyncUtilities',
+  'parsers',
+] as const;
 
 const Main: NodeEditorDefinition<NodeMainProps> = {
   category: 'toolkit',
@@ -23,6 +30,9 @@ const Main: NodeEditorDefinition<NodeMainProps> = {
     name: { value: '' },
     entry: { value: 'payload', required: true },
     entryType: { value: 'msg', required: true },
+    // not required: nodes saved before this option existed must not be flagged invalid
+    output: { value: 'payload' },
+    outputType: { value: 'msg' },
     category: { value: '', required: true },
     function: { value: '', required: true },
     mainValue: { value: '' },
@@ -60,6 +70,16 @@ const Main: NodeEditorDefinition<NodeMainProps> = {
     for (const category of CONFIG_CATEGORIES) {
       setFormValues(category, this[category]);
     }
+
+    // nodes saved before the output option existed have no value: show the historical target
+    if (!this.output) {
+      jqSelector('$output').val('payload');
+    }
+
+    applyTypedInput({
+      selector: '$output',
+      types: ['msg', 'flow', 'global'],
+    });
 
     applyTypedInput({
       selector: '$entry',

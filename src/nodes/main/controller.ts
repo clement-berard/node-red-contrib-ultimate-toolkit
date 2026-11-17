@@ -58,12 +58,23 @@ export default function (this: NodeControllerInst<NodeMainProps>, config: NodeCo
       // Prepare the final response object, with metadata about the function call
       const resp = {
         ...msg,
-        payload: finalResult,
         nodeParams: {
           callWith: argsToCall,
           callFunction: config.function,
         },
       };
+
+      // Nodes saved before the output option existed have none: they keep writing to msg.payload
+      const outputProperty = config.output || 'payload';
+      const outputType = config.outputType || 'msg';
+
+      if (outputType === 'msg') {
+        RED.util.setMessageProperty(resp, outputProperty, finalResult, true);
+      } else if (outputType === 'flow' || outputType === 'global') {
+        this.context()[outputType].set(outputProperty, finalResult);
+      } else {
+        throw new Error(`Unsupported output type "${outputType}"`);
+      }
 
       // Route the output based on configuration and result type
       if ((fnDetails?.canSplitBooleanOutputs && config.splitBooleanOutputs) || fnDetails?.forceSplitBooleanOutputs) {

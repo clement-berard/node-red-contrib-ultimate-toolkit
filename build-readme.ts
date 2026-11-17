@@ -52,8 +52,7 @@ for (const cat of allCategories) {
   const finalCatFns = [];
   for (const [key, value] of Object.entries(catFns)) {
     finalCatFns.push({
-      name: title(key),
-      // @ts-expect-error
+      name: value?.label || title(key),
       description: value?.description || '',
     });
   }

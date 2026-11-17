@@ -4,6 +4,7 @@ import { dateUtilities } from './fns/date-utilities';
 import { mathUtilities } from './fns/math-utilities';
 import { networkUtilities } from './fns/network-utilities';
 import { objectUtilities } from './fns/object-utilities';
+import { parsers } from './fns/parsers';
 import { predicates } from './fns/predicates';
 import { stringUtilities } from './fns/string-utilities';
 import { tools } from './fns/tools';
@@ -16,6 +17,7 @@ export const listFunctions = {
   math_utilities: mathUtilities,
   network_utilities: networkUtilities,
   object_utilities: objectUtilities,
+  parsers,
   predicates,
   string_utilities: stringUtilities,
   utility_functions: utilityFunctions,
