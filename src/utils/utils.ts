@@ -16,3 +16,12 @@ export function filterByPrefix(
 export function getValueOrEmptyString(val: unknown) {
   return val ?? '';
 }
+
+// Parses a JSON value, falls back to the raw input when it is not valid JSON
+export function parseJsonOrRaw(input: unknown) {
+  try {
+    return JSON.parse(String(input));
+  } catch (_e) {
+    return input;
+  }
+}

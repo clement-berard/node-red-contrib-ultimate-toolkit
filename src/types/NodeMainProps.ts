@@ -15,6 +15,10 @@ export interface NodeMainProps extends EditorNodeProperties {
     property?: string;
     direction?: 'asc' | 'desc';
   }>;
+  mathUtilities: OrEmpty<{
+    min?: string;
+    max?: string;
+  }>;
   dateUtilities: OrEmpty<{
     nowFormat: string;
     nowFormatToken?: string;
