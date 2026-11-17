@@ -41,9 +41,9 @@ Vitest, tests live in `fns/__tests__/*.test.ts` (not colocated, not a top-level 
 
 ## Tooling
 
-- Biome for lint+format (`pnpm lint` / `pnpm format`, config in `biome.json`; `suspicious.noExplicitAny` is off — `as any`/`unknown` casts are an accepted pattern here).
+- Biome for lint+format (`pnpm lint` / `pnpm lint:check` / `pnpm lint:ci` / `pnpm format`, config in `biome.json`; `suspicious.noExplicitAny` is off — `as any`/`unknown` casts are an accepted pattern here).
 - TypeScript via `tsc --noEmit` (`pnpm typecheck`).
 - Build via `@keload/node-red-dxp` (`pnpm build`).
 - `pnpm dev` (`node-red-dxp watch`) to run a live Node-RED instance while developing.
-- `pnpm test` for Vitest.
+- `pnpm test` for Vitest (single run), `pnpm test:watch`, `pnpm test:coverage` (thresholds in `vitest.config.ts`, editor code excluded; CI runs it).
 - No runtime `dependencies` in `package.json` — the build tree-shakes everything into the bundle.

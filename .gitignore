@@ -19,6 +19,7 @@ pnpm-debug.log*
 *.sln
 *.sw?
 dist
+coverage
 
 # temp builder files
 .node-red-dxp
