@@ -53,6 +53,12 @@ describe('mathUtilities', () => {
   });
 
   describe('aggregates', () => {
+    it('min and max handle very large arrays', () => {
+      const big = Array.from({ length: 500_000 }, (_, i) => i);
+      expect(mathUtilities.max(big)).toBe(499_999);
+      expect(mathUtilities.min(big)).toBe(0);
+    });
+
     it('computes min, max, sum, mean and median', () => {
       expect(mathUtilities.min([3, 1, 2])).toBe(1);
       expect(mathUtilities.max([3, 1, 2])).toBe(3);

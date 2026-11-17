@@ -26,17 +26,22 @@ describe('networkUtilities', () => {
     });
 
     it('queries the given IP', async () => {
-      const fetchMock = vi.fn().mockResolvedValue({ json: async () => ({ query: '8.8.8.8' }) });
+      const fetchMock = vi.fn().mockResolvedValue({ ok: true, json: async () => ({ query: '8.8.8.8' }) });
       vi.stubGlobal('fetch', fetchMock);
       await expect(networkUtilities.ipInformation('8.8.8.8')).resolves.toEqual({ query: '8.8.8.8' });
-      expect(fetchMock).toHaveBeenCalledWith('http://ip-api.com/json/8.8.8.8');
+      expect(fetchMock).toHaveBeenCalledWith('http://ip-api.com/json/8.8.8.8', expect.anything());
+    });
+
+    it('throws on a non-ok response', async () => {
+      vi.stubGlobal('fetch', vi.fn().mockResolvedValue({ ok: false, status: 429, json: async () => ({}) }));
+      await expect(networkUtilities.ipInformation('8.8.8.8')).rejects.toThrow('IP lookup failed (HTTP 429)');
     });
 
     it('queries the caller IP when no input', async () => {
-      const fetchMock = vi.fn().mockResolvedValue({ json: async () => ({}) });
+      const fetchMock = vi.fn().mockResolvedValue({ ok: true, json: async () => ({}) });
       vi.stubGlobal('fetch', fetchMock);
       await networkUtilities.ipInformation(undefined);
-      expect(fetchMock).toHaveBeenCalledWith('http://ip-api.com/json/');
+      expect(fetchMock).toHaveBeenCalledWith('http://ip-api.com/json/', expect.anything());
     });
   });
 });

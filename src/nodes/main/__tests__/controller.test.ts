@@ -5,9 +5,10 @@ vi.mock('@keload/node-red-dxp/utils/controller', () => ({
   splitBooleanOutputs: vi.fn((value: boolean, msg: unknown) => (value ? [msg, null] : [null, msg])),
 }));
 
+import { tools } from '../../../lib/server-side/fns/tools';
 import controller from '../controller';
 
-type Handler = (msg: any) => Promise<void>;
+type Handler = (msg: any, send?: unknown, done?: unknown) => Promise<void>;
 
 function setup(config: Record<string, unknown>) {
   const handlers: Record<string, Handler> = {};
@@ -16,30 +17,32 @@ function setup(config: Record<string, unknown>) {
     on: vi.fn((event: string, handler: Handler) => {
       handlers[event] = handler;
     }),
-    send: vi.fn(),
-    error: vi.fn(),
     status: vi.fn(),
   };
+  const send = vi.fn();
+  const done = vi.fn();
   (globalThis as any).RED = { nodes: { createNode: vi.fn() } };
   controller.call(node as any, config as any);
-  return { node, handlers };
+  const run = (msg: any) => handlers.input(msg, send, done);
+  return { node, handlers, send, done, run };
 }
 
 describe('controller', () => {
   beforeEach(() => {
     vi.clearAllMocks();
+    tools.clearCounter();
   });
 
   it('calls the function and sends the result with call metadata', async () => {
-    const { node, handlers } = setup({
+    const { node, send, run } = setup({
       category: 'array_utilities',
       function: 'chunk',
       entry: [1, 2, 3, 4],
       entryType: 'msg',
       mainValue: '2',
     });
-    await handlers.input({ topic: 't' });
-    expect(node.send).toHaveBeenCalledWith({
+    await run({ topic: 't' });
+    expect(send).toHaveBeenCalledWith({
       topic: 't',
       payload: [
         [1, 2],
@@ -51,54 +54,69 @@ describe('controller', () => {
   });
 
   it('reports errors and sets the error status', async () => {
-    const { node, handlers } = setup({
+    const { node, send, done, run } = setup({
       category: 'array_utilities',
       function: 'chunk',
       entry: [1],
       entryType: 'msg',
       mainValue: '0',
     });
-    await handlers.input({});
-    expect(node.error).toHaveBeenCalled();
+    await run({});
+    expect(done).toHaveBeenCalledWith(expect.any(Error));
     expect(node.status).toHaveBeenCalledWith({ fill: 'red', shape: 'ring', text: 'Error' });
-    expect(node.send).not.toHaveBeenCalled();
+    expect(send).not.toHaveBeenCalled();
+  });
+
+  it('reports an unknown function instead of throwing', async () => {
+    const { node, send, done, run } = setup({ category: 'nope', function: 'nope', entry: 1, entryType: 'msg' });
+    await expect(run({})).resolves.toBeUndefined();
+    expect(done).toHaveBeenCalledWith(expect.objectContaining({ message: 'Unknown function "nope.nope"' }));
+    expect(node.status).toHaveBeenCalledWith({ fill: 'red', shape: 'ring', text: 'Error' });
+    expect(send).not.toHaveBeenCalled();
+  });
+
+  it('does not mutate the node configuration', async () => {
+    const tools = { 'cyclicCounter-maxCount': '3' };
+    const { run } = setup({ category: 'tools', function: 'cyclicCounter', entry: 0, entryType: 'msg', tools });
+    await run({});
+    expect(tools).toEqual({ 'cyclicCounter-maxCount': '3' });
   });
 
   it('passes configArgs and adds the node id when requested', async () => {
-    const { node, handlers } = setup({
+    const { send, run } = setup({
       category: 'tools',
       function: 'cyclicCounter',
       entry: 0,
       entryType: 'msg',
       tools: { 'cyclicCounter-maxCount': '3', 'cyclicCounter-resetDelay': '' },
     });
-    await handlers.input({});
-    expect(node.send.mock.calls[0][0].payload).toBe(1);
-    expect(node.send.mock.calls[0][0].nodeParams.callWith[1].nodeId).toBe('node-1');
+    await run({});
+    expect(send.mock.calls[0][0].payload).toBe(1);
+    expect(send.mock.calls[0][0].nodeParams.callWith[1].nodeId).toBe('node-1');
   });
 
   it('inverses the boolean result when configured', async () => {
-    const { node, handlers } = setup({
+    const { send, run } = setup({
       category: 'predicates',
       function: 'isString',
       entry: 'a',
       entryType: 'msg',
       inverseReturnValue: true,
     });
-    await handlers.input({});
-    expect(node.send.mock.calls[0][0].payload).toBe(false);
+    await run({});
+    expect(send.mock.calls[0][0].payload).toBe(false);
   });
 
   it('splits boolean outputs when enabled', async () => {
-    const { node, handlers } = setup({
+    const { send, run } = setup({
       category: 'predicates',
       function: 'isString',
       entry: 'a',
       entryType: 'msg',
       splitBooleanOutputs: true,
     });
-    await handlers.input({});
-    const [outputs] = node.send.mock.calls[0];
+    await run({});
+    const [outputs] = send.mock.calls[0];
     expect(outputs[0].payload).toBe(true);
     expect(outputs[1]).toBeNull();
   });

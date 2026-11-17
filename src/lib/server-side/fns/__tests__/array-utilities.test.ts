@@ -142,6 +142,16 @@ describe('arrayUtilities', () => {
   });
 
   describe('validation', () => {
+    it('groupBy and keyBy tolerate an empty property', () => {
+      expect(Object.keys(arrayUtilities.groupBy(rows, undefined))).toEqual(['undefined']);
+      expect(Object.keys(arrayUtilities.keyBy(rows, ''))).toEqual(['undefined']);
+    });
+
+    it('take and takeRight throw on an invalid count', () => {
+      expect(() => arrayUtilities.take([1], 'x')).toThrow('Count must be a positive integer');
+      expect(() => arrayUtilities.takeRight([1], -1)).toThrow('Count must be a positive integer');
+    });
+
     it('drop throws on a negative count', () => {
       expect(() => arrayUtilities.drop([1], -1)).toThrow('Count must be a positive integer');
     });

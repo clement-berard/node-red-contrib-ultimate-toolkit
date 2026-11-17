@@ -13,3 +13,7 @@ export function docsFromEsToolkit(entity: string) {
 export function codeTag(content = '') {
   return `<code>${content}</code>`;
 }
+
+// Short aliases used by the category metadata files
+export const es = docsFromEsToolkit;
+export const radash = docsFromRadash;

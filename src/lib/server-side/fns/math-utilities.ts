@@ -23,12 +23,13 @@ export const mathUtilities = {
   inRange: (input: number, options: NodeMainProps['mathUtilities']) =>
     inRange(Number(input), toBound(options?.min, 'Min'), toBound(options?.max, 'Max')),
   log: Math.log,
-  max: (inputArr: number[]) => Math.max(...inputArr),
+  // reduce instead of spread: Math.max(...arr) overflows the call stack on very large arrays
+  max: (inputArr: number[]) => inputArr.reduce((acc, v) => Math.max(acc, v), Number.NEGATIVE_INFINITY),
   mean: (inputArr: number[]) => {
     return sum(inputArr) / inputArr.length;
   },
   median: median,
-  min: (inputArr: number[]) => Math.min(...inputArr),
+  min: (inputArr: number[]) => inputArr.reduce((acc, v) => Math.min(acc, v), Number.POSITIVE_INFINITY),
   random: Math.random,
   round: Math.round,
   sin: Math.sin,

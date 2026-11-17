@@ -3,7 +3,7 @@
   "version": "1.16.0",
   "description": "A collection of (moderns) useful tools for Node-RED",
   "engines": {
-    "node": ">=24"
+    "node": ">=18"
   },
   "publishConfig": {
     "access": "public"
@@ -14,12 +14,15 @@
     "postbuild": "pnpm generate:readme",
     "dev": "node-red-dxp watch",
     "format": "biome format",
-    "lint": "pnpm biome lint",
+    "lint": "biome lint",
     "lint:check": "biome check",
+    "lint:ci": "biome ci",
     "release": "pnpm release-it",
     "release:test": "pnpm release-it --dry-run",
     "generate:readme": "pnpm tsx build-readme.ts",
-    "test": "vitest",
+    "test": "vitest run",
+    "test:watch": "vitest",
+    "test:coverage": "vitest run --coverage",
     "typecheck": "tsc --noEmit -p tsconfig.json"
   },
   "node-red": {

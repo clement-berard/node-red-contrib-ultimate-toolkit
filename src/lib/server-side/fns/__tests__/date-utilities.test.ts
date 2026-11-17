@@ -62,6 +62,14 @@ describe('dateUtilities', () => {
     });
   });
 
+  describe('unknown format', () => {
+    it('throws a readable error', () => {
+      expect(() => dateUtilities.now(null, { nowFormat: 'nope', nowFormatToken: '' } as any)).toThrow(
+        'Unknown format "nope"',
+      );
+    });
+  });
+
   describe('currentTimezone', () => {
     it('returns the RED setting when defined', () => {
       (globalThis as any).RED = { settings: { timezone: 'Europe/Paris' } };
