@@ -25,6 +25,7 @@ const Main: NodeEditorDefinition<NodeMainProps> = {
     mainValue: { value: '' },
     splitBooleanOutputs: { value: false },
     inverseReturnValue: { value: false },
+    arrayUtilities: { value: {} },
     dateUtilities: { value: {} },
     tools: { value: {} },
     asyncUtilities: { value: {} },
@@ -48,11 +49,13 @@ const Main: NodeEditorDefinition<NodeMainProps> = {
       jqSelector('$function').val() as string,
     );
     this.outputs = isCheckboxChecked('$splitBooleanOutputs') || forceSplitBooleanOutputs ? 2 : 1;
+    this.arrayUtilities = getFormValues('arrayUtilities');
     this.dateUtilities = getFormValues('dateUtilities');
     this.tools = getFormValues('tools');
     this.asyncUtilities = getFormValues('asyncUtilities');
   },
   oneditprepare: function () {
+    setFormValues('arrayUtilities', this.arrayUtilities);
     setFormValues('dateUtilities', this.dateUtilities);
     setFormValues('tools', this.tools);
     setFormValues('asyncUtilities', this.asyncUtilities);
@@ -101,7 +104,7 @@ const Main: NodeEditorDefinition<NodeMainProps> = {
       if (hasMainValue) {
         jqSelector('.additionalMainValue').removeClass('hidden!');
         if (fnDetails?.mainValue?.label) {
-          jqSelector('.additionalMainValue label').text(fnDetails.mainValue.label);
+          jqSelector('.additionalMainValue label').text(fnDetails.mainValue.label).attr('title', fnDetails.mainValue.label);
         }
       }
       // split boolean outputs

@@ -33,7 +33,7 @@
 <table align="center">
   <tr>
     <td align="center">
-      <h2>✨ 76</h2>
+      <h2>✨ 95</h2>
       <sub><b>Built-in Utilities</b></sub>
     </td>
     <td align="center">
@@ -41,7 +41,7 @@
       <sub><b>Runtime Dependencies</b></sub>
     </td>
     <td align="center">
-      <h2>🚀 54 kB</h2>
+      <h2>🚀 61 kB</h2>
       <sub><b>Bundle Size</b></sub>
     </td>
   </tr>
@@ -84,7 +84,35 @@ All used libraries are treeshaked and included in the final bundle.
 
 ### → Array Utilities
 
-`Get Random Item` · `Group By` · `Key By` · `Shuffle` · `Take` · `Take Right` · `Toggle` · `Unique`
+| Name | Description |
+| --- | --- |
+| `Chunk` | — |
+| `Compact` | — |
+| `Count By` | — |
+| `Drop` | — |
+| `Drop Right` | — |
+| `Flatten` | — |
+| `Flatten Deep` | — |
+| `Get Random Item` | — |
+| `Group By` | — |
+| `Head` | — |
+| `Initial` | — |
+| `Key By` | — |
+| `Last` | — |
+| `Max By` | — |
+| `Min By` | — |
+| `Order By` | — |
+| `Partition` | — |
+| `Sample Size` | — |
+| `Shuffle` | — |
+| `Sort By` | — |
+| `Tail` | — |
+| `Take` | — |
+| `Take Right` | — |
+| `Toggle` | — |
+| `Unique` | Without property, dedupes simple values |
+| `Unzip` | — |
+| `Windowed` | — |
 
 ### → Async Utilities
 

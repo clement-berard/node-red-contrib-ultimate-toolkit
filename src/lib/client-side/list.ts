@@ -22,8 +22,9 @@ export const list: UtilityList = {
       docs: docsHelper.docsFromEsToolkit('array/keyBy'),
     },
     unique: {
+      description: 'Without property, dedupes simple values',
       mainValue: {
-        label: 'Property',
+        label: 'Property (optional)',
       },
       docs: docsHelper.docsFromRadash('array/unique'),
     },
@@ -41,6 +42,95 @@ export const list: UtilityList = {
     },
     getRandomItem: {
       docs: 'Get a random item from input array',
+    },
+    compact: {
+      docs: docsHelper.docsFromEsToolkit('array/compact'),
+    },
+    flatten: {
+      docs: docsHelper.docsFromEsToolkit('array/flatten'),
+    },
+    flattenDeep: {
+      docs: docsHelper.docsFromEsToolkit('array/flattenDeep'),
+    },
+    head: {
+      docs: docsHelper.docsFromEsToolkit('array/head'),
+    },
+    last: {
+      docs: docsHelper.docsFromEsToolkit('array/last'),
+    },
+    tail: {
+      docs: docsHelper.docsFromEsToolkit('array/tail'),
+    },
+    initial: {
+      docs: docsHelper.docsFromEsToolkit('array/initial'),
+    },
+    unzip: {
+      docs: docsHelper.docsFromEsToolkit('array/unzip'),
+    },
+    chunk: {
+      mainValue: {
+        label: 'Size',
+      },
+      docs: docsHelper.docsFromEsToolkit('array/chunk'),
+    },
+    drop: {
+      mainValue: {
+        label: 'Count',
+      },
+      docs: docsHelper.docsFromEsToolkit('array/drop'),
+    },
+    dropRight: {
+      mainValue: {
+        label: 'Count',
+      },
+      docs: docsHelper.docsFromEsToolkit('array/dropRight'),
+    },
+    sampleSize: {
+      mainValue: {
+        label: 'Count',
+      },
+      docs: docsHelper.docsFromEsToolkit('array/sampleSize'),
+    },
+    windowed: {
+      mainValue: {
+        label: 'Size',
+      },
+      docs: docsHelper.docsFromEsToolkit('array/windowed'),
+    },
+    sortBy: {
+      mainValue: {
+        label: 'Property',
+      },
+      docs: docsHelper.docsFromEsToolkit('array/sortBy'),
+    },
+    countBy: {
+      mainValue: {
+        label: 'Property',
+      },
+      docs: docsHelper.docsFromEsToolkit('array/countBy'),
+    },
+    partition: {
+      mainValue: {
+        label: 'Property',
+      },
+      docs: docsHelper.docsFromEsToolkit('array/partition'),
+    },
+    minBy: {
+      mainValue: {
+        label: 'Property',
+      },
+      docs: docsHelper.docsFromEsToolkit('array/minBy'),
+    },
+    maxBy: {
+      mainValue: {
+        label: 'Property',
+      },
+      docs: docsHelper.docsFromEsToolkit('array/maxBy'),
+    },
+    orderBy: {
+      revealClasses: ['arrayUtilities_orderBy'],
+      configArgs: 'arrayUtilities',
+      docs: docsHelper.docsFromEsToolkit('array/orderBy'),
     },
   },
   date_utilities: {
