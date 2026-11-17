@@ -50,7 +50,7 @@ export default function (this: NodeControllerInst<NodeMainProps>, config: NodeCo
         throw new Error(`Unknown function "${config.category}.${config.function}"`);
       }
 
-      const result = await matchedServerFunction(...(argsToCall as any[]));
+      const result = await matchedServerFunction(...argsToCall);
 
       // Handle result inversion if configured
       const finalResult = fnDetails?.inverseReturnValue && config.inverseReturnValue ? !result : result;

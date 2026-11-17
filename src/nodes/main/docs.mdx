@@ -1,0 +1,25 @@
+import { title } from 'radash';
+import { getCategories, getFunctionDetails, getFunctionsFromCategory } from '../../lib/client-side';
+
+A collection of utilities to help you build your Node-RED flows.
+
+Pick a category, then a function: the node applies it to the chosen input and sends the result in `msg.payload`.
+
+{getCategories.map((category) => (
+  <div key={category}>
+    <h3>{title(category)}</h3>
+    <table>
+      <thead>
+        <tr><th>Name</th><th>Description</th></tr>
+      </thead>
+      <tbody>
+        {getFunctionsFromCategory(category).map(({ key, label }) => (
+          <tr key={key}>
+            <td><code>{label}</code></td>
+            <td>{getFunctionDetails(category, key).description || '—'}</td>
+          </tr>
+        ))}
+      </tbody>
+    </table>
+  </div>
+))}

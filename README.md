@@ -41,7 +41,7 @@
       <sub><b>Runtime Dependencies</b></sub>
     </td>
     <td align="center">
-      <h2>🚀 97 kB</h2>
+      <h2>🚀 117 kB</h2>
       <sub><b>Bundle Size</b></sub>
     </td>
   </tr>
@@ -133,27 +133,27 @@ All used libraries are treeshaked and included in the final bundle.
 
 | Name | Description |
 | --- | --- |
-| `Abs` | — |
-| `Acos` | — |
-| `Asin` | — |
-| `Atan` | — |
-| `Ceil` | — |
+| `Abs` | Returns the absolute value |
+| `Acos` | Returns the arccosine, in radians |
+| `Asin` | Returns the arcsine, in radians |
+| `Atan` | Returns the arctangent, in radians |
+| `Ceil` | Rounds up to the next integer |
 | `Clamp` | Restricts the number between Min and Max |
-| `Cos` | — |
-| `Exp` | — |
-| `Floor` | — |
+| `Cos` | Returns the cosine of an angle in radians |
+| `Exp` | Returns e raised to the power of the number |
+| `Floor` | Rounds down to the previous integer |
 | `In Range` | True if the number is greater than or equal to Min and lower than Max |
-| `Log` | — |
-| `Max` | — |
-| `Mean` | — |
-| `Median` | — |
-| `Min` | — |
-| `Random` | — |
-| `Round` | — |
-| `Sin` | — |
-| `Sum` | — |
-| `Tan` | — |
-| `Trunc` | — |
+| `Log` | Returns the natural logarithm (base e) |
+| `Max` | Returns the largest value of the array |
+| `Mean` | Returns the average of the array |
+| `Median` | Returns the median of the array |
+| `Min` | Returns the smallest value of the array |
+| `Random` | Returns a random number from 0 (included) to 1 (excluded) |
+| `Round` | Rounds to the nearest integer |
+| `Sin` | Returns the sine of an angle in radians |
+| `Sum` | Returns the sum of the array |
+| `Tan` | Returns the tangent of an angle in radians |
+| `Trunc` | Removes the decimal part |
 
 ### → Network Utilities
 

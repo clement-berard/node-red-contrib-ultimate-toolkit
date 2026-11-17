@@ -5,16 +5,13 @@ import { list } from './list';
 export const getCategories = alphabetical(Object.keys(list), (f) => f);
 
 export function getFunctionsFromCategory(category: string) {
-  const all = Object.keys(list[category])
-    .map((v) => {
-      const fn = list[category][v];
-      return {
-        key: v,
-        label: fn.label || title(v),
-        enabled: fn?.enabled ?? true,
-      };
-    })
-    .filter((v) => v.enabled);
+  const all = Object.keys(list[category]).map((v) => {
+    const fn = list[category][v];
+    return {
+      key: v,
+      label: fn.label || title(v),
+    };
+  });
 
   return alphabetical(all, (f) => f.label);
 }
