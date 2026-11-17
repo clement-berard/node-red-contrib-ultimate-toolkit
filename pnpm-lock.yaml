@@ -15,8 +15,8 @@ importers:
         specifier: ^1.1.1
         version: 1.1.1
       '@keload/node-red-dxp':
-        specifier: 2.0.0
-        version: 2.0.0(@types/node@26.6.6)(debug@4.4.3(supports-color@5.5.0))(supports-color@5.5.0)
+        specifier: 2.1.0
+        version: 2.1.0(@types/node@26.6.6)(debug@4.4.3(supports-color@5.5.0))(supports-color@5.5.0)
       '@release-it/conventional-changelog':
         specifier: 12.0.2
         version: 12.0.2(conventional-commits-filter@6.0.1)(conventional-commits-parser@7.1.4)(release-it@21.1.2(@types/node@26.6.6)(magicast@0.5.5)(supports-color@5.5.0))
@@ -661,8 +661,8 @@ packages:
   '@jridgewell/trace-mapping@0.3.31':
     resolution: {integrity: sha512-zzNR+SdQSDJzc8joaeP8QQoCQr8NuYx2dIIytl1QeBEZHJ9uW6hebsrYgbz8hJwUQao3TWCMtmfV8Nu1twOLAw==}
 
-  '@keload/node-red-dxp@2.0.0':
-    resolution: {integrity: sha512-4NCwOEjIZIbI8eLUNwwT75wqpLO8I5OSInmNULnvGiFDUhkQOuAieUCVqEiBz6rIrlfWhkP/chgu6yL97DYegg==}
+  '@keload/node-red-dxp@2.1.0':
+    resolution: {integrity: sha512-7DrWW2svB1qCuakZrM89uEqqk5s5boSgYiNlnKiK3hdOZFGp46+RdeWVIhi4CRCMwcd87yhBrPfLtrimZYmXvQ==}
     engines: {node: '>=22.22'}
     hasBin: true
 
@@ -3989,7 +3989,7 @@ snapshots:
       '@jridgewell/resolve-uri': 3.1.2
       '@jridgewell/sourcemap-codec': 1.6.0
 
-  '@keload/node-red-dxp@2.0.0(@types/node@26.6.6)(debug@4.4.3(supports-color@5.5.0))(supports-color@5.5.0)':
+  '@keload/node-red-dxp@2.1.0(@types/node@26.6.6)(debug@4.4.3(supports-color@5.5.0))(supports-color@5.5.0)':
     dependencies:
       '@fullhuman/postcss-purgecss': 9.1.0(postcss@8.5.33)
       '@tailwindcss/node': 4.3.5

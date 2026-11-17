@@ -3,7 +3,7 @@ import { getCategories, getFunctionDetails, getFunctionsFromCategory } from '../
 
 A collection of utilities to help you build your Node-RED flows.
 
-Pick a category, then a function: the node applies it to the chosen input and sends the result to the chosen output property (`msg.payload` by default; a `msg` property, `flow` or `global` context value can be selected).
+Pick a category, then a function: the node applies it to the chosen input and sends the result where the **Output properties** say: one line per `target = source`, the target being a `msg` property, a `flow` or a `global` variable (`msg.payload` by default), the source being the function result, the input or any value (message, flow, global, string, number, JSON, JSONata, env...).
 
 {getCategories.map((category) => (
   <div key={category}>

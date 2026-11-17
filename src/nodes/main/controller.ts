@@ -6,6 +6,7 @@ import { getFunctionDetails } from '../../lib/client-side';
 import { listFunctions as serverSideFunctions } from '../../lib/server-side';
 import { tools } from '../../lib/server-side/fns/tools';
 import type { NodeMainProps } from '../../types/NodeMainProps';
+import { getOutputRules } from '../../utils/output-rules';
 
 // Main Node-RED node controller
 // Handles the node's initialization and message processing
@@ -64,16 +65,37 @@ export default function (this: NodeControllerInst<NodeMainProps>, config: NodeCo
         },
       };
 
-      // Nodes saved before the output option existed have none: they keep writing to msg.payload
-      const outputProperty = config.output || 'payload';
-      const outputType = config.outputType || 'msg';
+      // One rule per line of the "Output properties" list; sources are evaluated against the incoming message
+      for (const rule of getOutputRules(config.outputProps)) {
+        if (!rule.target?.trim()) {
+          throw new Error('Output property must not be empty');
+        }
 
-      if (outputType === 'msg') {
-        RED.util.setMessageProperty(resp, outputProperty, finalResult, true);
-      } else if (outputType === 'flow' || outputType === 'global') {
-        this.context()[outputType].set(outputProperty, finalResult);
-      } else {
-        throw new Error(`Unsupported output type "${outputType}"`);
+        let value: unknown;
+        if (rule.sourceType === 'result') {
+          value = finalResult;
+        } else if (rule.sourceType === 'input') {
+          value = innerPayload;
+        } else {
+          const [evalErr, evaluated] = await evaluateNodeProperty({
+            msg,
+            type: rule.sourceType,
+            node: this,
+            value: rule.source,
+          });
+          if (evalErr) {
+            throw evalErr;
+          }
+          value = evaluated;
+        }
+
+        if (rule.targetType === 'msg') {
+          RED.util.setMessageProperty(resp, rule.target, value, true);
+        } else if (rule.targetType === 'flow' || rule.targetType === 'global') {
+          this.context()[rule.targetType].set(rule.target, value);
+        } else {
+          throw new Error(`Unsupported output type "${rule.targetType}"`);
+        }
       }
 
       // Route the output based on configuration and result type

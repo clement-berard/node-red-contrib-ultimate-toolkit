@@ -1,12 +1,12 @@
 import type { EditorNodeProperties } from 'node-red';
+import type { OutputRule } from './OutputRule';
 
 type OrEmpty<T> = T | Record<any, any>;
 
 export interface NodeMainProps extends EditorNodeProperties {
   entry: string;
   entryType: string;
-  output: string;
-  outputType: string;
+  outputProps: OutputRule[];
   category: string;
   function: string;
   mainValue: string;
