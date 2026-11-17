@@ -1,5 +1,5 @@
 import { describe, expect, it } from 'vitest';
-import { filterByPrefix } from './utils'; // Adapte le chemin
+import { filterByPrefix, getValueOrEmptyString, parseJsonOrRaw } from './utils';
 
 describe('filterByPrefix', () => {
   it('should filter keys by prefix and remove prefix by default', () => {
@@ -147,5 +147,24 @@ describe('filterByPrefix', () => {
     expect(result).toEqual({
       nodeId: '999',
     });
+  });
+});
+
+describe('getValueOrEmptyString', () => {
+  it('falls back to an empty string on nil only', () => {
+    expect(getValueOrEmptyString(null)).toBe('');
+    expect(getValueOrEmptyString(undefined)).toBe('');
+    expect(getValueOrEmptyString(0)).toBe(0);
+  });
+});
+
+describe('parseJsonOrRaw', () => {
+  it('parses valid JSON', () => {
+    expect(parseJsonOrRaw('{"a":1}')).toEqual({ a: 1 });
+    expect(parseJsonOrRaw('42')).toBe(42);
+  });
+
+  it('returns the raw input otherwise', () => {
+    expect(parseJsonOrRaw('hello')).toBe('hello');
   });
 });

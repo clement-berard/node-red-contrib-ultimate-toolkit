@@ -45,4 +45,28 @@ describe('dateUtilities', () => {
       expect(() => dateUtilities.timeRange(null, { rangeEndTime: '18:00' } as any)).toThrow();
     });
   });
+
+  describe('now', () => {
+    const base = { nowFormatToken: '' } as any;
+
+    it.each(['full', 'long', 'medium', 'short', 'iso8601', 'utcString'])('supports the %s format', (nowFormat) => {
+      expect(dateUtilities.now(null, { ...base, nowFormat })).toBeTruthy();
+    });
+
+    it('returns a timestamp', () => {
+      expect(typeof dateUtilities.now(null, { ...base, nowFormat: 'timestamp' })).toBe('number');
+    });
+
+    it('uses the custom token first', () => {
+      expect(dateUtilities.now(null, { nowFormat: 'iso8601', nowFormatToken: 'YYYY' })).toMatch(/^\d{4}$/);
+    });
+  });
+
+  describe('currentTimezone', () => {
+    it('returns the RED setting when defined', () => {
+      (globalThis as any).RED = { settings: { timezone: 'Europe/Paris' } };
+      expect(dateUtilities.currentTimezone()).toBe('Europe/Paris');
+      delete (globalThis as any).RED;
+    });
+  });
 });
