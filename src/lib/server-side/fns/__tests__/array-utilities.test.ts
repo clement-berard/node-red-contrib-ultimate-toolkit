@@ -114,4 +114,45 @@ describe('arrayUtilities', () => {
       expect(arrayUtilities.maxBy(rows, 'age')?.name).toBe('c');
     });
   });
+
+  describe('legacy', () => {
+    it('toggle adds or removes an item', () => {
+      expect(arrayUtilities.toggle([1, 2], 3)).toEqual([1, 2, 3]);
+      expect(arrayUtilities.toggle([1, 2, 3], 3)).toEqual([1, 2]);
+    });
+
+    it('shuffle keeps the same items', () => {
+      expect(arrayUtilities.shuffle([1, 2, 3]).sort()).toEqual([1, 2, 3]);
+    });
+
+    it('groupBy and keyBy use the trimmed property', () => {
+      expect(Object.keys(arrayUtilities.groupBy(rows, ' ok '))).toEqual(['true', 'false']);
+      expect(Object.keys(arrayUtilities.keyBy(rows, 'name'))).toEqual(['b', 'a', 'c']);
+    });
+
+    it('take and takeRight', () => {
+      expect(arrayUtilities.take([1, 2, 3] as any, 2)).toEqual([1, 2]);
+      expect(arrayUtilities.takeRight([1, 2, 3] as any, 2)).toEqual([2, 3]);
+    });
+
+    it('getRandomItem returns null on empty array and an item otherwise', () => {
+      expect(arrayUtilities.getRandomItem([])).toBeNull();
+      expect([1, 2, 3]).toContain(arrayUtilities.getRandomItem([1, 2, 3]));
+    });
+  });
+
+  describe('validation', () => {
+    it('drop throws on a negative count', () => {
+      expect(() => arrayUtilities.drop([1], -1)).toThrow('Count must be a positive integer');
+    });
+
+    it('windowed throws on a size of 0', () => {
+      expect(() => arrayUtilities.windowed([1], 0)).toThrow('Size must be greater than 0');
+    });
+
+    it('minBy and maxBy return null on empty array', () => {
+      expect(arrayUtilities.minBy([], 'age')).toBeNull();
+      expect(arrayUtilities.maxBy([], 'age')).toBeNull();
+    });
+  });
 });
