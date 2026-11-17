@@ -11,6 +11,10 @@ export interface NodeMainProps extends EditorNodeProperties {
   outputs: number;
   splitBooleanOutputs: boolean;
   inverseReturnValue: boolean;
+  arrayUtilities: OrEmpty<{
+    property?: string;
+    direction?: 'asc' | 'desc';
+  }>;
   dateUtilities: OrEmpty<{
     nowFormat: string;
     nowFormatToken?: string;

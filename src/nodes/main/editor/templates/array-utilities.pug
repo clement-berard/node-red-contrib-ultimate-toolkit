@@ -1,0 +1,13 @@
+include ../../../../../.node-red-dxp/pug/helper
+
+.extra-field.arrayUtilities_orderBy
+    +dxpFormRowInputText({
+        id: 'arrayUtilities-property',
+        label: 'Property',
+    })
+    .dxp-template-form-row
+        label(for="node-input-arrayUtilities-direction") Direction
+        .content
+            select#node-input-arrayUtilities-direction
+                option(value="asc" selected) asc
+                option(value="desc") desc

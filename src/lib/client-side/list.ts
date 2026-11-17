@@ -4,43 +4,159 @@ import * as docsHelper from '../../utils/docs';
 export const list: UtilityList = {
   array_utilities: {
     toggle: {
+      description: 'Adds the item if absent, removes it if present',
       docs: docsHelper.docsFromRadash('array/toggle'),
     },
     shuffle: {
+      description: 'Returns a randomly reordered copy of the array',
       docs: docsHelper.docsFromEsToolkit('array/shuffle'),
     },
     groupBy: {
+      description: 'Groups items into an object keyed by the property value',
       mainValue: {
         label: 'Property',
       },
       docs: docsHelper.docsFromEsToolkit('array/groupBy'),
     },
     keyBy: {
+      description: 'Maps each item to an object keyed by the property value (last wins)',
       mainValue: {
         label: 'Property',
       },
       docs: docsHelper.docsFromEsToolkit('array/keyBy'),
     },
     unique: {
+      description: 'Removes duplicates, by property value or by simple value if empty',
       mainValue: {
-        label: 'Property',
+        label: 'Property (optional)',
       },
       docs: docsHelper.docsFromRadash('array/unique'),
     },
     take: {
+      description: 'Returns the first N items',
       mainValue: {
         label: 'Count',
       },
       docs: docsHelper.docsFromEsToolkit('array/take'),
     },
     takeRight: {
+      description: 'Returns the last N items',
       mainValue: {
         label: 'Count',
       },
       docs: docsHelper.docsFromEsToolkit('array/takeRight'),
     },
     getRandomItem: {
+      description: 'Returns one random item, null if the array is empty',
       docs: 'Get a random item from input array',
+    },
+    compact: {
+      description: "Removes falsy values (0, '', null, undefined, false, NaN)",
+      docs: docsHelper.docsFromEsToolkit('array/compact'),
+    },
+    flatten: {
+      description: 'Flattens the array by one level',
+      docs: docsHelper.docsFromEsToolkit('array/flatten'),
+    },
+    flattenDeep: {
+      description: 'Flattens the array at every depth',
+      docs: docsHelper.docsFromEsToolkit('array/flattenDeep'),
+    },
+    head: {
+      description: 'Returns the first item, null if empty',
+      docs: docsHelper.docsFromEsToolkit('array/head'),
+    },
+    last: {
+      description: 'Returns the last item, null if empty',
+      docs: docsHelper.docsFromEsToolkit('array/last'),
+    },
+    tail: {
+      description: 'Returns everything except the first item',
+      docs: docsHelper.docsFromEsToolkit('array/tail'),
+    },
+    initial: {
+      description: 'Returns everything except the last item',
+      docs: docsHelper.docsFromEsToolkit('array/initial'),
+    },
+    unzip: {
+      description: "Regroups tuples by position: [[1,'a'],[2,'b']] → [[1,2],['a','b']]",
+      docs: docsHelper.docsFromEsToolkit('array/unzip'),
+    },
+    chunk: {
+      description: 'Splits the array into groups of the given size',
+      mainValue: {
+        label: 'Size',
+      },
+      docs: docsHelper.docsFromEsToolkit('array/chunk'),
+    },
+    drop: {
+      description: 'Removes the first N items',
+      mainValue: {
+        label: 'Count',
+      },
+      docs: docsHelper.docsFromEsToolkit('array/drop'),
+    },
+    dropRight: {
+      description: 'Removes the last N items',
+      mainValue: {
+        label: 'Count',
+      },
+      docs: docsHelper.docsFromEsToolkit('array/dropRight'),
+    },
+    sampleSize: {
+      description: 'Returns N random items, without repeats',
+      mainValue: {
+        label: 'Count',
+      },
+      docs: docsHelper.docsFromEsToolkit('array/sampleSize'),
+    },
+    windowed: {
+      description: 'Returns sliding windows of the given size: [1,2,3] with 2 → [[1,2],[2,3]]',
+      mainValue: {
+        label: 'Size',
+      },
+      docs: docsHelper.docsFromEsToolkit('array/windowed'),
+    },
+    sortBy: {
+      description: 'Sorts objects by the property, ascending',
+      mainValue: {
+        label: 'Property',
+      },
+      docs: docsHelper.docsFromEsToolkit('array/sortBy'),
+    },
+    countBy: {
+      description: 'Counts items per property value: {value: count}',
+      mainValue: {
+        label: 'Property',
+      },
+      docs: docsHelper.docsFromEsToolkit('array/countBy'),
+    },
+    partition: {
+      description: 'Splits into [truthy, falsy] arrays based on the property',
+      mainValue: {
+        label: 'Property',
+      },
+      docs: docsHelper.docsFromEsToolkit('array/partition'),
+    },
+    minBy: {
+      description: 'Returns the item with the lowest property value, null if empty',
+      mainValue: {
+        label: 'Property',
+      },
+      docs: docsHelper.docsFromEsToolkit('array/minBy'),
+    },
+    maxBy: {
+      description: 'Returns the item with the highest property value, null if empty',
+      mainValue: {
+        label: 'Property',
+      },
+      docs: docsHelper.docsFromEsToolkit('array/maxBy'),
+    },
+    orderBy: {
+      description: 'Sorts objects by the property, ascending or descending',
+      revealClasses: ['arrayUtilities_orderBy'],
+      configArgs: 'arrayUtilities',
+      docs: docsHelper.docsFromEsToolkit('array/orderBy'),
     },
   },
   date_utilities: {
@@ -170,7 +286,92 @@ export const list: UtilityList = {
   },
   object_utilities: {
     getKeys: {
+      description: 'Returns the keys of the object as an array',
       docs: docsHelper.docsFromRadash('object/keys'),
+    },
+    invert: {
+      description: "Swaps keys and values: {a:'x'} → {x:'a'}",
+      docs: docsHelper.docsFromEsToolkit('object/invert'),
+    },
+    flattenObject: {
+      description: "Flattens nested keys to dot paths: {a:{b:1}} → {'a.b':1}",
+      docs: docsHelper.docsFromEsToolkit('object/flattenObject'),
+    },
+    construct: {
+      description: "Rebuilds nesting from dot paths: {'a.b':1} → {a:{b:1}}",
+      docs: docsHelper.docsFromRadash('object/construct'),
+    },
+    shake: {
+      description: 'Removes keys whose value is undefined',
+      docs: docsHelper.docsFromRadash('object/shake'),
+    },
+    cloneDeep: {
+      description: 'Returns a deep copy, independent from the original',
+      docs: docsHelper.docsFromEsToolkit('object/cloneDeep'),
+    },
+    sortKeys: {
+      description: 'Returns the object with keys sorted alphabetically',
+      docs: docsHelper.docsFromEsToolkit('object/sortKeys'),
+    },
+    listify: {
+      description: 'Converts the object to an array of {key, value}',
+      docs: docsHelper.docsFromRadash('object/listify'),
+    },
+    toCamelCaseKeys: {
+      description: 'Converts keys to camelCase, deeply',
+      docs: docsHelper.docsFromEsToolkit('object/toCamelCaseKeys'),
+    },
+    toSnakeCaseKeys: {
+      description: 'Converts keys to snake_case, deeply',
+      docs: docsHelper.docsFromEsToolkit('object/toSnakeCaseKeys'),
+    },
+    toKebabCaseKeys: {
+      description: 'Converts keys to kebab-case, deeply',
+      docs: docsHelper.docsFromEsToolkit('object/toKebabCaseKeys'),
+    },
+    toPascalCaseKeys: {
+      description: 'Converts keys to PascalCase, deeply',
+      docs: docsHelper.docsFromEsToolkit('object/toPascalCaseKeys'),
+    },
+    toConstantCaseKeys: {
+      description: 'Converts keys to CONSTANT_CASE, deeply',
+      docs: docsHelper.docsFromEsToolkit('object/toConstantCaseKeys'),
+    },
+    lowerize: {
+      description: 'Converts keys to lower case',
+      docs: docsHelper.docsFromRadash('object/lowerize'),
+    },
+    upperize: {
+      description: 'Converts keys to upper case',
+      docs: docsHelper.docsFromRadash('object/upperize'),
+    },
+    pick: {
+      description: 'Keeps only the listed keys (comma separated)',
+      mainValue: {
+        label: 'Keys',
+      },
+      docs: docsHelper.docsFromEsToolkit('object/pick'),
+    },
+    omit: {
+      description: 'Removes the listed keys (comma separated)',
+      mainValue: {
+        label: 'Keys',
+      },
+      docs: docsHelper.docsFromEsToolkit('object/omit'),
+    },
+    get: {
+      description: 'Reads a value by path like <code>a.b[0].c</code>, null if missing',
+      mainValue: {
+        label: 'Path',
+      },
+      docs: docsHelper.docsFromRadash('object/get'),
+    },
+    findKey: {
+      description: 'Returns the first key holding this value, null if none',
+      mainValue: {
+        label: 'Value',
+      },
+      docs: docsHelper.docsFromEsToolkit('object/findKey'),
     },
   },
   network_utilities: {
