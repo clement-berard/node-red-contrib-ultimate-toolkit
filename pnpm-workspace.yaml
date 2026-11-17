@@ -1,6 +1,6 @@
 allowBuilds:
   '@parcel/watcher': true
   esbuild: true
-minimumReleaseAge: 1440
+minimumReleaseAge: 0
 minimumReleaseAgeExclude:
   - '@keload/*'
