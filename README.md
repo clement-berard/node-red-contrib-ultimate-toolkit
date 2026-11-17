@@ -33,7 +33,7 @@
 <table align="center">
   <tr>
     <td align="center">
-      <h2>✨ 95</h2>
+      <h2>✨ 113</h2>
       <sub><b>Built-in Utilities</b></sub>
     </td>
     <td align="center">
@@ -41,7 +41,7 @@
       <sub><b>Runtime Dependencies</b></sub>
     </td>
     <td align="center">
-      <h2>🚀 61 kB</h2>
+      <h2>🚀 70 kB</h2>
       <sub><b>Bundle Size</b></sub>
     </td>
   </tr>
@@ -143,7 +143,27 @@ All used libraries are treeshaked and included in the final bundle.
 
 ### → Object Utilities
 
-`Get Keys`
+| Name | Description |
+| --- | --- |
+| `Clone Deep` | — |
+| `Construct` | — |
+| `Find Key` | Returns the first key holding this value, null if none |
+| `Flatten Object` | — |
+| `Get` | Path like <code>a.b[0].c</code>, null if missing |
+| `Get Keys` | — |
+| `Invert` | — |
+| `Listify` | — |
+| `Lowerize` | — |
+| `Omit` | Comma separated keys |
+| `Pick` | Comma separated keys |
+| `Shake` | — |
+| `Sort Keys` | — |
+| `To Camel Case Keys` | — |
+| `To Constant Case Keys` | — |
+| `To Kebab Case Keys` | — |
+| `To Pascal Case Keys` | — |
+| `To Snake Case Keys` | — |
+| `Upperize` | — |
 
 ### → Predicates
 

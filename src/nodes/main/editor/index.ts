@@ -104,7 +104,9 @@ const Main: NodeEditorDefinition<NodeMainProps> = {
       if (hasMainValue) {
         jqSelector('.additionalMainValue').removeClass('hidden!');
         if (fnDetails?.mainValue?.label) {
-          jqSelector('.additionalMainValue label').text(fnDetails.mainValue.label).attr('title', fnDetails.mainValue.label);
+          jqSelector('.additionalMainValue label')
+            .text(fnDetails.mainValue.label)
+            .attr('title', fnDetails.mainValue.label);
         }
       }
       // split boolean outputs

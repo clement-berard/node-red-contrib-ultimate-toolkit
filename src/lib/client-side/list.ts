@@ -262,6 +262,76 @@ export const list: UtilityList = {
     getKeys: {
       docs: docsHelper.docsFromRadash('object/keys'),
     },
+    invert: {
+      docs: docsHelper.docsFromEsToolkit('object/invert'),
+    },
+    flattenObject: {
+      docs: docsHelper.docsFromEsToolkit('object/flattenObject'),
+    },
+    construct: {
+      docs: docsHelper.docsFromRadash('object/construct'),
+    },
+    shake: {
+      docs: docsHelper.docsFromRadash('object/shake'),
+    },
+    cloneDeep: {
+      docs: docsHelper.docsFromEsToolkit('object/cloneDeep'),
+    },
+    sortKeys: {
+      docs: docsHelper.docsFromEsToolkit('object/sortKeys'),
+    },
+    listify: {
+      docs: docsHelper.docsFromRadash('object/listify'),
+    },
+    toCamelCaseKeys: {
+      docs: docsHelper.docsFromEsToolkit('object/toCamelCaseKeys'),
+    },
+    toSnakeCaseKeys: {
+      docs: docsHelper.docsFromEsToolkit('object/toSnakeCaseKeys'),
+    },
+    toKebabCaseKeys: {
+      docs: docsHelper.docsFromEsToolkit('object/toKebabCaseKeys'),
+    },
+    toPascalCaseKeys: {
+      docs: docsHelper.docsFromEsToolkit('object/toPascalCaseKeys'),
+    },
+    toConstantCaseKeys: {
+      docs: docsHelper.docsFromEsToolkit('object/toConstantCaseKeys'),
+    },
+    lowerize: {
+      docs: docsHelper.docsFromRadash('object/lowerize'),
+    },
+    upperize: {
+      docs: docsHelper.docsFromRadash('object/upperize'),
+    },
+    pick: {
+      description: 'Comma separated keys',
+      mainValue: {
+        label: 'Keys',
+      },
+      docs: docsHelper.docsFromEsToolkit('object/pick'),
+    },
+    omit: {
+      description: 'Comma separated keys',
+      mainValue: {
+        label: 'Keys',
+      },
+      docs: docsHelper.docsFromEsToolkit('object/omit'),
+    },
+    get: {
+      description: 'Path like <code>a.b[0].c</code>, null if missing',
+      mainValue: {
+        label: 'Path',
+      },
+      docs: docsHelper.docsFromRadash('object/get'),
+    },
+    findKey: {
+      description: 'Returns the first key holding this value, null if none',
+      mainValue: {
+        label: 'Value',
+      },
+      docs: docsHelper.docsFromEsToolkit('object/findKey'),
+    },
   },
   network_utilities: {
     ipInformation: {
