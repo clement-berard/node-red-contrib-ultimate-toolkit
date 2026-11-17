@@ -3,7 +3,7 @@
   "version": "1.16.0",
   "description": "A collection of (moderns) useful tools for Node-RED",
   "engines": {
-    "node": ">=24"
+    "node": ">=18"
   },
   "publishConfig": {
     "access": "public"
