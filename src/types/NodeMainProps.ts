@@ -28,7 +28,7 @@ export interface NodeMainProps extends EditorNodeProperties {
   tools: OrEmpty<{
     cyclicCounter?: {
       maxCount: number;
-      nodeId: number;
+      nodeId: string;
       resetDelay?: number;
     };
   }>;

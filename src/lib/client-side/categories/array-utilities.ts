@@ -38,7 +38,7 @@ export const arrayUtilities: UtilityCategory = {
   },
   getRandomItem: {
     description: 'Returns one random item, null if the array is empty',
-    docs: 'Get a random item from input array',
+    docs: es('array/sample'),
   },
   compact: {
     description: "Removes falsy values (0, '', null, undefined, false, NaN)",
