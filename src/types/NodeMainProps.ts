@@ -26,6 +26,12 @@ export interface NodeMainProps extends EditorNodeProperties {
     nowFormatToken?: string;
     rangeStartTime?: string;
     rangeEndTime?: string;
+    // `rangeDay0` to `rangeDay6` (0 = Sunday): false when the day is unchecked, absent means allowed
+    addAmount?: string;
+    addUnit?: string;
+    diffUnit?: string;
+    boundaryUnit?: string;
+    reference?: string;
   }>;
   tools: OrEmpty<{
     cyclicCounter?: {
