@@ -58,7 +58,7 @@
 </script>
 
 <script lang="ts">
-  import { Checkbox, Input, List, Row, Select, TypedInput, useT } from '@keload/node-red-dxp/ui';
+  import { Checkbox, Hint, Input, List, Row, Select, TypedInput, useT } from '@keload/node-red-dxp/ui';
 
   let { node }: { node: NodeMainProps } = $props();
 
@@ -78,6 +78,21 @@
   );
   // field groups to show for the chosen function, declared by `revealClasses` in the registry
   const shows = (group: string) => !!fn.revealClasses?.includes(group);
+  const unitOptions = (units: string[]) => units.map((value) => ({ value, text: t(`unit_${value}`) }));
+  const addUnits = unitOptions(['day', 'week', 'month', 'year', 'hour', 'minute', 'second', 'millisecond']);
+  const boundaryUnits = unitOptions(['day', 'week', 'month', 'year', 'hour', 'minute']);
+  // Monday first, 0 is Sunday
+  const weekDays = [1, 2, 3, 4, 5, 6, 0];
+
+  // a Select saves its first option (the units start with `day`); the amount and the days get their default here,
+  // before the fields exist: a Checkbox would save `false` for a missing value
+  $effect.pre(() => {
+    const date = node.dateUtilities;
+    if (shows('dateUtilities_add')) date.addAmount ??= '1';
+    // a day unchecked is saved as false, an absent key means allowed
+    if (shows('dateUtilities_timeRange')) for (const day of weekDays) date[`rangeDay${day}`] ??= true;
+  });
+
   const helpText = $derived(
     [
       fn.description && t(`desc_${node.category}_${node.function}`, fn.description),
@@ -93,7 +108,7 @@
 <Row label={t('name')} icon="tag"><Input bind:value={node.name} /></Row>
 
 <Row label={t('inputData')} icon="arrow-circle-o-right">
-  <TypedInput bind:value={node.entry} bind:type={node.entryType} types={['msg', 'json']} />
+  <TypedInput bind:value={node.entry} bind:type={node.entryType} />
 </Row>
 
 <Row label={t('category')} icon="list-alt">
@@ -144,6 +159,31 @@
 {#if shows('dateUtilities_timeRange')}
   <Row label={t('startTime')} icon="clock-o"><Input type="time" bind:value={node.dateUtilities.rangeStartTime} /></Row>
   <Row label={t('endTime')} icon="clock-o"><Input type="time" bind:value={node.dateUtilities.rangeEndTime} /></Row>
+  <Row label={t('activeDays')} icon="calendar">
+    {#each weekDays as day}
+      <Checkbox bind:checked={node.dateUtilities[`rangeDay${day}`]} text={t(`weekday_${day}`)} />
+    {/each}
+  </Row>
+{/if}
+
+{#if shows('dateUtilities_add')}
+  <Row label={t('amount')} icon="plus"><Input type="number" step="any" bind:value={node.dateUtilities.addAmount} /></Row>
+  <Row label={t('unit')}><Select bind:value={node.dateUtilities.addUnit} options={addUnits} /></Row>
+{/if}
+
+{#if shows('dateUtilities_diff')}
+  <Row label={t('unit')}><Select bind:value={node.dateUtilities.diffUnit} options={addUnits} /></Row>
+{/if}
+
+{#if shows('dateUtilities_boundary')}
+  <Row label={t('unit')}><Select bind:value={node.dateUtilities.boundaryUnit} options={boundaryUnits} /></Row>
+{/if}
+
+{#if shows('dateUtilities_reference')}
+  <Row label={t('referenceDate')} icon="calendar">
+    <Input placeholder="2026-07-25T08:00:00" bind:value={node.dateUtilities.reference} />
+    <Hint>{t('referenceHint', 'Empty: now')}</Hint>
+  </Row>
 {/if}
 
 {#if shows('tools_cyclicCounter')}

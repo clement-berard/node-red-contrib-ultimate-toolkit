@@ -33,7 +33,7 @@
 <table align="center">
   <tr>
     <td align="center">
-      <h2>✨ 141</h2>
+      <h2>✨ 153</h2>
       <sub><b>Built-in Utilities</b></sub>
     </td>
     <td align="center">
@@ -41,7 +41,7 @@
       <sub><b>Runtime Dependencies</b></sub>
     </td>
     <td align="center">
-      <h2>🚀 221 kB</h2>
+      <h2>🚀 235 kB</h2>
       <sub><b>Bundle Size</b></sub>
     </td>
   </tr>
@@ -124,9 +124,21 @@ All used libraries are treeshaked and included in the final bundle.
 
 | Name | Description |
 | --- | --- |
+| `Add` | Adds a duration to the date (negative amount to subtract), returns an ISO 8601 date |
 | `Current Timezone` | Returns the current timezone |
+| `Day Of Year` | Returns the day number in the year (1 to 366) |
+| `Diff` | Returns the whole units between the date and the reference date (negative if the date is before) |
+| `End Of` | Returns the end of the minute, hour, day, week (Sunday), month or year, as an ISO 8601 date |
 | `Format` | Return formatted date from a date |
+| `Is After` | True if the date is after the reference date |
+| `Is Before` | True if the date is before the reference date |
+| `Is Future` | True if the date is in the future |
+| `Is Past` | True if the date is in the past |
+| `Is Weekend` | True if the date is a Saturday or a Sunday |
+| `Month Days` | Returns the number of days in the month of the date |
 | `Now` | Returns the current date with lot of formatting options |
+| `Same Day` | True if the date is on the same day as the reference date |
+| `Start Of` | Returns the start of the minute, hour, day, week (Monday), month or year, as an ISO 8601 date |
 | `Time Range` | Routes messages depending on the time |
 
 ### → Math Utilities
