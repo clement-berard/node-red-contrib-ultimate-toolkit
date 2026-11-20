@@ -1,0 +1,20 @@
+{
+	"name": "Nom",
+	"sections": "Sections",
+	"meta": "meta",
+	"msg": "msg",
+	"flow": "flow",
+	"global": "global",
+	"node": "node",
+	"env": "env",
+	"excludeKeys": "Clés exclues",
+	"maxDepth": "Profondeur max",
+	"target": "Sortie",
+	"target_sidebar": "Panneau debug",
+	"target_console": "Console serveur",
+	"target_both": "Les deux",
+	"passthrough": "Pass-through",
+	"passthroughText": "Envoyer le message sur une sortie",
+	"status": "Statut",
+	"statusText": "Afficher l'id et l'heure du dernier message"
+}
