@@ -1,5 +1,5 @@
 import { clamp, inRange, median, sum } from 'es-toolkit';
-import type { NodeMainProps } from '../../../types/NodeMainProps';
+import type { MathConfig } from '../../client-side/categories/math-utilities';
 
 const toBound = (input: unknown, name: string) => {
   const value = Number(input);
@@ -15,12 +15,12 @@ export const mathUtilities = {
   asin: Math.asin,
   atan: Math.atan,
   ceil: Math.ceil,
-  clamp: (input: number, options: NodeMainProps['mathUtilities']) =>
+  clamp: (input: number, options: MathConfig) =>
     clamp(Number(input), toBound(options?.min, 'Min'), toBound(options?.max, 'Max')),
   cos: Math.cos,
   exp: Math.exp,
   floor: Math.floor,
-  inRange: (input: number, options: NodeMainProps['mathUtilities']) =>
+  inRange: (input: number, options: MathConfig) =>
     inRange(Number(input), toBound(options?.min, 'Min'), toBound(options?.max, 'Max')),
   log: Math.log,
   // reduce instead of spread: Math.max(...arr) overflows the call stack on very large arrays

@@ -1,23 +1,21 @@
 import type { UtilityCategory } from '../../../types/UtilityList';
+import { addFields, boundaryFields, diffFields, nowFields, referenceFields, timeRangeFields } from './date-fields';
 
 export const dateUtilities: UtilityCategory = {
   now: {
     description: 'Returns the current date with lot of formatting options',
     docs: 'If token is provided, <code>Format</code> will not be used',
-    revealClasses: ['dateUtilities_now'],
-    configArgs: 'dateUtilities',
+    fields: nowFields,
   },
   format: {
     description: 'Return formatted date from a date',
     docs: 'If token is provided, <code>Format</code> will not be used',
-    revealClasses: ['dateUtilities_now'],
-    configArgs: 'dateUtilities',
+    fields: nowFields,
   },
   timeRange: {
     description: 'Routes messages depending on the time',
     docs: 'Time range checker that validates if current time is<br>between given start and end times (HH:mm format), on the checked days. A range crossing midnight belongs to the day it started.',
-    revealClasses: ['dateUtilities_timeRange'],
-    configArgs: 'dateUtilities',
+    fields: timeRangeFields,
     forceSplitBooleanOutputs: true,
   },
   currentTimezone: {
@@ -25,24 +23,20 @@ export const dateUtilities: UtilityCategory = {
   },
   add: {
     description: 'Adds a duration to the date (negative amount to subtract), returns an ISO 8601 date',
-    revealClasses: ['dateUtilities_add'],
-    configArgs: 'dateUtilities',
+    fields: addFields,
   },
   diff: {
     description: 'Returns the whole units between the date and the reference date (negative if the date is before)',
     docs: 'Empty reference date means now',
-    revealClasses: ['dateUtilities_diff', 'dateUtilities_reference'],
-    configArgs: 'dateUtilities',
+    fields: { ...diffFields, ...referenceFields },
   },
   startOf: {
     description: 'Returns the start of the minute, hour, day, week (Monday), month or year, as an ISO 8601 date',
-    revealClasses: ['dateUtilities_boundary'],
-    configArgs: 'dateUtilities',
+    fields: boundaryFields,
   },
   endOf: {
     description: 'Returns the end of the minute, hour, day, week (Sunday), month or year, as an ISO 8601 date',
-    revealClasses: ['dateUtilities_boundary'],
-    configArgs: 'dateUtilities',
+    fields: boundaryFields,
   },
   isPast: {
     description: 'True if the date is in the past',
@@ -57,24 +51,21 @@ export const dateUtilities: UtilityCategory = {
   isBefore: {
     description: 'True if the date is before the reference date',
     docs: 'Empty reference date means now',
-    revealClasses: ['dateUtilities_reference'],
-    configArgs: 'dateUtilities',
+    fields: referenceFields,
     canSplitBooleanOutputs: true,
     inverseReturnValue: true,
   },
   isAfter: {
     description: 'True if the date is after the reference date',
     docs: 'Empty reference date means now',
-    revealClasses: ['dateUtilities_reference'],
-    configArgs: 'dateUtilities',
+    fields: referenceFields,
     canSplitBooleanOutputs: true,
     inverseReturnValue: true,
   },
   sameDay: {
     description: 'True if the date is on the same day as the reference date',
     docs: 'Empty reference date means now',
-    revealClasses: ['dateUtilities_reference'],
-    configArgs: 'dateUtilities',
+    fields: referenceFields,
     canSplitBooleanOutputs: true,
     inverseReturnValue: true,
   },

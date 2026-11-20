@@ -33,8 +33,8 @@ export default function (this: NodeControllerInst<NodeMainProps>, config: NodeCo
       if (fnDetails?.mainValue) {
         argsToCall.push(config.mainValue);
       }
-      if (fnDetails?.configArgs) {
-        const extraArgs = (config as unknown as Record<string, unknown>)[fnDetails.configArgs];
+      if (fnDetails?.configKey) {
+        const extraArgs = (config as unknown as Record<string, unknown>)[fnDetails.configKey];
 
         // Copy to avoid mutating the node configuration shared by every message
         argsToCall.push(

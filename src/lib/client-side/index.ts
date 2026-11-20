@@ -1,4 +1,5 @@
 import { alphabetical, title } from 'radash';
+import { storageKey } from '../../utils/fields';
 import { getValueOrEmptyString } from '../../utils/utils';
 import { list } from './list';
 
@@ -27,6 +28,8 @@ export function getFunctionDetails(category: string, fn: string) {
 
   return {
     ...foundFn,
+    // the saved object of a function declaring `fields` is named after its category
+    configKey: foundFn?.fields ? storageKey(category) : undefined,
     nodeDocs,
   };
 }

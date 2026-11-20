@@ -1,5 +1,13 @@
 import type { UtilityCategory } from '../../../types/UtilityList';
 import { es, mdn } from '../../../utils/docs';
+import { type ConfigOf, field } from '../../../utils/fields';
+
+const range = {
+  min: field.number({ i18n: 'min', step: 'any' }),
+  max: field.number({ i18n: 'max', step: 'any' }),
+};
+
+export type MathConfig = ConfigOf<typeof range>;
 
 export const mathUtilities: UtilityCategory = {
   abs: {
@@ -24,8 +32,7 @@ export const mathUtilities: UtilityCategory = {
   },
   clamp: {
     description: 'Restricts the number between Min and Max',
-    revealClasses: ['mathUtilities_range'],
-    configArgs: 'mathUtilities',
+    fields: range,
     docs: es('math/clamp'),
   },
   cos: {
@@ -42,8 +49,7 @@ export const mathUtilities: UtilityCategory = {
   },
   inRange: {
     description: 'True if the number is greater than or equal to Min and lower than Max',
-    revealClasses: ['mathUtilities_range'],
-    configArgs: 'mathUtilities',
+    fields: range,
     canSplitBooleanOutputs: true,
     inverseReturnValue: true,
     docs: es('math/inRange'),

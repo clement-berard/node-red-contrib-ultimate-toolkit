@@ -1,4 +1,8 @@
+import type { Fields } from '../utils/fields';
+
 export type UtilityItem = {
+  // typed options of the function, saved under the key of its category (see `storageKey`)
+  fields?: Fields;
   description?: string;
   docs?: string;
   canSplitBooleanOutputs?: boolean;
@@ -8,8 +12,6 @@ export type UtilityItem = {
     label?: string;
   };
   label?: string;
-  revealClasses?: string[];
-  configArgs?: string;
   addNodeIdToConfigArgs?: boolean;
 };
 

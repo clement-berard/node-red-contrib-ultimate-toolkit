@@ -1,4 +1,4 @@
-import type { NodeMainProps } from '../../../types/NodeMainProps';
+import type { ParsersConfig } from '../../client-side/categories/parsers';
 
 // Same indentation as the native Node-RED json node
 const PRETTY_INDENT = 4;
@@ -19,7 +19,7 @@ const stringifyJson = (input: unknown, pretty: boolean) => {
 };
 
 export const parsers = {
-  json: (input: unknown, options: NodeMainProps['parsers']) => {
+  json: (input: unknown, options: ParsersConfig) => {
     const action = options?.action;
     const pretty = options?.pretty === true;
 

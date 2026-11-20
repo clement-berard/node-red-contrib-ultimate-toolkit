@@ -1,6 +1,14 @@
 import type { UtilityCategory } from '../../../types/UtilityList';
 import { es, radash } from '../../../utils/docs';
+import { type ConfigOf, field } from '../../../utils/fields';
 import { value } from './helpers';
+
+const orderByFields = {
+  property: field.text(),
+  direction: field.select(['asc', 'desc'], { default: 'asc' }),
+};
+
+export type ArrayConfig = ConfigOf<typeof orderByFields>;
 
 export const arrayUtilities: UtilityCategory = {
   toggle: {
@@ -124,8 +132,7 @@ export const arrayUtilities: UtilityCategory = {
   },
   orderBy: {
     description: 'Sorts objects by the property, ascending or descending',
-    revealClasses: ['arrayUtilities_orderBy'],
-    configArgs: 'arrayUtilities',
+    fields: orderByFields,
     docs: es('array/orderBy'),
   },
 };
