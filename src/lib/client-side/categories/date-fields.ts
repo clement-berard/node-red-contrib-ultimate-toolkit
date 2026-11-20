@@ -49,6 +49,11 @@ export const referenceFields = {
   }),
 };
 
+export const relativeFields = {
+  ...referenceFields,
+  locale: field.text({ icon: 'globe', placeholder: 'en' }),
+};
+
 // Everything saved under `dateUtilities`, for the typed options of the functions
 export type DateConfig = ConfigOf<
   typeof nowFields &
@@ -56,5 +61,5 @@ export type DateConfig = ConfigOf<
     typeof addFields &
     typeof diffFields &
     typeof boundaryFields &
-    typeof referenceFields
+    typeof relativeFields
 >;

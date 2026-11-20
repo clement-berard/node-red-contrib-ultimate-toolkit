@@ -4,7 +4,7 @@ Notes on this codebase's architecture and conventions, gathered from analysis (n
 
 ## What this package is
 
-`@keload/node-red-contrib-ultimate-toolkit` is a single generic Node-RED node exposing ~165 utility functions grouped by category (array, async, crypto, date, math, network, object, predicates, string, tools, utility functions...), selected via config in one node's editor rather than one node per utility.
+`@keload/node-red-contrib-ultimate-toolkit` is a single generic Node-RED node exposing ~180 utility functions grouped by category (array, async, crypto, date, math, network, object, predicates, string, tools, unit, utility functions...), selected via config in one node's editor rather than one node per utility.
 
 The package also ships a second, independent node, **debug-kit** (see "debug-kit node" below).
 

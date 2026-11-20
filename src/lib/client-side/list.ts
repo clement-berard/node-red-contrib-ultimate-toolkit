@@ -10,6 +10,7 @@ import { parsers } from './categories/parsers';
 import { predicates } from './categories/predicates';
 import { stringUtilities } from './categories/string-utilities';
 import { tools } from './categories/tools';
+import { unitUtilities } from './categories/unit-utilities';
 import { utilityFunctions } from './categories/utility-functions';
 
 export const list: UtilityList = {
@@ -25,4 +26,5 @@ export const list: UtilityList = {
   math_utilities: mathUtilities,
   async_utilities: asyncUtilities,
   tools,
+  unit_utilities: unitUtilities,
 };

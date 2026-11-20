@@ -166,3 +166,38 @@ describe('arrayUtilities', () => {
     });
   });
 });
+
+describe('arrayUtilities with another array', () => {
+  const other = (values: unknown) => ({ other: values }) as any;
+
+  it('intersection, difference and union', () => {
+    expect(arrayUtilities.intersection([1, 2, 3], other([2, 3, 4]))).toEqual([2, 3]);
+    expect(arrayUtilities.difference([1, 2, 3], other([2]))).toEqual([1, 3]);
+    expect(arrayUtilities.union([1, 2], other([2, 3]))).toEqual([1, 2, 3]);
+  });
+
+  it('zip pairs the items by position', () => {
+    expect(arrayUtilities.zip([1, 2], other(['a', 'b']))).toEqual([
+      [1, 'a'],
+      [2, 'b'],
+    ]);
+  });
+
+  it('requires an array on both sides', () => {
+    expect(() => arrayUtilities.union([1], other('x'))).toThrow('Other array must be an array');
+    expect(() => arrayUtilities.union([1], other(undefined))).toThrow('Other array must be an array');
+    expect(() => arrayUtilities.union('x' as any, other([1]))).toThrow('Input must be an array');
+  });
+
+  describe('sortNatural', () => {
+    it('sorts numbers inside the text and ignores the case', () => {
+      expect(arrayUtilities.sortNatural(['item10', 'Item2', 'item1'])).toEqual(['item1', 'Item2', 'item10']);
+    });
+
+    it('sorts numbers and does not mutate the input', () => {
+      const input = [10, 9, 100];
+      expect(arrayUtilities.sortNatural(input)).toEqual([9, 10, 100]);
+      expect(input).toEqual([10, 9, 100]);
+    });
+  });
+});

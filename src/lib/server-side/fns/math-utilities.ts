@@ -1,4 +1,4 @@
-import { clamp, inRange, median, sum } from 'es-toolkit';
+import { clamp, inRange, median, round, sum } from 'es-toolkit';
 import type { MathConfig } from '../../client-side/categories/math-utilities';
 
 const toBound = (input: unknown, name: string) => {
@@ -36,4 +36,11 @@ export const mathUtilities = {
   sum,
   tan: Math.tan,
   trunc: Math.trunc,
+  roundTo: (input: number, options: MathConfig) => {
+    const decimals = Number(options?.decimals ?? 2);
+    if (!Number.isInteger(decimals) || decimals < 0 || decimals > 100) {
+      throw new Error('Decimals must be an integer between 0 and 100');
+    }
+    return round(Number(input), decimals);
+  },
 };

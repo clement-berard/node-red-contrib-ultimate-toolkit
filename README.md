@@ -33,7 +33,7 @@
 <table align="center">
   <tr>
     <td align="center">
-      <h2>✨ 166</h2>
+      <h2>✨ 183</h2>
       <sub><b>Built-in Utilities</b></sub>
     </td>
     <td align="center">
@@ -41,7 +41,7 @@
       <sub><b>Runtime Dependencies</b></sub>
     </td>
     <td align="center">
-      <h2>🚀 256 kB</h2>
+      <h2>🚀 275 kB</h2>
       <sub><b>Bundle Size</b></sub>
     </td>
   </tr>
@@ -105,6 +105,7 @@ All used libraries are treeshaked and included in the final bundle.
 | `Chunk` | Splits the array into groups of the given size |
 | `Compact` | Removes falsy values (0, '', null, undefined, false, NaN) |
 | `Count By` | Counts items per property value: {value: count} |
+| `Difference` | Returns the items of the array that are not in the other array |
 | `Drop` | Removes the first N items |
 | `Drop Right` | Removes the last N items |
 | `Flatten` | Flattens the array by one level |
@@ -113,6 +114,7 @@ All used libraries are treeshaked and included in the final bundle.
 | `Group By` | Groups items into an object keyed by the property value |
 | `Head` | Returns the first item, null if empty |
 | `Initial` | Returns everything except the last item |
+| `Intersection` | Returns the items present in both arrays |
 | `Key By` | Maps each item to an object keyed by the property value (last wins) |
 | `Last` | Returns the last item, null if empty |
 | `Max By` | Returns the item with the highest property value, null if empty |
@@ -122,13 +124,16 @@ All used libraries are treeshaked and included in the final bundle.
 | `Sample Size` | Returns N random items, without repeats |
 | `Shuffle` | Returns a randomly reordered copy of the array |
 | `Sort By` | Sorts objects by the property, ascending |
+| `Sort Natural` | Sorts strings or numbers in natural order: item2 comes before item10, case is ignored |
 | `Tail` | Returns everything except the first item |
 | `Take` | Returns the first N items |
 | `Take Right` | Returns the last N items |
 | `Toggle` | Adds the item if absent, removes it if present |
+| `Union` | Returns the unique items of both arrays |
 | `Unique` | Removes duplicates, by property value or by simple value if empty |
 | `Unzip` | Regroups tuples by position: [[1,'a'],[2,'b']] → [[1,2],['a','b']] |
 | `Windowed` | Returns sliding windows of the given size: [1,2,3] with 2 → [[1,2],[2,3]] |
+| `Zip` | Pairs the items of both arrays by position: [[a1, b1], [a2, b2]] |
 
 ### → Async Utilities
 
@@ -159,11 +164,13 @@ All used libraries are treeshaked and included in the final bundle.
 | Name | Description |
 | --- | --- |
 | `Add` | Adds a duration to the date (negative amount to subtract), returns an ISO 8601 date |
+| `Age` | Returns the whole years between the date (a birth date) and the reference date |
 | `Current Timezone` | Returns the current timezone |
 | `Day Of Year` | Returns the day number in the year (1 to 366) |
 | `Diff` | Returns the whole units between the date and the reference date (negative if the date is before) |
 | `End Of` | Returns the end of the minute, hour, day, week (Sunday), month or year, as an ISO 8601 date |
 | `Format` | Return formatted date from a date |
+| `Format Relative` | Describes the date relative to the reference date: 'in 3 hours', '2 days ago', 'yesterday' |
 | `Is After` | True if the date is after the reference date |
 | `Is Before` | True if the date is before the reference date |
 | `Is Future` | True if the date is in the future |
@@ -196,6 +203,7 @@ All used libraries are treeshaked and included in the final bundle.
 | `Min` | Returns the smallest value of the array |
 | `Random` | Returns a random number from 0 (included) to 1 (excluded) |
 | `Round` | Rounds to the nearest integer |
+| `Round To` | Rounds to the given number of decimals |
 | `Sin` | Returns the sine of an angle in radians |
 | `Sum` | Returns the sum of the array |
 | `Tan` | Returns the tangent of an angle in radians |
@@ -222,8 +230,10 @@ All used libraries are treeshaked and included in the final bundle.
 | `Invert` | Swaps keys and values: {a:'x'} → {x:'a'} |
 | `Listify` | Converts the object to an array of {key, value} |
 | `Lowerize` | Converts keys to lower case |
+| `Merge` | Deep merges the other object into the object, the other object wins. Returns a new object |
 | `Omit` | Removes the listed keys (comma separated) |
 | `Pick` | Keeps only the listed keys (comma separated) |
+| `Set` | Sets a value at a path (a.b[0].c), creating what is missing. Returns a new object |
 | `Shake` | Removes keys whose value is undefined |
 | `Sort Keys` | Returns the object with keys sorted alphabetically |
 | `To Camel Case Keys` | Converts keys to camelCase, deeply |
@@ -238,6 +248,8 @@ All used libraries are treeshaked and included in the final bundle.
 | Name | Description |
 | --- | --- |
 | `JSON` | Converts between a JSON string and an object, like the native json node |
+| `Query String` | Converts between a query string and an object: 'a=1&b=2&b=3' ⇄ {a: '1', b: ['2', '3']} |
+| `URL` | Converts between a URL string and an object (protocol, hostname, port, pathname, query, hash...) |
 
 ### → Predicates
 
@@ -300,6 +312,16 @@ All used libraries are treeshaked and included in the final bundle.
 | Name | Description |
 | --- | --- |
 | `Cyclic Counter` | A customizable cyclic counter node for Node-RED that iterates through a defined sequence of numbers and can reset after a set timeout. It allows flexible control over the counter's behavior, making it useful in a variety of automation scenarios. |
+
+### → Unit Utilities
+
+| Name | Description |
+| --- | --- |
+| `Format Bytes` | Formats a number of bytes: 1536 → '1.5 KB' |
+| `Format Duration` | Formats a duration in seconds or milliseconds: 3661 → '1h 1m 1s' |
+| `Parse Duration` | Reads a duration text in seconds or milliseconds: '1h 30m' → 5400. Units: d, h, m, s, ms |
+| `Speed` | Converts a speed between m/s, km/h, mph and knots |
+| `Temperature` | Converts a temperature between °C, °F and K |
 
 ### → Utility Functions
 

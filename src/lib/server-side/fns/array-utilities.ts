@@ -2,6 +2,7 @@ import {
   chunk,
   compact,
   countBy,
+  difference,
   drop,
   dropRight,
   flatten,
@@ -9,6 +10,7 @@ import {
   groupBy,
   head,
   initial,
+  intersection,
   keyBy,
   last,
   maxBy,
@@ -21,14 +23,26 @@ import {
   tail,
   take,
   takeRight,
+  union,
   uniq,
   unzip,
   windowed,
+  zip,
 } from 'es-toolkit';
 import { random, toggle, unique } from 'radash';
 import type { ArrayConfig } from '../../client-side/categories/array-utilities';
 
 type Row = Record<string, unknown>;
+
+const asArray = (input: unknown, name: string) => {
+  if (!Array.isArray(input)) {
+    throw new Error(`${name} must be an array`);
+  }
+  return input;
+};
+
+// Numeric: item2 before item10, base: case and accents are ignored
+const naturalOrder = new Intl.Collator(undefined, { numeric: true, sensitivity: 'base' });
 
 const toProp = (input: unknown) => String(input ?? '').trim();
 
@@ -101,4 +115,14 @@ export const arrayUtilities = {
   partition: (inputArr: Row[], inputProp: unknown) => partition(inputArr, (x) => Boolean(x[toProp(inputProp)])),
   minBy: (inputArr: Row[], inputProp: unknown) => minBy(inputArr, (x) => x[toProp(inputProp)] as number) ?? null,
   maxBy: (inputArr: Row[], inputProp: unknown) => maxBy(inputArr, (x) => x[toProp(inputProp)] as number) ?? null,
+
+  intersection: (input: unknown[], options: ArrayConfig) =>
+    intersection(asArray(input, 'Input'), asArray(options?.other, 'Other array')),
+  difference: (input: unknown[], options: ArrayConfig) =>
+    difference(asArray(input, 'Input'), asArray(options?.other, 'Other array')),
+  union: (input: unknown[], options: ArrayConfig) =>
+    union(asArray(input, 'Input'), asArray(options?.other, 'Other array')),
+  zip: (input: unknown[], options: ArrayConfig) => zip(asArray(input, 'Input'), asArray(options?.other, 'Other array')),
+  sortNatural: (input: unknown[]) =>
+    [...asArray(input, 'Input')].sort((a, b) => naturalOrder.compare(String(a), String(b))),
 };
