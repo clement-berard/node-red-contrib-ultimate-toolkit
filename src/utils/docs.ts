@@ -16,7 +16,14 @@ export function docsFromMdn(entity: string) {
   `;
 }
 
+export function docsFromNodeJs(entity: string) {
+  return `
+📖 <a href="https://nodejs.org/api/${entity}" target="_blank">View documentation on <span class="font-bold">Node.js</span> <i class="fa fa-external-link"></i></a>
+  `;
+}
+
 // Short aliases used by the category metadata files
 export const es = docsFromEsToolkit;
 export const radash = docsFromRadash;
 export const mdn = docsFromMdn;
+export const nodejs = docsFromNodeJs;

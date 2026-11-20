@@ -1,6 +1,7 @@
 import type { UtilityList } from '../../types/UtilityList';
 import { arrayUtilities } from './categories/array-utilities';
 import { asyncUtilities } from './categories/async-utilities';
+import { cryptoUtilities } from './categories/crypto-utilities';
 import { dateUtilities } from './categories/date-utilities';
 import { mathUtilities } from './categories/math-utilities';
 import { networkUtilities } from './categories/network-utilities';
@@ -13,6 +14,7 @@ import { utilityFunctions } from './categories/utility-functions';
 
 export const list: UtilityList = {
   array_utilities: arrayUtilities,
+  crypto_utilities: cryptoUtilities,
   date_utilities: dateUtilities,
   string_utilities: stringUtilities,
   utility_functions: utilityFunctions,

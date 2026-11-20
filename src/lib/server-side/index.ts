@@ -1,5 +1,6 @@
 import { arrayUtilities } from './fns/array-utilities';
 import { asyncUtilities } from './fns/async-utilities';
+import { cryptoUtilities } from './fns/crypto-utilities';
 import { dateUtilities } from './fns/date-utilities';
 import { mathUtilities } from './fns/math-utilities';
 import { networkUtilities } from './fns/network-utilities';
@@ -13,6 +14,7 @@ import { utilityFunctions } from './fns/utility-functions';
 export const listFunctions = {
   array_utilities: arrayUtilities,
   async_utilities: asyncUtilities,
+  crypto_utilities: cryptoUtilities,
   date_utilities: dateUtilities,
   math_utilities: mathUtilities,
   network_utilities: networkUtilities,

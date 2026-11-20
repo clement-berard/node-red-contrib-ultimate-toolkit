@@ -1,3 +1,4 @@
+import { createHmac } from 'node:crypto';
 import { get, set } from 'es-toolkit/compat';
 import { beforeEach, describe, expect, it, vi } from 'vitest';
 
@@ -247,6 +248,33 @@ describe('controller', () => {
       const { done, run } = setup(isAfter({ reference: 'limit', referenceType: 'msg' }));
       await run({ payload: '2026-07-25T11:00:00.000Z', limit: 'nope' });
       expect(done).toHaveBeenCalledWith(expect.objectContaining({ message: 'reference is not a valid date' }));
+    });
+  });
+
+  describe('secret fields', () => {
+    it('hands the evaluated secret to the function, not its type', async () => {
+      const { send, run } = setup({
+        category: 'crypto_utilities',
+        function: 'hmac',
+        entry: 'abc',
+        entryType: 'str',
+        cryptoUtilities: { key: 'MY_SECRET', keyType: 'env', algorithm: 'sha256', encoding: 'hex' },
+      });
+      await run({});
+      expect(send.mock.calls[0][0].payload).toBe(createHmac('sha256', 'MY_SECRET').update('abc').digest('hex'));
+      expect(send.mock.calls[0][0].nodeParams.callWith[1].keyType).toBeUndefined();
+    });
+
+    it('compares with a value read from the message', async () => {
+      const { send, run } = setup({
+        category: 'crypto_utilities',
+        function: 'timingSafeEqual',
+        entry: 'payload',
+        entryType: 'msg',
+        cryptoUtilities: { compare: 'expected', compareType: 'msg' },
+      });
+      await run({ payload: 'token', expected: 'token' });
+      expect(send.mock.calls[0][0].payload).toBe(true);
     });
   });
 
