@@ -19,6 +19,8 @@ type Base<V> = {
 export type TextField = Base<string> & { kind: 'text' };
 export type NumberField = Base<string> & { kind: 'number'; min?: number; step?: number | 'any' };
 export type TimeField = Base<string> & { kind: 'time' };
+// A Node-RED typedInput: the value is saved under the key of the field, its type under `<key>Type`
+export type TypedField = Base<string> & { kind: 'typed'; types: readonly string[]; defaultType: string };
 export type CheckboxField = Base<boolean> & { kind: 'checkbox'; group: string };
 export type SelectField<O extends string = string> = Base<O> & {
   kind: 'select';
@@ -29,7 +31,7 @@ export type SelectField<O extends string = string> = Base<O> & {
   rawOptions?: boolean;
 };
 
-export type Field = TextField | NumberField | TimeField | CheckboxField | SelectField;
+export type Field = TextField | NumberField | TimeField | TypedField | CheckboxField | SelectField;
 export type Fields = Record<string, Field>;
 
 type Opts<T extends Field> = Omit<T, 'kind'>;
@@ -38,6 +40,7 @@ export const field = {
   text: (opts: Opts<TextField> = {}): TextField => ({ kind: 'text', ...opts }),
   number: (opts: Opts<NumberField> = {}): NumberField => ({ kind: 'number', ...opts }),
   time: (opts: Opts<TimeField> = {}): TimeField => ({ kind: 'time', ...opts }),
+  typed: (opts: Opts<TypedField>): TypedField => ({ kind: 'typed', ...opts }),
   checkbox: (opts: Opts<CheckboxField>): CheckboxField => ({ kind: 'checkbox', ...opts }),
   select: <const O extends string>(
     options: readonly O[],
@@ -53,9 +56,12 @@ type ValueOf<F extends Field> = F extends { kind: 'select'; options: readonly (i
   ? O
   : F extends { kind: 'checkbox' }
     ? boolean
-    : string;
+    : F extends { kind: 'typed' }
+      ? unknown
+      : string;
 
-// Options received by the function: every key is optional, nodes saved before a field existed do not have it
+// Options received by the function: every key is optional, nodes saved before a field existed do not have it.
+// A typed field is received already evaluated against the message (see `resolveTypedFields`)
 export type ConfigOf<F extends Fields> = { [K in keyof F]?: ValueOf<F[K]> };
 
 // Key of the saved object holding the fields of a category: `date_utilities` -> `dateUtilities`
@@ -65,13 +71,32 @@ export const i18nKey = (key: string, f: Field) => f.i18n ?? `field_${key}`;
 
 export function fieldDefaults(fields: Fields) {
   return Object.fromEntries(
-    Object.entries(fields).flatMap(([key, f]) => (f.default === undefined ? [] : [[key, f.default]])),
+    Object.entries(fields).flatMap(([key, f]) => [
+      ...(f.default === undefined ? [] : [[key, f.default]]),
+      ...(f.kind === 'typed' ? [[`${key}Type`, f.defaultType]] : []),
+    ]),
   );
 }
 
 // Fills the missing keys only: a value the user changed, `false` included, is never overwritten
 export function applyDefaults(config: Record<string, unknown>, fields: Fields) {
   for (const [key, value] of Object.entries(fieldDefaults(fields))) config[key] ??= value;
+}
+
+type Evaluate = (type: string, value: string) => Promise<unknown>;
+
+// Evaluates the typed fields against the message: the function receives values, never types. An empty value stays
+// empty whatever the type, nodes saved before the field was typed have no type and hold a plain string
+export async function resolveTypedFields(fields: Fields, config: Record<string, unknown>, evaluate: Evaluate) {
+  const resolved = { ...config };
+  for (const [key, f] of Object.entries(fields)) {
+    if (f.kind !== 'typed') continue;
+    const raw = config[key];
+    const type = (config[`${key}Type`] as string | undefined) ?? f.defaultType;
+    delete resolved[`${key}Type`];
+    resolved[key] = raw === undefined || raw === '' ? raw : await evaluate(type, raw as string);
+  }
+  return resolved;
 }
 
 // Attributes of the <Input> of a text, number or time field

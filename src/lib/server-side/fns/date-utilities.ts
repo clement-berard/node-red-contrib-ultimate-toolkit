@@ -128,9 +128,12 @@ function toDate(input: unknown, name = 'payloadDate') {
   return parsed;
 }
 
-// Empty reference date means "now"
+// Empty reference date means "now"; it is a string, a timestamp or a Date, already evaluated by the controller
 function toReference(options: DateOptions) {
-  return options?.reference?.trim() ? toDate(options.reference, 'reference') : new Date();
+  const reference = typeof options?.reference === 'string' ? options.reference.trim() : options?.reference;
+  return reference === undefined || reference === null || reference === ''
+    ? new Date()
+    : toDate(reference, 'reference');
 }
 
 export const dateUtilities = {

@@ -31,7 +31,7 @@ fields: {
 }
 ```
 
-Everything else is derived from that declaration: the saved defaults (`applyDefaults`, run before the form renders), the form (`fields.svelte`), the type of the options received by the fn (`ConfigOf`) and the i18n keys. Kinds: `text`, `number`, `time`, `checkbox` (needs a `group`, the row label), `select` (needs a `default`; `rawOptions` for technical values shown untranslated). Fields sharing a `group` render in one row. The options are saved flat under `storageKey(category)` (`date_utilities` -> `dateUtilities`), the key of a field being the saved key: functions sharing a field object (`range`, `referenceFields`...) share the saved value.
+Everything else is derived from that declaration: the saved defaults (`applyDefaults`, run before the form renders), the form (`fields.svelte`), the type of the options received by the fn (`ConfigOf`) and the i18n keys. Kinds: `text`, `number`, `time`, `typed` (a Node-RED typedInput: value under the key, type under `<key>Type`; the controller evaluates it against the message with `resolveTypedFields`, so the fn receives the value, `unknown`, never the type), `checkbox` (needs a `group`, the row label), `select` (needs a `default`; `rawOptions` for technical values shown untranslated). Fields sharing a `group` render in one row. The options are saved flat under `storageKey(category)` (`date_utilities` -> `dateUtilities`), the key of a field being the saved key: functions sharing a field object (`range`, `referenceFields`...) share the saved value.
 
 i18n: `i18n` (default `field_<key>`) is the base of the label, `<i18n>_hint` (when `hint: true`) and `<i18n>_<option>`; `src/lib/client-side/__tests__/i18n.test.ts` checks that both locales have them.
 
