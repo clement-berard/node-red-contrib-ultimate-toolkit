@@ -1,0 +1,20 @@
+{
+	"name": "Name",
+	"sections": "Sections",
+	"meta": "meta",
+	"msg": "msg",
+	"flow": "flow",
+	"global": "global",
+	"node": "node",
+	"env": "env",
+	"excludeKeys": "Exclude keys",
+	"maxDepth": "Max depth",
+	"target": "Output",
+	"target_sidebar": "Debug sidebar",
+	"target_console": "Server console",
+	"target_both": "Both",
+	"passthrough": "Pass-through",
+	"passthroughText": "Send the message to an output",
+	"status": "Status",
+	"statusText": "Show the last message id and time"
+}

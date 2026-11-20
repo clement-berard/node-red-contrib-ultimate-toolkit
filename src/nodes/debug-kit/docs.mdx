@@ -1,0 +1,14 @@
+Logs everything about a message in one debug entry, with no configuration: no more `msg.payload` only.
+
+Each entry is a tree with the sections you keep checked:
+
+- **meta**: node id and name, flow id, `_msgid`, time, delay since the previous message, payload type and size
+- **msg**: the whole message
+- **flow**, **global**, **node**: every key of the matching context
+- **env**: process environment variables (off by default, they may hold secrets)
+
+Keys listed in **Exclude keys** (comma separated, `req,res` by default) are left out. Circular references, buffers and
+functions are summarised, and **Max depth** limits how deep objects are expanded.
+
+The entry goes to the debug sidebar, the server console, or both. Tick **Pass-through** to get an output that forwards
+the message unchanged.

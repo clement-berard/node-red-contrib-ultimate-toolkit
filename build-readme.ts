@@ -79,7 +79,7 @@ ${finalFeatures
 const README = `
 # node-red-contrib-ultimate-toolkit
 
-<h3 align="center">The multi-tool for Node-RED, all in one lightweight node.</h3>
+<h3 align="center">The multi-tool for Node-RED, plus the debug node you wished the native one was.</h3>
 
 <br/>
 <p align="center">
@@ -127,6 +127,22 @@ Whenever possible, native Node.js methods take precedence for maximum efficiency
 **One node to rule them all—streamline your flows like never before!**
 
 ![paring-config.png](docs/screenshot.png)
+
+## debug-kit 🐞
+
+A second node, **debug-kit**, logs everything about a message in one debug entry, with no configuration: no more \`msg.payload\` only.
+
+| Section | Content |
+| --- | --- |
+| \`meta\` | Node id and name, flow id, \`_msgid\`, time, delay since the previous message, payload type and size |
+| \`msg\` | The whole message |
+| \`flow\` · \`global\` · \`node\` | Every key of the matching context |
+| \`env\` | Process environment variables (off by default, they may hold secrets) |
+
+- Exclude keys (\`req,res\` by default), limit the depth: circular references, buffers and functions are summarised
+- Send the entry to the debug sidebar, the server console, or both
+- Optional pass-through output to forward the message unchanged
+- Named \`debug-kit 1\`, \`debug-kit 2\`... when added, like the native debug node
 
 ## Installation 📦
 
