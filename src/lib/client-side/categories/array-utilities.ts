@@ -1,14 +1,18 @@
 import type { UtilityCategory } from '../../../types/UtilityList';
-import { es, radash } from '../../../utils/docs';
+import { es, mdn, radash } from '../../../utils/docs';
 import { type ConfigOf, field } from '../../../utils/fields';
-import { value } from './helpers';
+import { structuredTypes, value } from './helpers';
 
 const orderByFields = {
   property: field.text(),
   direction: field.select(['asc', 'desc'], { default: 'asc' }),
 };
 
-export type ArrayConfig = ConfigOf<typeof orderByFields>;
+const otherArrayFields = {
+  other: field.typed({ i18n: 'otherArray', icon: 'list', types: structuredTypes, defaultType: 'json' }),
+};
+
+export type ArrayConfig = ConfigOf<typeof orderByFields & typeof otherArrayFields>;
 
 export const arrayUtilities: UtilityCategory = {
   toggle: {
@@ -134,5 +138,29 @@ export const arrayUtilities: UtilityCategory = {
     description: 'Sorts objects by the property, ascending or descending',
     fields: orderByFields,
     docs: es('array/orderBy'),
+  },
+  intersection: {
+    description: 'Returns the items present in both arrays',
+    fields: otherArrayFields,
+    docs: es('array/intersection'),
+  },
+  difference: {
+    description: 'Returns the items of the array that are not in the other array',
+    fields: otherArrayFields,
+    docs: es('array/difference'),
+  },
+  union: {
+    description: 'Returns the unique items of both arrays',
+    fields: otherArrayFields,
+    docs: es('array/union'),
+  },
+  zip: {
+    description: 'Pairs the items of both arrays by position: [[a1, b1], [a2, b2]]',
+    fields: otherArrayFields,
+    docs: es('array/zip'),
+  },
+  sortNatural: {
+    description: 'Sorts strings or numbers in natural order: item2 comes before item10, case is ignored',
+    docs: mdn('Intl/Collator/Collator'),
   },
 };

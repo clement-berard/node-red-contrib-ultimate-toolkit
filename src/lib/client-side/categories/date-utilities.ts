@@ -1,5 +1,13 @@
 import type { UtilityCategory } from '../../../types/UtilityList';
-import { addFields, boundaryFields, diffFields, nowFields, referenceFields, timeRangeFields } from './date-fields';
+import {
+  addFields,
+  boundaryFields,
+  diffFields,
+  nowFields,
+  referenceFields,
+  relativeFields,
+  timeRangeFields,
+} from './date-fields';
 
 export const dateUtilities: UtilityCategory = {
   now: {
@@ -79,5 +87,15 @@ export const dateUtilities: UtilityCategory = {
   },
   monthDays: {
     description: 'Returns the number of days in the month of the date',
+  },
+  formatRelative: {
+    description: "Describes the date relative to the reference date: 'in 3 hours', '2 days ago', 'yesterday'",
+    docs: 'Empty reference date means now. Empty locale means the system locale',
+    fields: relativeFields,
+  },
+  age: {
+    description: 'Returns the whole years between the date (a birth date) and the reference date',
+    docs: 'Empty reference date means now',
+    fields: referenceFields,
   },
 };

@@ -3,18 +3,28 @@ import {
   findKey,
   flattenObject,
   invert,
+  isPlainObject,
   omit,
   pick,
   sortKeys,
   toCamelCaseKeys,
   toConstantCaseKeys,
   toKebabCaseKeys,
+  toMerged,
   toPascalCaseKeys,
   toSnakeCaseKeys,
 } from 'es-toolkit';
-import { construct, get, keys, listify, lowerize, shake, upperize } from 'radash';
+import { construct, get, keys, listify, lowerize, set, shake, upperize } from 'radash';
+import type { ObjectConfig } from '../../client-side/categories/object-utilities';
 
 type Obj = Record<string, any>;
+
+const asObject = (input: unknown, name: string): Obj => {
+  if (!isPlainObject(input)) {
+    throw new Error(`${name} must be an object`);
+  }
+  return input as Obj;
+};
 
 const toKeys = (input: unknown) =>
   String(input ?? '')
@@ -42,4 +52,14 @@ export const objectUtilities = {
   omit: (inputObj: Obj, inputProp: unknown) => omit(inputObj, toKeys(inputProp)),
   get: (inputObj: Obj, inputProp: unknown) => get(inputObj, String(inputProp ?? '').trim()) ?? null,
   findKey: (inputObj: Obj, inputProp: unknown) => findKey(inputObj, (v) => String(v) === String(inputProp)) ?? null,
+  merge: (inputObj: Obj, options: ObjectConfig) =>
+    toMerged(asObject(inputObj, 'Input'), asObject(options?.other, 'Other object')),
+  set: (inputObj: Obj, options: ObjectConfig) => {
+    const path = String(options?.path ?? '').trim();
+    if (!path) {
+      throw new Error('Path is required');
+    }
+    // radash `set` mutates its first argument
+    return set(cloneDeep(asObject(inputObj, 'Input')), path, options?.value);
+  },
 };

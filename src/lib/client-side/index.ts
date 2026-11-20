@@ -6,7 +6,8 @@ import { list } from './list';
 export const getCategories = alphabetical(Object.keys(list), (f) => f);
 
 export function getFunctionsFromCategory(category: string) {
-  const all = Object.keys(list[category]).map((v) => {
+  // a node saved with a category this version does not know (rollback, removed category) must still open
+  const all = Object.keys(list[category] ?? {}).map((v) => {
     const fn = list[category][v];
     return {
       key: v,

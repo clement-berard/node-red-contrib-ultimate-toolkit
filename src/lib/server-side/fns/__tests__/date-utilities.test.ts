@@ -244,3 +244,34 @@ describe('dateUtilities', () => {
     });
   });
 });
+
+describe('dateUtilities relative and age', () => {
+  const options = (extra: Record<string, unknown> = {}) =>
+    ({ reference: '2026-07-25T12:00:00.000Z', locale: 'en', ...extra }) as any;
+
+  it('formatRelative picks the unit and the direction', () => {
+    const format = (date: string, extra?: Record<string, unknown>) =>
+      dateUtilities.formatRelative(date, options(extra));
+    expect(format('2026-07-25T12:00:00.000Z')).toBe('now');
+    expect(format('2026-07-25T11:59:30.000Z')).toBe('30 seconds ago');
+    expect(format('2026-07-25T15:00:00.000Z')).toBe('in 3 hours');
+    expect(format('2026-07-24T12:00:00.000Z')).toBe('yesterday');
+    expect(format('2026-07-20T12:00:00.000Z')).toBe('5 days ago');
+    expect(format('2026-05-25T12:00:00.000Z')).toBe('2 months ago');
+    expect(format('2028-07-25T12:00:00.000Z')).toBe('in 2 years');
+  });
+
+  it('formatRelative follows the locale and uses now without reference', () => {
+    expect(dateUtilities.formatRelative('2026-07-24T12:00:00.000Z', options({ locale: 'fr' }))).toBe('hier');
+    vi.useFakeTimers();
+    vi.setSystemTime(new Date('2026-07-25T12:00:00.000Z'));
+    expect(dateUtilities.formatRelative('2026-07-25T09:00:00.000Z', { locale: 'en' } as any)).toBe('3 hours ago');
+    vi.useRealTimers();
+  });
+
+  it('age counts the whole years', () => {
+    expect(dateUtilities.age('1990-07-26T00:00:00.000Z', options())).toBe(35);
+    expect(dateUtilities.age('1990-07-25T00:00:00.000Z', options())).toBe(36);
+    expect(() => dateUtilities.age('nope', options())).toThrow('payloadDate is not a valid date');
+  });
+});

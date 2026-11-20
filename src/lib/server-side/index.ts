@@ -9,6 +9,7 @@ import { parsers } from './fns/parsers';
 import { predicates } from './fns/predicates';
 import { stringUtilities } from './fns/string-utilities';
 import { tools } from './fns/tools';
+import { unitUtilities } from './fns/unit-utilities';
 import { utilityFunctions } from './fns/utility-functions';
 
 export const listFunctions = {
@@ -24,4 +25,5 @@ export const listFunctions = {
   string_utilities: stringUtilities,
   utility_functions: utilityFunctions,
   tools,
+  unit_utilities: unitUtilities,
 };

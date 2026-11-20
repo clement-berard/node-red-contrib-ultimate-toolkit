@@ -44,6 +44,10 @@ describe('client-side helpers', () => {
     expect(labels).toEqual([...labels].sort((a, b) => a.localeCompare(b)));
   });
 
+  it('getFunctionsFromCategory tolerates an unknown category', () => {
+    expect(getFunctionsFromCategory('nope')).toEqual([]);
+  });
+
   it('getFunctionDetails returns docs and tolerates unknown entries', () => {
     expect(getFunctionDetails('array_utilities', 'chunk').nodeDocs).toContain('<br>');
     expect(getFunctionDetails('nope', 'nope').nodeDocs).toBe('<br><br>');

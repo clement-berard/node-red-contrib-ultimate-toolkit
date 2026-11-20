@@ -68,3 +68,17 @@ describe('mathUtilities', () => {
     });
   });
 });
+
+describe('mathUtilities roundTo', () => {
+  it('rounds to the decimals', () => {
+    expect(mathUtilities.roundTo(1.23456, { decimals: '2' })).toBe(1.23);
+    expect(mathUtilities.roundTo(1.5, { decimals: '0' })).toBe(2);
+    expect(mathUtilities.roundTo(2.345, {} as any)).toBe(2.35);
+  });
+
+  it('rejects invalid decimals', () => {
+    expect(() => mathUtilities.roundTo(1, { decimals: '-1' })).toThrow('Decimals must be an integer');
+    expect(() => mathUtilities.roundTo(1, { decimals: '1.5' })).toThrow('Decimals must be an integer');
+    expect(() => mathUtilities.roundTo(1, { decimals: 'a' })).toThrow('Decimals must be an integer');
+  });
+});

@@ -1,6 +1,23 @@
 import type { UtilityCategory } from '../../../types/UtilityList';
 import { es, radash } from '../../../utils/docs';
-import { value } from './helpers';
+import { type ConfigOf, field } from '../../../utils/fields';
+import { structuredTypes, value } from './helpers';
+
+const mergeFields = {
+  other: field.typed({ i18n: 'otherObject', icon: 'sitemap', types: structuredTypes, defaultType: 'json' }),
+};
+
+const setFields = {
+  path: field.text({ placeholder: 'a.b[0].c' }),
+  value: field.typed({
+    i18n: 'value',
+    icon: 'plus',
+    types: ['json', 'str', ...structuredTypes.slice(1)],
+    defaultType: 'json',
+  }),
+};
+
+export type ObjectConfig = ConfigOf<typeof mergeFields & typeof setFields>;
 
 export const objectUtilities: UtilityCategory = {
   getKeys: {
@@ -82,5 +99,15 @@ export const objectUtilities: UtilityCategory = {
     description: 'Returns the first key holding this value, null if none',
     mainValue: value('Value'),
     docs: es('object/findKey'),
+  },
+  merge: {
+    description: 'Deep merges the other object into the object, the other object wins. Returns a new object',
+    fields: mergeFields,
+    docs: es('object/toMerged'),
+  },
+  set: {
+    description: 'Sets a value at a path (a.b[0].c), creating what is missing. Returns a new object',
+    fields: setFields,
+    docs: radash('object/set'),
   },
 };

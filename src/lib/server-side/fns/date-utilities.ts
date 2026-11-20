@@ -136,6 +136,25 @@ function toReference(options: DateOptions) {
     : toDate(reference, 'reference');
 }
 
+const SECOND = 1000;
+// Units of the relative format, the first one whose limit is not reached wins
+const RELATIVE_UNITS: [Intl.RelativeTimeFormatUnit, number, number][] = [
+  ['second', SECOND, 60],
+  ['minute', 60 * SECOND, 60],
+  ['hour', 60 * 60 * SECOND, 24],
+  ['day', 24 * 60 * 60 * SECOND, 30],
+  ['month', 30 * 24 * 60 * 60 * SECOND, 12],
+  ['year', 365 * 24 * 60 * 60 * SECOND, Number.POSITIVE_INFINITY],
+];
+
+function formatRelative(target: Date, reference: Date, locale: string | undefined) {
+  const diff = target.getTime() - reference.getTime();
+  const [unit, size] = RELATIVE_UNITS.find(
+    ([, unitSize, limit]) => Math.abs(diff) < unitSize * limit,
+  ) as (typeof RELATIVE_UNITS)[number];
+  return new Intl.RelativeTimeFormat(locale || undefined, { numeric: 'auto' }).format(Math.round(diff / size), unit);
+}
+
 export const dateUtilities = {
   now: (_: unknown, options: DateConfig) => {
     return formatDate(new Date(), options);
@@ -190,4 +209,8 @@ export const dateUtilities = {
   isWeekend: (payloadDate: unknown) => [0, 6].includes(toDate(payloadDate).getDay()),
   dayOfYear: (payloadDate: unknown) => dayOfYear(toDate(payloadDate)),
   monthDays: (payloadDate: unknown) => monthDays(toDate(payloadDate)),
+  formatRelative: (payloadDate: unknown, options: DateOptions) =>
+    formatRelative(toDate(payloadDate), toReference(options), options?.locale?.trim()),
+  // the reference minus the birth date, whole years
+  age: (payloadDate: unknown, options: DateOptions) => diffYears(toReference(options), toDate(payloadDate)),
 };

@@ -70,5 +70,20 @@
 	"field_key_hint": "Name of an env variable, a flow or a global variable holding the secret",
 	"field_size": "Size (bytes)",
 	"field_variant": "Variant",
-	"field_compare": "Compare to"
+	"field_compare": "Compare to",
+	"otherArray": "Other array",
+	"otherObject": "Other object",
+	"field_path": "Path",
+	"field_locale": "Locale",
+	"field_parseAction": "Action",
+	"field_parseAction_auto": "Convert between string & object",
+	"field_parseAction_stringify": "Always convert to string",
+	"field_parseAction_parse": "Always convert to object",
+	"field_durationUnit": "Unit",
+	"field_durationUnit_seconds": "Seconds",
+	"field_durationUnit_milliseconds": "Milliseconds",
+	"field_base": "Base",
+	"from": "From",
+	"to": "To",
+	"decimals": "Decimals"
 }

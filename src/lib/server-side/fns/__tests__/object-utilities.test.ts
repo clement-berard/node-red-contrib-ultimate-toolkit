@@ -57,3 +57,32 @@ describe('objectUtilities', () => {
     expect(objectUtilities.findKey({ a: 1 }, '9')).toBeNull();
   });
 });
+
+describe('objectUtilities merge and set', () => {
+  it('merge deep merges the other object into a new object', () => {
+    const input = { a: { x: 1, y: 2 }, b: 1 };
+    expect(objectUtilities.merge(input, { other: { a: { y: 3, z: 4 }, c: 5 } } as any)).toEqual({
+      a: { x: 1, y: 3, z: 4 },
+      b: 1,
+      c: 5,
+    });
+    expect(input).toEqual({ a: { x: 1, y: 2 }, b: 1 });
+  });
+
+  it('merge requires an object on both sides', () => {
+    expect(() => objectUtilities.merge({ a: 1 }, { other: [1] } as any)).toThrow('Other object must be an object');
+    expect(() => objectUtilities.merge([] as any, { other: {} } as any)).toThrow('Input must be an object');
+  });
+
+  it('set writes at a path without mutating the input', () => {
+    const input = { a: { b: 1 } };
+    expect(objectUtilities.set(input, { path: 'a.c[1]', value: 'x' } as any)).toEqual({
+      a: { b: 1, c: [undefined, 'x'] },
+    });
+    expect(input).toEqual({ a: { b: 1 } });
+  });
+
+  it('set requires a path', () => {
+    expect(() => objectUtilities.set({}, { path: ' ', value: 1 } as any)).toThrow('Path is required');
+  });
+});

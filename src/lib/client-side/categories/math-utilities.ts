@@ -7,7 +7,11 @@ const range = {
   max: field.number({ i18n: 'max', step: 'any' }),
 };
 
-export type MathConfig = ConfigOf<typeof range>;
+const roundFields = {
+  decimals: field.number({ default: '2', min: 0, i18n: 'decimals' }),
+};
+
+export type MathConfig = ConfigOf<typeof range & typeof roundFields>;
 
 export const mathUtilities: UtilityCategory = {
   abs: {
@@ -97,5 +101,10 @@ export const mathUtilities: UtilityCategory = {
   trunc: {
     description: 'Removes the decimal part',
     docs: mdn('Math/trunc'),
+  },
+  roundTo: {
+    description: 'Rounds to the given number of decimals',
+    fields: roundFields,
+    docs: es('math/round'),
   },
 };
