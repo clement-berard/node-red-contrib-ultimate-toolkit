@@ -213,6 +213,13 @@ describe('dateUtilities', () => {
       expect(dateUtilities.isBefore('2026-07-25T09:00:00.000Z', {} as any)).toBe(true);
     });
 
+    it('accepts a timestamp or a Date as the reference, as given by a typed input', () => {
+      const timestamp = Date.parse('2026-07-25T10:00:00.000Z');
+      expect(dateUtilities.isBefore('2026-07-25T09:00:00.000Z', { reference: timestamp } as any)).toBe(true);
+      expect(dateUtilities.isAfter('2026-07-25T09:00:00.000Z', { reference: new Date(timestamp) } as any)).toBe(false);
+      expect(dateUtilities.isAfter('2026-07-25T09:00:00.000Z', { reference: null } as any)).toBe(false);
+    });
+
     it('sameDay', () => {
       const options = { reference: '2026-07-25T20:00:00' } as any;
       expect(dateUtilities.sameDay('2026-07-25T01:00:00', options)).toBe(true);

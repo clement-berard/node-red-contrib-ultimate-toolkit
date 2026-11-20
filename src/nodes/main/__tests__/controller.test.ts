@@ -222,6 +222,34 @@ describe('controller', () => {
     });
   });
 
+  describe('typed fields', () => {
+    const isAfter = (dateUtilities: Record<string, unknown>) => ({
+      category: 'date_utilities',
+      function: 'isAfter',
+      entry: 'payload',
+      entryType: 'msg',
+      dateUtilities,
+    });
+
+    it('evaluates a typed field against the message before calling the function', async () => {
+      const { send, run } = setup(isAfter({ reference: 'limit', referenceType: 'msg' }));
+      await run({ payload: '2026-07-25T11:00:00.000Z', limit: '2026-07-25T10:00:00.000Z' });
+      expect(send.mock.calls[0][0].payload).toBe(true);
+    });
+
+    it('reads a node saved before the field was typed as a plain string', async () => {
+      const { send, run } = setup(isAfter({ reference: '2026-07-25T10:00:00.000Z' }));
+      await run({ payload: '2026-07-25T09:00:00.000Z' });
+      expect(send.mock.calls[0][0].payload).toBe(false);
+    });
+
+    it('reports a reference that is not a date', async () => {
+      const { done, run } = setup(isAfter({ reference: 'limit', referenceType: 'msg' }));
+      await run({ payload: '2026-07-25T11:00:00.000Z', limit: 'nope' });
+      expect(done).toHaveBeenCalledWith(expect.objectContaining({ message: 'reference is not a valid date' }));
+    });
+  });
+
   it('clears the counters on close', () => {
     const { handlers } = setup({ category: 'tools', function: 'cyclicCounter' });
     expect(() => (handlers.close as any)()).not.toThrow();

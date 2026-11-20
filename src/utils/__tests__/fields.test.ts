@@ -7,6 +7,7 @@ import {
   fieldRows,
   i18nKey,
   inputAttrs,
+  resolveTypedFields,
   storageKey,
 } from '../fields';
 
@@ -43,6 +44,30 @@ describe('applyDefaults', () => {
     const config: Record<string, unknown> = { amount: '5', rangeDay1: false };
     applyDefaults(config, fields);
     expect(config).toEqual({ amount: '5', unit: 'day', rangeDay1: false, rangeDay2: true });
+  });
+});
+
+describe('typed fields', () => {
+  const typed = {
+    reference: field.typed({ types: ['str', 'msg'], defaultType: 'str' }),
+    unit: field.select(['day'], { default: 'day' }),
+  };
+
+  it('default to their type too', () => {
+    expect(fieldDefaults(typed)).toEqual({ reference: undefined, referenceType: 'str', unit: 'day' });
+  });
+
+  it('are evaluated by type, the type key being dropped', async () => {
+    const evaluate = async (type: string, value: string) => `${type}:${value}`;
+    const config = { reference: 'date', referenceType: 'msg', unit: 'day' };
+    expect(await resolveTypedFields(typed, config, evaluate)).toEqual({ reference: 'msg:date', unit: 'day' });
+    expect(config.referenceType).toBe('msg');
+  });
+
+  it('keep an empty value empty and read a missing type as the default one', async () => {
+    const evaluate = async (type: string, value: string) => `${type}:${value}`;
+    expect(await resolveTypedFields(typed, { reference: '' }, evaluate)).toEqual({ reference: '' });
+    expect(await resolveTypedFields(typed, { reference: 'x' }, evaluate)).toEqual({ reference: 'str:x' });
   });
 });
 

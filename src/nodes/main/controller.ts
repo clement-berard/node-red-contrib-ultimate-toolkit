@@ -6,6 +6,7 @@ import { getFunctionDetails } from '../../lib/client-side';
 import { listFunctions as serverSideFunctions } from '../../lib/server-side';
 import { tools } from '../../lib/server-side/fns/tools';
 import type { NodeMainProps } from '../../types/NodeMainProps';
+import { resolveTypedFields } from '../../utils/fields';
 import { getOutputRules } from '../../utils/output-rules';
 
 // Main Node-RED node controller
@@ -36,9 +37,19 @@ export default function (this: NodeControllerInst<NodeMainProps>, config: NodeCo
       if (fnDetails?.configKey) {
         const extraArgs = (config as unknown as Record<string, unknown>)[fnDetails.configKey];
 
-        // Copy to avoid mutating the node configuration shared by every message
+        // Copy to avoid mutating the node configuration shared by every message; typed fields are evaluated first
+        const resolved =
+          fnDetails.fields && isPlainObject(extraArgs)
+            ? await resolveTypedFields(fnDetails.fields, extraArgs, async (type, value) => {
+                const [evalErr, evaluated] = await evaluateNodeProperty({ msg, type, node: this, value });
+                if (evalErr) {
+                  throw evalErr;
+                }
+                return evaluated;
+              })
+            : extraArgs;
         argsToCall.push(
-          isPlainObject(extraArgs) && fnDetails?.addNodeIdToConfigArgs ? { ...extraArgs, nodeId: this.id } : extraArgs,
+          isPlainObject(resolved) && fnDetails?.addNodeIdToConfigArgs ? { ...resolved, nodeId: this.id } : resolved,
         );
       }
 

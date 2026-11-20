@@ -1,5 +1,5 @@
 <script lang="ts">
-  import { Checkbox, Hint, Input, Row, Select, useT } from '@keload/node-red-dxp/ui';
+  import { Checkbox, Hint, Input, Row, Select, TypedInput, useT } from '@keload/node-red-dxp/ui';
   import { type Fields, fieldRows, i18nKey, inputAttrs } from '../../utils/fields';
 
   // Renders the declared fields of a function, bound on the saved object of its category
@@ -20,6 +20,8 @@
           bind:value={config[key]}
           options={field.options.map((value) => ({ value, text: field.rawOptions ? value : t(`${base}_${value}`, value) }))}
         />
+      {:else if field.kind === 'typed'}
+        <TypedInput bind:value={config[key]} bind:type={config[`${key}Type`]} types={field.types} allowEmpty />
       {:else}
         <Input {...inputAttrs(field)} bind:value={config[key]} />
       {/if}

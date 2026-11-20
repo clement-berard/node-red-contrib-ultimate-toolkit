@@ -40,7 +40,13 @@ export const boundaryFields = { boundaryUnit: field.select(BOUNDARY_UNITS, { def
 
 // Empty means now
 export const referenceFields = {
-  reference: field.text({ i18n: 'referenceDate', icon: 'calendar', placeholder: '2026-07-25T08:00:00', hint: true }),
+  reference: field.typed({
+    i18n: 'referenceDate',
+    icon: 'calendar',
+    hint: true,
+    types: ['str', 'msg', 'flow', 'global', 'jsonata', 'env'],
+    defaultType: 'str',
+  }),
 };
 
 // Everything saved under `dateUtilities`, for the typed options of the functions
