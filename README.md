@@ -33,7 +33,7 @@
 <table align="center">
   <tr>
     <td align="center">
-      <h2>✨ 153</h2>
+      <h2>✨ 166</h2>
       <sub><b>Built-in Utilities</b></sub>
     </td>
     <td align="center">
@@ -41,7 +41,7 @@
       <sub><b>Runtime Dependencies</b></sub>
     </td>
     <td align="center">
-      <h2>🚀 244 kB</h2>
+      <h2>🚀 256 kB</h2>
       <sub><b>Bundle Size</b></sub>
     </td>
   </tr>
@@ -135,6 +135,24 @@ All used libraries are treeshaked and included in the final bundle.
 | Name | Description |
 | --- | --- |
 | `Delay` | Delays the message by the specified amount of time |
+
+### → Crypto Utilities
+
+| Name | Description |
+| --- | --- |
+| `Base64 Decode` | Decodes a base64 or base64url string to text |
+| `Base64 Encode` | Encodes a string or a Buffer to base64 (or base64url) |
+| `Decrypt` | Decrypts a base64 string made by Encrypt, with the same key |
+| `Encrypt` | Encrypts text with AES-256-GCM, the key is a secret read from env, flow or global. Returns a base64 string |
+| `Hash` | Returns the digest of a string or a Buffer (md5 and sha1 are not safe for security) |
+| `Hex Decode` | Decodes a hexadecimal string to text |
+| `Hex Encode` | Encodes a string or a Buffer to hexadecimal |
+| `Hmac` | Returns the HMAC of a string or a Buffer, signed with a secret key |
+| `Jwt Decode` | Decodes the header and the payload of a JWT. The signature is NOT verified |
+| `Random Bytes` | Generates cryptographically secure random bytes, the payload is ignored |
+| `Random Int` | Generates a cryptographically secure random integer from Min (included) to Max (excluded), the payload is ignored |
+| `Random U U I D` | Generates a random UUID v4, the payload is ignored |
+| `Timing Safe Equal` | True if the payload equals the compared value, in constant time (secrets, tokens, signatures) |
 
 ### → Date Utilities
 

@@ -63,5 +63,12 @@
 	"weekday_3": "Wed",
 	"weekday_4": "Thu",
 	"weekday_5": "Fri",
-	"weekday_6": "Sat"
+	"weekday_6": "Sat",
+	"field_algorithm": "Algorithm",
+	"field_encoding": "Encoding",
+	"field_key": "Key",
+	"field_key_hint": "Name of an env variable, a flow or a global variable holding the secret",
+	"field_size": "Size (bytes)",
+	"field_variant": "Variant",
+	"field_compare": "Compare to"
 }
