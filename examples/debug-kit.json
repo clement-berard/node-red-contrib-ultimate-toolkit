@@ -1,0 +1,52 @@
+[
+  {
+    "id": "b2e4d0a3f5c80201",
+    "type": "inject",
+    "name": "sample object",
+    "props": [{ "p": "payload" }, { "p": "topic", "vt": "str" }],
+    "repeat": "",
+    "crontab": "",
+    "once": false,
+    "onceDelay": 0.1,
+    "topic": "sensor/temperature",
+    "payload": "{\"room\":\"kitchen\",\"value\":21.5}",
+    "payloadType": "json",
+    "x": 150,
+    "y": 100,
+    "wires": [["b2e4d0a3f5c80202"]]
+  },
+  {
+    "id": "b2e4d0a3f5c80202",
+    "type": "change",
+    "name": "store in flow.last",
+    "rules": [{ "t": "set", "p": "last", "pt": "flow", "to": "payload", "tot": "msg" }],
+    "action": "",
+    "property": "",
+    "from": "",
+    "to": "",
+    "reg": false,
+    "x": 360,
+    "y": 100,
+    "wires": [["b2e4d0a3f5c80203"]]
+  },
+  {
+    "id": "b2e4d0a3f5c80203",
+    "type": "debug-kit",
+    "name": "debug-kit 1",
+    "showMeta": true,
+    "showMsg": true,
+    "showFlow": true,
+    "showGlobal": true,
+    "showNode": true,
+    "showEnv": false,
+    "excludeKeys": "req,res",
+    "maxDepth": 5,
+    "target": "sidebar",
+    "passthrough": false,
+    "showStatus": true,
+    "outputs": 0,
+    "x": 580,
+    "y": 100,
+    "wires": []
+  }
+]
