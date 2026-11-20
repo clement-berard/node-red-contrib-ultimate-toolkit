@@ -1,5 +1,7 @@
-import type { NodeMainProps } from '../../../types/NodeMainProps';
 import { filterByPrefix } from '../../../utils/utils';
+
+// The `cyclicCounter-` keys of the node, without the prefix, and the node id added by the controller
+type CounterParams = { maxCount?: string; resetDelay?: string; nodeId: string };
 
 const counters = new Map<string, number>();
 const timers = new Map<string, NodeJS.Timeout>();
@@ -7,7 +9,7 @@ const timers = new Map<string, NodeJS.Timeout>();
 export const tools = {
   cyclicCounter: (_input: number, ...params: Record<string, unknown>[]) => {
     const prefix = 'cyclicCounter-';
-    const counterParams = filterByPrefix(params, prefix) as NodeMainProps['tools']['cyclicCounter'];
+    const counterParams = filterByPrefix(params, prefix) as CounterParams;
     const maxCount = Number(counterParams.maxCount);
     const nodeId = counterParams.nodeId;
     const resetDelay = Number(counterParams.resetDelay) || 0;

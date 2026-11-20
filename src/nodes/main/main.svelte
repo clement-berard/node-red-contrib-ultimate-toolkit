@@ -6,11 +6,11 @@
   import { DEFAULT_OUTPUT_RULE } from '../../utils/output-rules';
 
 
-  // One saved object per `configArgs` category (arrayUtilities, dateUtilities...), straight from the registry
+  // One saved object per category declaring `fields` (arrayUtilities, dateUtilities...), straight from the registry
   const configKeys = [
     ...new Set(
       getCategories.flatMap((category) =>
-        getFunctionsFromCategory(category).map(({ key }) => getFunctionDetails(category, key).configArgs),
+        getFunctionsFromCategory(category).map(({ key }) => getFunctionDetails(category, key).configKey),
       ),
     ),
   ].filter((key): key is string => !!key);
@@ -59,6 +59,8 @@
 
 <script lang="ts">
   import { Checkbox, Hint, Input, List, Row, Select, TypedInput, useT } from '@keload/node-red-dxp/ui';
+  import { applyDefaults } from '../../utils/fields';
+  import Fields from './fields.svelte';
 
   let { node }: { node: NodeMainProps } = $props();
 
@@ -76,21 +78,9 @@
   const functions = $derived(
     node.category ? getFunctionsFromCategory(node.category).map(({ key, label }) => ({ value: key, text: label })) : [],
   );
-  // field groups to show for the chosen function, declared by `revealClasses` in the registry
-  const shows = (group: string) => !!fn.revealClasses?.includes(group);
-  const unitOptions = (units: string[]) => units.map((value) => ({ value, text: t(`unit_${value}`) }));
-  const addUnits = unitOptions(['day', 'week', 'month', 'year', 'hour', 'minute', 'second', 'millisecond']);
-  const boundaryUnits = unitOptions(['day', 'week', 'month', 'year', 'hour', 'minute']);
-  // Monday first, 0 is Sunday
-  const weekDays = [1, 2, 3, 4, 5, 6, 0];
-
-  // a Select saves its first option (the units start with `day`); the amount and the days get their default here,
-  // before the fields exist: a Checkbox would save `false` for a missing value
+  // the defaults of the declared fields, set before they are rendered (a Checkbox would save `false` for a missing value)
   $effect.pre(() => {
-    const date = node.dateUtilities;
-    if (shows('dateUtilities_add')) date.addAmount ??= '1';
-    // a day unchecked is saved as false, an absent key means allowed
-    if (shows('dateUtilities_timeRange')) for (const day of weekDays) date[`rangeDay${day}`] ??= true;
+    if (fn.fields) applyDefaults(node[fn.configKey], fn.fields);
   });
 
   const helpText = $derived(
@@ -133,91 +123,13 @@
   </Row>
 {/if}
 
-{#if shows('arrayUtilities_orderBy')}
-  <Row label={t('property')}><Input bind:value={node.arrayUtilities.property} /></Row>
-  <Row label={t('direction')}><Select bind:value={node.arrayUtilities.direction} options={[
-        { value: 'asc', text: t('asc') },
-        { value: 'desc', text: t('desc') },
-      ]} /></Row>
-{/if}
-
-{#if shows('mathUtilities_range')}
-  <Row label={t('min')}><Input type="number" step="any" bind:value={node.mathUtilities.min} /></Row>
-  <Row label={t('max')}><Input type="number" step="any" bind:value={node.mathUtilities.max} /></Row>
-{/if}
-
-{#if shows('dateUtilities_now')}
-  <Row label={t('format')}>
-    <Select
-      bind:value={node.dateUtilities.nowFormat}
-      options={['timestamp', 'iso8601', 'utcString', 'full', 'long', 'medium', 'short']}
-    />
-  </Row>
-  <Row label={t('token')}><Input placeholder="YYYY-MM-DD" bind:value={node.dateUtilities.nowFormatToken} /></Row>
-{/if}
-
-{#if shows('dateUtilities_timeRange')}
-  <Row label={t('startTime')} icon="clock-o"><Input type="time" bind:value={node.dateUtilities.rangeStartTime} /></Row>
-  <Row label={t('endTime')} icon="clock-o"><Input type="time" bind:value={node.dateUtilities.rangeEndTime} /></Row>
-  <Row label={t('activeDays')} icon="calendar">
-    {#each weekDays as day}
-      <Checkbox bind:checked={node.dateUtilities[`rangeDay${day}`]} text={t(`weekday_${day}`)} />
-    {/each}
-  </Row>
-{/if}
-
-{#if shows('dateUtilities_add')}
-  <Row label={t('amount')} icon="plus"><Input type="number" step="any" bind:value={node.dateUtilities.addAmount} /></Row>
-  <Row label={t('unit')}><Select bind:value={node.dateUtilities.addUnit} options={addUnits} /></Row>
-{/if}
-
-{#if shows('dateUtilities_diff')}
-  <Row label={t('unit')}><Select bind:value={node.dateUtilities.diffUnit} options={addUnits} /></Row>
-{/if}
-
-{#if shows('dateUtilities_boundary')}
-  <Row label={t('unit')}><Select bind:value={node.dateUtilities.boundaryUnit} options={boundaryUnits} /></Row>
-{/if}
-
-{#if shows('dateUtilities_reference')}
-  <Row label={t('referenceDate')} icon="calendar">
-    <Input placeholder="2026-07-25T08:00:00" bind:value={node.dateUtilities.reference} />
-    <Hint>{t('referenceHint', 'Empty: now')}</Hint>
-  </Row>
-{/if}
-
-{#if shows('tools_cyclicCounter')}
-  <Row label={t('maxCount')} icon="sort-numeric-asc">
-    <Input type="number" bind:value={node.tools['cyclicCounter-maxCount']} />
-  </Row>
-  <Row label={t('resetDelay')} icon="clock-o">
-    <Input type="number" bind:value={node.tools['cyclicCounter-resetDelay']} />
-    <div class="hint">{t('resetDelayHint', 'Number in ms - Default 0: no reset')}</div>
-  </Row>
-{/if}
-
-{#if shows('asyncUtilities_delay')}
-  <Row label={t('milliseconds')} icon="clock-o">
-    <Input type="number" min="0" bind:value={node.asyncUtilities.milliseconds} />
-  </Row>
-{/if}
-
-{#if shows('parsers_json')}
-  <Row label={t('action')}>
-    <Select
-      bind:value={node.parsers.action}
-      options={[
-        { value: 'auto', text: t('actionAuto', 'Convert between JSON String & Object') },
-        { value: 'stringify', text: t('actionStringify', 'Always convert to JSON String') },
-        { value: 'parse', text: t('actionParse', 'Always convert to JavaScript Object') },
-      ]}
-    />
-  </Row>
-  <Row label={t('format')}><Checkbox bind:checked={node.parsers.pretty} text={t('formatJsonText', 'Format JSON string')} /></Row>
+{#if fn.fields}
+  <Fields fields={fn.fields} config={node[fn.configKey]} />
 {/if}
 
 {#if helpText}
-  <div class="alert alert-info text-center">{@html helpText}</div>
+  <!-- inline style: the tray is sized on the natural width of the form, a long help text must not widen it -->
+  <div style="contain: inline-size" class="alert alert-info text-center">{@html helpText}</div>
 {/if}
 
 <Row label={t('outputProperties')} icon="arrow-circle-o-left">

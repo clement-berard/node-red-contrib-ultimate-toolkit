@@ -26,7 +26,7 @@ import {
   windowed,
 } from 'es-toolkit';
 import { random, toggle, unique } from 'radash';
-import type { NodeMainProps } from '../../../types/NodeMainProps';
+import type { ArrayConfig } from '../../client-side/categories/array-utilities';
 
 type Row = Record<string, unknown>;
 
@@ -90,7 +90,7 @@ export const arrayUtilities = {
   },
   windowed: (inputArr: unknown[], inputProp: unknown) => windowed(inputArr, toSize(inputProp)),
   sortBy: (inputArr: Row[], inputProp: unknown) => sortBy(inputArr, [toProp(inputProp)]),
-  orderBy: (inputArr: Row[], options: NodeMainProps['arrayUtilities']) => {
+  orderBy: (inputArr: Row[], options: ArrayConfig) => {
     const property = toProp(options?.property);
     if (!property) {
       throw new Error('Property is required');

@@ -34,7 +34,7 @@ import {
   yearEnd,
   yearStart,
 } from '@formkit/tempo';
-import type { NodeMainProps } from '../../../types/NodeMainProps';
+import type { DateConfig } from '../../client-side/categories/date-fields';
 
 function getCurrentTimezone() {
   const timezoneDefault = Intl.DateTimeFormat().resolvedOptions().timeZone;
@@ -42,10 +42,10 @@ function getCurrentTimezone() {
   return RED.settings.timezone || process.env.TZ || timezoneDefault;
 }
 
-function formatDate(innerDate: Date | string, options: NodeMainProps['dateUtilities']) {
+function formatDate(innerDate: Date | string, options: DateConfig) {
   const realDate = date(innerDate);
 
-  if (options?.nowFormatToken.trim()) {
+  if (options?.nowFormatToken?.trim()) {
     return format(realDate, options.nowFormatToken.trim());
   }
 
@@ -59,14 +59,14 @@ function formatDate(innerDate: Date | string, options: NodeMainProps['dateUtilit
     utcString: () => realDate.toUTCString(),
   };
 
-  const formatter = matched[options?.nowFormat];
+  const formatter = matched[options?.nowFormat ?? ''];
   if (!formatter) {
     throw new Error(`Unknown format "${options?.nowFormat}"`);
   }
   return formatter();
 }
 
-type DateOptions = NodeMainProps['dateUtilities'];
+type DateOptions = DateConfig;
 
 // Weeks start on Monday
 const MONDAY = 1;
@@ -134,17 +134,17 @@ function toReference(options: DateOptions) {
 }
 
 export const dateUtilities = {
-  now: (_: unknown, options: NodeMainProps['dateUtilities']) => {
+  now: (_: unknown, options: DateConfig) => {
     return formatDate(new Date(), options);
   },
-  format: (payloadDate: string, options: NodeMainProps['dateUtilities']) => {
+  format: (payloadDate: string, options: DateConfig) => {
     if (!payloadDate) {
       throw new Error('payloadDate is required');
     }
 
     return formatDate(payloadDate, options);
   },
-  timeRange: (_payload: unknown, options: NodeMainProps['dateUtilities']) => {
+  timeRange: (_payload: unknown, options: DateConfig) => {
     const now = new Date();
     const currentTime = format(now, 'HH:mm');
 

@@ -12,13 +12,23 @@ describe('client/server registry consistency', () => {
     const runtime = Object.keys((listFunctions as Record<string, object>)[category]);
     expect(runtime).toEqual(expect.arrayContaining(Object.keys(list[category])));
   });
+});
 
-  it('gives each entry with revealClasses or configArgs both of them', () => {
-    for (const [category, fns] of Object.entries(list)) {
-      for (const [name, item] of Object.entries(fns)) {
-        expect(!!item.configArgs, `${category}.${name}`).toBe(!!item.revealClasses?.length);
-      }
+describe('fields', () => {
+  const entries = Object.entries(list).flatMap(([category, fns]) =>
+    Object.entries(fns).flatMap(([name, item]) => (item.fields ? [[`${category}.${name}`, item.fields] as const] : [])),
+  );
+
+  it.each(entries)('%s: a select default is one of its options', (_, fields) => {
+    for (const [key, f] of Object.entries(fields)) {
+      if (f.kind === 'select') expect(f.options, key).toContain(f.default);
     }
+  });
+
+  it('are saved under the camel-cased category', () => {
+    expect(getFunctionDetails('tools', 'cyclicCounter').configKey).toBe('tools');
+    expect(getFunctionDetails('date_utilities', 'add').configKey).toBe('dateUtilities');
+    expect(getFunctionDetails('date_utilities', 'isPast').configKey).toBeUndefined();
   });
 });
 
